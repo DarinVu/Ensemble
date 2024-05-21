@@ -8,10 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AuthComponent {
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router) {}
 
   onNext() {
-      this.router.navigate(['profile-creation', { relativeTo: this.route }])
+      this.router.navigate(['profile-creation'])
 
   }
 }

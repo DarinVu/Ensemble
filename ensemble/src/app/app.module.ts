@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthComponent } from './auth/auth.component';
 import { ProfileCreationComponent } from './profile-creation/profile-creation.component';
+import { UserHomeComponent } from './user-home/user-home.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ProfileCreationComponent } from './profile-creation/profile-creation.co
     HomeComponent,
     AuthComponent,
     ProfileCreationComponent,
+    UserHomeComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,3 +23,8 @@ h3 {
     font-weight: 700;
     text-align: center;
 }
+
+.btn-submit {
+    font-weight: 700;
+    background-color: #ff9f1c;
+}

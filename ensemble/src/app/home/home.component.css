@@ -15,10 +15,6 @@
     color: white;
 }
 
-.nav-link {
-    margin-right: 20px;
-}
-
 h1 {
     font-weight: 900;
 }
@@ -40,4 +36,8 @@ p {
 
 .join-btn {
     width:200px;
+}
+
+.login-btn {
+    margin-right: 20px;
 }
