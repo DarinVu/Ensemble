@@ -10,6 +10,7 @@ h1 {
 h2 {
     font-weight: 800;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .btn-next {
@@ -17,14 +18,35 @@ h2 {
     background-color: #ff9f1c;
 }
 
-.btn-next {
+.btn-outline-warning {
     border-color: #ff9f1c;
+    color: #ff9f1c;
+    font-weight: 700;
 }
 
 h3 {
     font-weight: 800;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 100%;
 }
 
 
 
+.google-signup-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
 
+.registered-container {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.login-link {
+    text-decoration: underline;
+    color:#ff9f1c;
+}
