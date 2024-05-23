@@ -7,8 +7,14 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  show = false;
+
 
   constructor(private router: Router) {}
+
+  onShow() {
+    this.show = !this.show;
+  }
 
   onSignup() {
     this.router.navigate(['auth', 0]);

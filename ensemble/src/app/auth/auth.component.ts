@@ -11,7 +11,10 @@ export class AuthComponent {
   constructor(private router: Router) {}
 
   onNext() {
-      this.router.navigate(['profile-creation'])
+      this.router.navigate(['profile-creation']);
+  }
 
+  onLogin() {
+    this.router.navigate(['auth', 0]);
   }
 }

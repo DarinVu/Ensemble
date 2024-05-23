@@ -49,4 +49,9 @@ h3 {
 .login-link {
     text-decoration: underline;
     color:#ff9f1c;
+    cursor: pointer;
+}
+
+.home-link {
+    text-decoration: none;
 }
