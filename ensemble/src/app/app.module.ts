@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthComponent } from './auth/auth.component';
 import { ProfileCreationComponent } from './profile-creation/profile-creation.component';
 import { UserHomeComponent } from './user-home/user-home.component';
+import { EnsemblesComponent } from './ensembles/ensembles.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { UserHomeComponent } from './user-home/user-home.component';
     AuthComponent,
     ProfileCreationComponent,
     UserHomeComponent,
+    EnsemblesComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

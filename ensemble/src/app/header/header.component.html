@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg bg-white">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/home">Ensemble</a>
+        <button class="navbar-toggler" (click)="onShow()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " [ngClass]="{show: show}" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" title="Friends">
+                        <img src="../../assets/friends.svg">
+                    </a>
+                </li>   
+                <li class="nav-item">
+                    <a class="nav-link" title="Inbox">
+                        <img src="../../assets/inbox.svg">
+                    </a>
+                </li>                                                                   
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link" (click)="onDisplayDropdown()" title="View Profile">
+                            <img src="../../assets/account-circle.svg">
+                            <img src="../../assets/chevron-down.svg">
+                        </a>
+                        <div class="dropdown-options"  [ngStyle]="{'display' : displayDropdown}">
+                            <div class="options-container">
+                                <a class="dropdown-item">Your Events</a>
+                                <a class="dropdown-item">Your Groups</a>
+                                <hr>
+                                <a class="dropdown-item">Logout</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </li>                                                                   
+            </ul>
+        </div>
+    </div>
+</nav>

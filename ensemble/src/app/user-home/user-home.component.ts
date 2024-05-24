@@ -7,19 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './user-home.component.css'
 })
 export class UserHomeComponent {
-  show = false;
-  displayDropdown = 'none';
-
-
-  onShow() {
-    this.show = !this.show;
-  }
-
-  onDisplayDropdown() {
-    if (this.displayDropdown == 'none') {
-      this.displayDropdown = 'block';
-    } else {
-      this.displayDropdown = 'none';
-    }
-  }
+  
 }

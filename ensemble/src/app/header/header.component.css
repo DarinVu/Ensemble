@@ -1,0 +1,28 @@
+.navbar {
+    font-weight: 700;
+    margin-bottom: 0px;
+}
+
+.navbar-brand {
+    color: #ff9f1c;
+    font-size: 2em;
+    font-style: italic;
+}
+
+.signup-btn {
+    background-color: #14213d;
+    color: white;
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    cursor: pointer;
+}
