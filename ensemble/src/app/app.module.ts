@@ -9,6 +9,7 @@ import { ProfileCreationComponent } from './profile-creation/profile-creation.co
 import { UserHomeComponent } from './user-home/user-home.component';
 import { EnsemblesComponent } from './ensembles/ensembles.component';
 import { HeaderComponent } from './header/header.component';
+import { ClickOutsideDirective } from './shared/click-outside-directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
     UserHomeComponent,
     EnsemblesComponent,
     HeaderComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,

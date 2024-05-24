@@ -21,4 +21,8 @@ export class HeaderComponent {
       this.displayDropdown = 'none';
     }
   }
+
+  onCloseDropdown() {
+    this.displayDropdown = 'none'
+  }
 }

@@ -18,21 +18,19 @@
                 </li>                                                                   
                 <li class="nav-item">
                     <div class="dropdown">
-                        <a class="nav-link" (click)="onDisplayDropdown()" title="View Profile">
+                        <a class="nav-link" (clickOutside)="onCloseDropdown()" (click)="onDisplayDropdown()" title="View Profile">
                             <img src="../../assets/account-circle.svg">
                             <img src="../../assets/chevron-down.svg">
                         </a>
                         <div class="dropdown-options"  [ngStyle]="{'display' : displayDropdown}">
-                            <div class="options-container">
+                            <div  class="options-container">
                                 <a class="dropdown-item">Your Events</a>
                                 <a class="dropdown-item">Your Groups</a>
                                 <hr>
                                 <a class="dropdown-item">Logout</a>
                             </div>
-                            
                         </div>
                     </div>
-                    
                 </li>                                                                   
             </ul>
         </div>

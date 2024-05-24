@@ -1,0 +1,33 @@
+.content-container {
+    padding-top: 50px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.filters-container {
+    display: flex;
+    gap: 20px;
+}
+
+.filter-button {
+    background-color: #e9ecef;
+    border-radius: 30px;
+    padding: 10px;
+    font-size: smaller;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.list-group {
+    margin-top: 20px;
+}
+
+.list-group-item {
+    border-left: 0px;
+    border-right: 0px;
+}
