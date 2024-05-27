@@ -1,0 +1,54 @@
+.content-container {
+    padding-top: 50px;
+}
+
+h2{
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.curr-page {
+    font-weight: 600;
+    color: #ff9f1c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.find-page-link {
+    color: #6C6D6D;
+    text-decoration: none;
+}
+
+.btn-next {
+    font-weight: 700;
+    background-color: #ff9f1c;
+}
+
+.control {
+    width: 50%;
+}
+
+
+.create-btn {
+    background-color: #ff9f1c;
+}
+
+select {
+    font-size: medium;
+    font-weight: 700;
+}
+
+.confirm-btn {
+    background-color: #ff9f1c;
+}

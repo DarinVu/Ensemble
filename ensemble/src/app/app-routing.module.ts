@@ -4,7 +4,9 @@ import { HomeComponent } from "./home/home.component";
 import { AuthComponent } from "./auth/auth.component";
 import { ProfileCreationComponent } from "./profile-creation/profile-creation.component";
 import { UserHomeComponent } from "./user-home/user-home.component";
-import { EnsemblesComponent } from "./ensembles/ensembles.component";
+import { EnsemblesFindComponent } from "./ensembles/ensembles-find/ensembles-find.component";
+import { EnsemblesCreateComponent } from "./ensembles/ensembles-create/ensembles-create.component";
+import { EnsemblesResolverService } from "./ensembles/ensembles-resolver.service";
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,7 +14,8 @@ const routes: Routes = [
     { path: 'auth/:status', component: AuthComponent },
     { path: 'profile-creation', component: ProfileCreationComponent },
     { path: 'user-home', component: UserHomeComponent },
-    { path: 'ensembles', component: EnsemblesComponent }
+    { path: 'ensembles-find', component: EnsemblesFindComponent, resolve: [EnsemblesResolverService] },
+    { path: 'ensembles-create', component: EnsemblesCreateComponent }
 ]
 
 

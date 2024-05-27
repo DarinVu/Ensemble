@@ -1,0 +1,129 @@
+<app-header></app-header>
+<div class="row justify-content-center content-container">
+    <div class="col-xs-12 col-md-10 col-lg-8 col-xxl-6">
+        <h2>Ensembles</h2>
+        <div class="options-container">
+            <a routerLink="/ensembles-find" class="find-page-link"><h3>Find</h3></a>
+            <h3 class="curr-page">Create</h3>
+        </div>
+        <form [formGroup]="ensembleForm" (ngSubmit)="onSubmit()">
+            <div class="form-floating mb-3 control">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="name" 
+                    placeholder="Ensemble Name"
+                    formControlName="name">
+                <label for="name">Ensemble Name</label>
+            </div>
+            <div class="form-floating mb-3 control">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="description" 
+                    placeholder="Description"
+                    formControlName="description">
+                <label for="description">Description</label>
+            </div>
+            <div class="form-floating mb-3 control">
+                <input 
+                    type="number" 
+                    class="form-control" 
+                    id="size" 
+                    placeholder="1"
+                    formControlName="size">
+                <label for="size">Size</label>
+                <div type="button" class="btn confirm-btn" (click)="onChangeSize()">Confirm</div>
+                
+            </div>
+            <div class="mb-3 control" formArrayName="instruments" *ngFor="let instConrol of controls; let i = index">
+                <div class="form-group" [formGroupName]="i">
+                    <label for="instrumentList" class="form-label">Instrument</label>
+                    <input 
+                        class="form-control" 
+                        list="datalistOptions" 
+                        id="instrumentList" 
+                        placeholder="Type to search..."
+                        formControlName="instrument">
+                    <datalist id="datalistOptions">
+                        <option value="Accordion">
+                        <option value="Alto Saxophone">
+                        <option value="Baritone Saxophone">
+                        <option value="Bass Clarinet">
+                        <option value="Bass Guitar">
+                        <option value="Bassoon">
+                        <option value="Cello">
+                        <option value="Clarinet">
+                        <option value="Double Bass">
+                        <option value="Drumset">
+                        <option value="Euphonium">
+                        <option value="Flute">
+                        <option value="French Horn">
+                        <option value="Guitar">  
+                        <option value="Harp">
+                        <option value="Marimba">
+                        <option value="Oboe">
+                        <option value="Organ">
+                        <option value="Piano">
+                        <option value="Piccolo">
+                        <option value="Recorder">
+                        <option value="Soprano Saxophone">
+                        <option value="Timpani">
+                        <option value="Triangle">
+                        <option value="Trombone">
+                        <option value="Trumpet">
+                        <option value="Tuba">
+                        <option value="Ukelele">
+                        <option value="Vibraphone">
+                        <option value="Viola">
+                        <option value="Violin">
+                        <option value="Xylophone">
+                    </datalist>
+                </div>
+               
+            </div>
+            <div class="mb-3 control">
+                <select 
+                    class="form-select form-select-lg"
+                    formControlName="genre"
+                    >
+                    <option class="default-option" selected>Select a Genre</option>
+                    <option value="1">Baroque</option>
+                    <option value="2">Choir</option>
+                    <option value="3">Classical</option>
+                    <option value="4">Contemporary</option>
+                    <option value="5">Country</option>
+                    <option value="6">Romantic</option>
+                    <option value="7">Folk</option>
+                    <option value="8">Jazz</option>
+                    <option value="9">Rock</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        id="flexRadioDefault1"
+                        value="open"
+                        formControlName="status">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Open
+                    </label>
+                  </div>
+                <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    id="flexRadioDefault2"
+                    value="invite-only"
+                    formControlName="status">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Invite-only
+                </label>
+                </div>
+            </div>
+            <button type="submit" class="btn create-btn">Create</button>
+        </form>
+    </div>
+</div>

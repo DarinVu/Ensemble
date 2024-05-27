@@ -1,0 +1,96 @@
+<app-header></app-header>
+<div class="row justify-content-center content-container">
+    <div class="col-xs-12 col-md-10 col-lg-8 col-xxl-6">
+        <h2>Ensembles</h2>
+        <div class="options-container">
+            <h3 class="curr-page">Find</h3>
+            <a class="create-page-link" routerLink="/ensembles-create"><h3>Create</h3></a>
+        </div>
+        <div class="filters-container">
+            <div class="dropdown">
+                <button type="button" class="btn filter-button" (clickOutside)="onCloseDropdown1()" (click)="onDisplayDropdown1()">Any Size
+                    <img src="../../assets/chevron-down.svg">
+                </button>
+                <div class="dropdown-options"  [ngStyle]="{'display' : displayDropdown1}">
+                    <div class="dropdown-options-container">
+                        <a class="dropdown-item">2</a>
+                        <a class="dropdown-item">3</a>
+                        <a class="dropdown-item">4</a>
+                        <a class="dropdown-item">5</a>
+                        <a class="dropdown-item">6</a>
+                        <a class="dropdown-item">7</a>
+                        <a class="dropdown-item">8</a>
+                        <a class="dropdown-item">9</a>
+                        <a class="dropdown-item">10+</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button type="button" class="btn filter-button" (clickOutside)="onCloseDropdown2()" (click)="onDisplayDropdown2()">Any Genre
+                    <img src="../../assets/chevron-down.svg">
+                </button>
+                <div class="dropdown-options"  [ngStyle]="{'display' : displayDropdown2}">
+                    <div class="dropdown-options-container">
+                        <a class="dropdown-item">Baroque</a>
+                        <a class="dropdown-item">Choir</a>
+                        <a class="dropdown-item">Classical</a>
+                        <a class="dropdown-item">Contemporary</a>
+                        <a class="dropdown-item">Country</a>
+                        <a class="dropdown-item">Romantic</a>
+                        <a class="dropdown-item">Folk</a>
+                        <a class="dropdown-item">Jazz</a>
+                        <a class="dropdown-item">Rock</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button type="button" class="btn filter-button" (clickOutside)="onCloseDropdown3()" (click)="onDisplayDropdown3()">Any Instrument
+                    <img src="../../assets/chevron-down.svg">
+                </button>
+                <div class="dropdown-options"  [ngStyle]="{'display' : displayDropdown3}">
+                    <div class="dropdown-options-container">
+                            <a class="dropdown-item">Accordion</a>
+                            <a class="dropdown-item">Alto Saxophone</a>
+                            <a class="dropdown-item">Baritone Saxophone</a>
+                            <a class="dropdown-item">Bass Clarinet</a>
+                            <a class="dropdown-item">Bass Guitar</a>
+                            <a class="dropdown-item">Bassoon</a>
+                            <a class="dropdown-item">Cello</a>
+                            <a class="dropdown-item">Clarinet</a>
+                            <a class="dropdown-item">Double Bass</a>
+                            <a class="dropdown-item">Drumset"</a>
+                            <a class="dropdown-item">Euphonium"</a>
+                            <a class="dropdown-item">Flute"</a>
+                            <a class="dropdown-item">French Horn</a>
+                            <a class="dropdown-item">Guitar</a>  
+                            <a class="dropdown-item">Harp</a>
+                            <a class="dropdown-item">Marimba</a>
+                            <a class="dropdown-item">Oboe</a>
+                            <a class="dropdown-item">Organ</a>
+                            <a class="dropdown-item">Piano</a>
+                            <a class="dropdown-item">Piccolo</a>
+                            <a class="dropdown-item">Recorder</a>
+                            <a class="dropdown-item">Soprano Saxophone</a>
+                            <a class="dropdown-item">Timpani</a>
+                            <a class="dropdown-item">Triangle</a>
+                            <a class="dropdown-item">Trombone</a>
+                            <a class="dropdown-item">Trumpet</a>
+                            <a class="dropdown-item">Tuba</a>
+                            <a class="dropdown-item">Ukelele</a>
+                            <a class="dropdown-item">Vibraphone</a>
+                            <a class="dropdown-item">Viola</a>
+                            <a class="dropdown-item">Violin</a>
+                            <a class="dropdown-item">Xylophone</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <ul class="list-group">
+            <app-ensembles-item 
+                *ngFor="let ensemble of ensembles"
+                [ensemble]="ensemble"></app-ensembles-item>
+          </ul>
+        
+    </div>
+</div>

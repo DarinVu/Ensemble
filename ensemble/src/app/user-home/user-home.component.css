@@ -112,3 +112,27 @@ h4 {
     cursor: pointer;
 }
 
+.personal-details-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-weight: 525;
+    font-size: 15px;
+    margin-top: 10px;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.hr{
+    border-bottom: 2px solid #e9ecef;
+}
+
+.instrument {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.bio {
+    margin-bottom: 10px;
+}
+

@@ -7,9 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthComponent } from './auth/auth.component';
 import { ProfileCreationComponent } from './profile-creation/profile-creation.component';
 import { UserHomeComponent } from './user-home/user-home.component';
-import { EnsemblesComponent } from './ensembles/ensembles.component';
 import { HeaderComponent } from './header/header.component';
 import { ClickOutsideDirective } from './shared/click-outside-directive';
+import { EnsemblesFindComponent } from './ensembles/ensembles-find/ensembles-find.component';
+import { EnsemblesCreateComponent } from './ensembles/ensembles-create/ensembles-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { EnsemblesItemComponent } from './ensembles/ensembles-find/ensembles-item/ensembles-item.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +22,17 @@ import { ClickOutsideDirective } from './shared/click-outside-directive';
     AuthComponent,
     ProfileCreationComponent,
     UserHomeComponent,
-    EnsemblesComponent,
+    EnsemblesFindComponent,
     HeaderComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    EnsemblesCreateComponent,
+    EnsemblesItemComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
