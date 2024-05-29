@@ -1,1 +1,31 @@
-<li class="list-group-item">{{ ensemble.name}}</li>
+<li class="list-group-item">
+    <div class="ensemble-container">
+        <div class="main-container">
+            <div class="when-container">
+                <p>{{ ensemble.date }}</p>
+                <p>-</p>
+                <p>{{ ensemble.time }}</p>
+            </div>
+            <a><h3>{{ ensemble.name}}</h3></a>
+        </div>
+        <div class="content-container">
+            <div class="details-container">
+                <p>Spots Remaining: </p>
+                <h4>{{ ensemble.size }}</h4>
+            </div>
+            <div class="details-container">
+                <p>Genre:</p>
+                <h4>{{ ensemble.genre }}</h4>
+            </div>
+            
+            <div class="instruments-container">
+                <p>Instruments Needed:</p>
+                <ul>
+                    <li *ngFor="let instrument of ensemble.instruments">
+                        {{ instrument.instrument }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</li>

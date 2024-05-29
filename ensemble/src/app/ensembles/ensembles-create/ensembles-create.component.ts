@@ -22,6 +22,8 @@ export class EnsemblesCreateComponent implements OnInit{
     let instruments = new FormArray([]);
     this.ensembleForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
+      'date': new FormControl(null, Validators.required),
+      'time': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required),
       'size': new FormControl(null, Validators.required),
       'instruments': instruments,
@@ -51,6 +53,8 @@ export class EnsemblesCreateComponent implements OnInit{
   onSubmit() {
     const newEnsemble = new Ensemble(
       this.ensembleForm.value['name'],
+      this.ensembleForm.value['date'],
+      this.ensembleForm.value['time'],
       this.ensembleForm.value['description'],
       this.ensembleForm.value['size'],
       this.ensembleForm.value['instruments'],

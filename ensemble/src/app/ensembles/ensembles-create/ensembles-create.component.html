@@ -18,14 +18,31 @@
             </div>
             <div class="form-floating mb-3 control">
                 <input 
-                    type="text" 
+                    type="date" 
                     class="form-control" 
-                    id="description" 
-                    placeholder="Description"
-                    formControlName="description">
-                <label for="description">Description</label>
+                    id="date" 
+                    formControlName="date">
+                <label for="name">Date</label>
             </div>
             <div class="form-floating mb-3 control">
+                <input 
+                    type="time" 
+                    class="form-control" 
+                    id="time" 
+                    formControlName="time">
+                <label for="name">Time</label>
+            </div>
+            <div class="description-container">
+                <p class="description-rec">*Recommended to include music piece title in description</p>
+                <div class="form-floating mb-3 control">
+                    <textarea class="form-control" 
+                    id="description" 
+                    placeholder="Description"
+                    formControlName="description"></textarea>
+                    <label for="description">Description</label>
+                </div>
+            </div>
+            <div class="form-floating mb-3 control size-container">
                 <input 
                     type="number" 
                     class="form-control" 
@@ -88,15 +105,15 @@
                     formControlName="genre"
                     >
                     <option class="default-option" selected>Select a Genre</option>
-                    <option value="1">Baroque</option>
-                    <option value="2">Choir</option>
-                    <option value="3">Classical</option>
-                    <option value="4">Contemporary</option>
-                    <option value="5">Country</option>
-                    <option value="6">Romantic</option>
-                    <option value="7">Folk</option>
-                    <option value="8">Jazz</option>
-                    <option value="9">Rock</option>
+                    <option value="Baroque">Baroque</option>
+                    <option value="Choir">Choir</option>
+                    <option value="Classical">Classical</option>
+                    <option value="Contemporary">Contemporary</option>
+                    <option value="Country">Country</option>
+                    <option value="Romantic">Romantic</option>
+                    <option value="Folk">Folk</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Rock">Rock</option>
                 </select>
             </div>
             <div class="mb-3">

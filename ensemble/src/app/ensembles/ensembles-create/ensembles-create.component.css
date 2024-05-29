@@ -52,3 +52,20 @@ select {
 .confirm-btn {
     background-color: #ff9f1c;
 }
+
+.size-container {
+    display: flex;
+}
+
+.confirm-btn {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+.description-rec {
+    font-weight: 400;
+    font-size: small;
+    margin-bottom: 0px;
+}
+
