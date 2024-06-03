@@ -5,22 +5,57 @@
 }
 
 .navbar-brand {
-    color: #ff9f1c;
+    color: #f18f01;
     font-size: 2em;
     font-style: italic;
+    margin-left: 10px;
 }
 
+
 .signup-btn {
-    background-color: #14213d;
+    background-color: #006e90;
     color: white;
+    font-weight: 600;
 }
 
 h1 {
     font-weight: 900;
 }
 
+.intro-message {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.make-music {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.music-emphasis {
+  color: #f18f01;
+}
+
+.make-friends {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.friends-emphasis {
+    color: #006e90;
+}
+
+.nonemphasis {
+    color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
 img {
-    max-width: auto;
+    max-width: 100%;
     height: auto;
 }
 

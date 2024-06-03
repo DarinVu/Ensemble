@@ -1,20 +1,101 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { UserService } from './user.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css'
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
+  signupForm: FormGroup;
+  loginStatus: boolean;
+  isLoading = false;
+  error: string = null;
 
-  constructor(private router: Router) {}
 
-  onNext() {
-      this.router.navigate(['profile-creation']);
+  constructor(
+    private router: Router, 
+    private userService: UserService, 
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+
+    this.route.params.subscribe(
+      (params: Params) => {
+        if (+params['status'] == 0) {
+          this.loginStatus = true;
+        } else {
+          this.loginStatus = false;
+        }
+      }
+    )
+
+    this.signupForm = new FormGroup({
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'password': new FormControl(null, [Validators.required, Validators.minLength(8)])
+    })
+
+    console.log(this.loginStatus);
+  }
+
+  onSubmit() {
+    this.isLoading = true;
+
+    const email = this.signupForm.value['email'];
+    const password = this.signupForm.value['password'];
+    
+    const user = {
+      'email': email,
+      'password': password
+    };
+
+    this.userService.setUserInProgress(user);
+
+    if (this.loginStatus) {
+      this.authService.login(email, password).subscribe(
+        resData => {
+          this.isLoading = false;
+          this.error = null;
+          this.router.navigate(['/user-home']);
+        }, 
+        errorMessage => {
+          this.error = errorMessage
+          this.isLoading = false;
+        }
+      );
+    } else {
+      this.authService.signup(email, password).subscribe(
+        resData => {
+          this.isLoading = false;
+          this.error = null;
+          this.router.navigate(['/profile-creation']);
+        }, 
+        errorMessage => {
+          this.error = errorMessage
+          this.isLoading = false;
+        }
+      );
+    }
+
+
+
+   
+  }
+
+  onSignUp() {
+    this.router.navigate(['/auth', 1]);
+    this.error = null;
+    this.signupForm.reset();
   }
 
   onLogin() {
-    this.router.navigate(['auth', 0]);
+    this.router.navigate(['/auth', 0]);
+    this.error = null;
+    this.signupForm.reset();
   }
 }

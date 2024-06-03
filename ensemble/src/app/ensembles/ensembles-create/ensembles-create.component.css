@@ -20,7 +20,7 @@ h3 {
 
 .curr-page {
     font-weight: 600;
-    color: #ff9f1c;
+    color: #006e90;
     text-decoration: underline;
     cursor: pointer;
 }
@@ -32,7 +32,7 @@ h3 {
 
 .btn-next {
     font-weight: 700;
-    background-color: #ff9f1c;
+    background-color: #006e90;
 }
 
 .control {
@@ -41,7 +41,10 @@ h3 {
 
 
 .create-btn {
-    background-color: #ff9f1c;
+    color: white;
+    background-color: #006e90;
+    font-weight: 600;
+    width: 50%;
 }
 
 select {
@@ -50,7 +53,8 @@ select {
 }
 
 .confirm-btn {
-    background-color: #ff9f1c;
+    background-color: #006e90;
+    color: white;
 }
 
 .size-container {

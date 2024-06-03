@@ -9,7 +9,6 @@
                     <li class="nav-item">
                         <a class="nav-link active login-btn" (click)="onLogin()" aria-current="page">Login</a>
                     </li>
-                
                     <li class="nav-item">
                         <button type="button" (click)="onSignup()" class="btn signup-btn">Sign Up</button>
                     </li>                                                                      
@@ -21,7 +20,16 @@
     <div class="col-xs-12 col-md-10 col-xxl-6">
         <div class="row">
             <div class="col-xs-12 col-md-8 intro-container">
-                <h1>Make Music. Make Friends.</h1>
+                <div class="intro-message">
+                    <div class="make-music">
+                        <h1 class="nonemphasis">Make</h1>
+                        <h1 class="music-emphasis">Music.</h1>
+                    </div>
+                    <div class="make-friends">
+                        <h1 class="nonemphasis">Make</h1>
+                        <h1 class="friends-emphasis">Friends.</h1>
+                    </div>
+                </div>
                 <p class="intro-paragraph">Whether you're into rock, jazz, classical, or any other genre, there are countless musicians who share your passion on Ensemble. Connect with fellow artists, form bands, and collaborate on exciting projects. Musicians of all levels are finding new opportunities to play, learn, and create every day. Sign up and start making music together!</p>
                 <button type="button" (click)="onSignup()" class="btn signup-btn join-btn">Join Ensemble</button>
             </div>

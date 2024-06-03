@@ -1,4 +1,7 @@
-
+hr {
+    margin: 0;
+    color: #B4B6B6;
+}
 
 h1 {
     font-weight: 900;
@@ -82,7 +85,7 @@ h4 {
 }
 
 .edit-profile-link {
-    color: #ff9f1c;
+    color: #006e90;
     text-decoration: underline;
     margin-top: -20px;
     cursor: pointer;

@@ -1,10 +1,12 @@
+
 h1 {
     font-weight: 700;
-    color: #ff9f1c;
+    color: #f18f01;
     font-size: 2em;
     font-style: italic;
-    margin-left: 0.75rem;
-    margin-top: 1.1rem;
+    margin-left: 22px;
+    margin-top: 18px;
+    cursor: pointer;
 }
 
 h2 {
@@ -15,7 +17,8 @@ h2 {
 
 .btn-add {
     font-weight: 700;
-    background-color: #ff9f1c;
+    background-color: #006e90;
+    color: white;
     margin-top: 10px;
 }
 
@@ -26,9 +29,10 @@ h3 {
 
 .btn-submit {
     font-weight: 700;
-    background-color: #ff9f1c;
+    background-color: #006e90;
+    color: white;
 }
 
 .progress-bar {
-    background-color: #ff9f1c;
+    background-color: #f18f01;
 }

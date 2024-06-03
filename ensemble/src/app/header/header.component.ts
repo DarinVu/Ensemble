@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +11,7 @@ export class HeaderComponent {
   show = false;
   displayDropdown = 'none';
 
+  constructor(private authService: AuthService, private router: Router) {}
 
   onShow() {
     this.show = !this.show;
@@ -24,5 +27,10 @@ export class HeaderComponent {
 
   onCloseDropdown() {
     this.displayDropdown = 'none'
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/home']);
   }
 }

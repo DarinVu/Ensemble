@@ -1,4 +1,4 @@
-<h1>Ensemble</h1>
+<h1 routerLink="/home">Ensemble</h1>
 <div class="row justify-content-center">
     <div class="col-xs-12 col-md-3">
         <div class="progress mb-3" role="progressbar" aria-label="Basic example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
@@ -54,7 +54,7 @@
                 <button type="button" class="btn btn-add">Add</button>
             </div>
             <div class="mb-3">
-                <label for="last-name" class="form-label">Bio</label>
+                <label for="last-name" class="form-label">Bio (Optional)</label>
                 <input type="text" class="form-control" id="last-name" placeholder="100 character max">
             </div>
             <hr>
@@ -71,7 +71,7 @@
             </div>
             <hr>
             <div class="row">
-                <button type="submit" (click)="onSubmit()" class="btn btn-submit">Sign up</button>
+                <button type="submit" (click)="onSubmit()" class="btn btn-submit">Finish</button>
             </div>
         </form>
     </div>

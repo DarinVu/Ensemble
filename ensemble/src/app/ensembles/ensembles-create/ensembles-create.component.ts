@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Ensemble } from '../ensemble.model';
 import { EnsemblesStorageService } from '../ensembles-storage.service';
-import { EnsemblesSerivce } from '../ensembles.service';
+import { EnsemblesService } from '../ensembles.service';
 
 @Component({
   selector: 'app-ensembles-create',
@@ -15,7 +15,7 @@ export class EnsemblesCreateComponent implements OnInit{
   
   constructor(
     private ensemblesStorageService: EnsemblesStorageService,
-    private ensemblesService: EnsemblesSerivce
+    private ensemblesService: EnsemblesService
   ) {}
 
   ngOnInit(): void {

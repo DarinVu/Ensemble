@@ -15,9 +15,14 @@
     flex-direction: column;
 }
 
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
 h3 {
     font-weight: 600;
-    color: #ff9f1c;
+    color: #006e90;
 }
 
 .when-container {

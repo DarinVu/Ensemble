@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="row justify-content-center content-container">
-    <div class="col-xs-12 col-md-10 col-lg-7 col-xxl-4">
+    <div class="col-xs-12 col-md-10 col-lg-7 col-xxl-5">
         <h2>Ensembles</h2>
         <div class="options-container">
             <h3 class="curr-page">Find</h3>
@@ -88,8 +88,8 @@
         </div>
         <ul class="list-group">
             <app-ensembles-item 
-                *ngFor="let ensemble of ensembles"
-                [ensemble]="ensemble"></app-ensembles-item>
+                *ngFor="let ensembleObj of ensembles"
+                [ensembleObj]="ensembleObj"></app-ensembles-item>
           </ul>
         
     </div>

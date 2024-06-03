@@ -4,9 +4,10 @@
 }
 
 .navbar-brand {
-    color: #ff9f1c;
+    color: #f18f01;
     font-size: 2em;
     font-style: italic;
+    margin-left: 10px;
 }
 
 .signup-btn {

@@ -5,15 +5,13 @@ import { Ensemble } from "./ensemble.model";
 @Injectable({
     providedIn: 'root'
 })
-export class EnsemblesSerivce {
+export class EnsemblesService {
     ensemblesChanged = new Subject<Ensemble[]>();
 
     private ensembles = [];
 
     public getEnsembles() {
-        console.log('hello')
-        return this.ensembles.slice();
-        
+        return this.ensembles.slice();  
     }
 
     public addEnsemble(newEnsemble: Ensemble) {

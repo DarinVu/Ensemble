@@ -1,0 +1,102 @@
+.title-container {
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+h1 {
+    font-weight: 600;
+}
+
+.host-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.host-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 400;
+    height: fit-content;
+}
+
+.host-name {
+    margin-top: -20px;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.content-container {
+    height: 100vh;
+    background-color: #F6F6F6;
+    padding-top: 30px;
+}
+
+hr {
+    margin: 0;
+    color: #B4B6B6;
+}
+
+h4 {
+    font-weight: 600;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+    gap: 30px;
+}
+
+.footer-info {
+    height: 100%;
+}
+
+.footer-ensemble-name {
+    margin-top: -20px;
+}
+
+.footer-date {
+    display: flex;
+    gap: 10px;
+    color:#6C6D6D;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+}
+
+.btn-join {
+    background-color: #006e90;
+    color: white;
+    font-weight: 600;
+}

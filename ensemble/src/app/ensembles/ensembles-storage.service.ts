@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { EnsemblesSerivce } from "./ensembles.service";
+import { EnsemblesService } from "./ensembles.service";
 import { Ensemble } from "./ensemble.model";
 import { map, tap } from "rxjs/operators";
 
@@ -8,7 +8,7 @@ import { map, tap } from "rxjs/operators";
     providedIn: 'root'
 })
 export class EnsemblesStorageService {
-    constructor(private http: HttpClient, private ensemblesService: EnsemblesSerivce) {}
+    constructor(private http: HttpClient, private ensemblesService: EnsemblesService) {}
 
     storeEnsemble(ensemble: Ensemble) {
         this.http.post('https://ensemble-163c3-default-rtdb.firebaseio.com/ensembles.json', 
@@ -21,7 +21,10 @@ export class EnsemblesStorageService {
             let ensemblesArray = []
             for (var key in ensembles) {
                 if (ensembles.hasOwnProperty(key)) {
-                    ensemblesArray.push(ensembles[key]);
+                    var ensembleId = key;
+                    var ensembleObj = {};
+                    ensembleObj[ensembleId] = ensembles[key];
+                    ensemblesArray.push(ensembleObj);
                 }
             }
             this.ensemblesService.setEnsembles(ensemblesArray);

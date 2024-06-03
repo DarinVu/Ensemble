@@ -1,6 +1,6 @@
 import { ActivatedRouteSnapshot, Resolve, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from "@angular/core";
-import { EnsemblesSerivce } from './ensembles.service';
+import { EnsemblesService } from './ensembles.service';
 import { EnsemblesStorageService } from './ensembles-storage.service';
 import { Ensemble } from './ensemble.model';
 
@@ -8,7 +8,7 @@ import { Ensemble } from './ensemble.model';
     providedIn: 'root'
 })
 export class EnsemblesResolverService implements Resolve<any> {
-    constructor(private ensemblesService: EnsemblesSerivce, private ensemblesStorageService: EnsemblesStorageService) {}
+    constructor(private ensemblesService: EnsemblesService, private ensemblesStorageService: EnsemblesStorageService) {}
 
 
     resolve() {
