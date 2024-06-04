@@ -5,69 +5,107 @@
             <div class="progress-bar" style="width: 50%"></div>
         </div>
         <h2>Set Up Your Profile</h2>
-        <form>
+        <form [formGroup]="profileForm">
             <div class="mb-3">
                 <label for="first-name" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="first-name">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="first-name"
+                    formControlName="firstName">
             </div>
             <div class="mb-3">
                 <label for="last-name" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="last-name">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="last-name"
+                    formControlname="lastName">
             </div>
-            <div class="mb-3">
-                <label for="instrumentList" class="form-label">Instrument(s)</label>
-                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-                <datalist id="datalistOptions">
-                    <option value="Accordion">
-                    <option value="Alto Saxophone">
-                    <option value="Baritone Saxophone">
-                    <option value="Bass Clarinet">
-                    <option value="Bass Guitar">
-                    <option value="Bassoon">
-                    <option value="Cello">
-                    <option value="Clarinet">
-                    <option value="Double Bass">
-                    <option value="Drumset">
-                    <option value="Euphonium">
-                    <option value="Flute">
-                    <option value="French Horn">
-                    <option value="Guitar">  
-                    <option value="Harp">
-                    <option value="Marimba">
-                    <option value="Oboe">
-                    <option value="Organ">
-                    <option value="Piano">
-                    <option value="Piccolo">
-                    <option value="Recorder">
-                    <option value="Soprano Saxophone">
-                    <option value="Timpani">
-                    <option value="Triangle">
-                    <option value="Trombone">
-                    <option value="Trumpet">
-                    <option value="Tuba">
-                    <option value="Ukelele">
-                    <option value="Vibraphone">
-                    <option value="Viola">
-                    <option value="Violin">
-                    <option value="Xylophone">
-                </datalist>
-                <button type="button" class="btn btn-add">Add</button>
+            <div class="mb-3 control" formArrayName="instruments" *ngFor="let instConrol of instrumentControls; let i = index">
+                <div class="form-group" [formGroupName]="i">
+                    <label for="instrumentList" class="form-label">Instrument</label>
+                    <div class="control-array-container">
+                        <input 
+                        class="form-control input-w-delete" 
+                        list="datalistOptions" 
+                        id="instrumentList" 
+                        placeholder="Type to search..."
+                        formControlName="instrument">
+                        <button *ngIf="instrumentControls.length > 1"class="btn btn-danger" (click)="onDeleteInstrument(i)">X</button>
+                    </div>
+                    <datalist id="datalistOptions">
+                        <option value="Accordion">
+                        <option value="Alto Saxophone">
+                        <option value="Baritone Saxophone">
+                        <option value="Bass Clarinet">
+                        <option value="Bass Guitar">
+                        <option value="Bassoon">
+                        <option value="Cello">
+                        <option value="Clarinet">
+                        <option value="Double Bass">
+                        <option value="Drumset">
+                        <option value="Euphonium">
+                        <option value="Flute">
+                        <option value="French Horn">
+                        <option value="Guitar">  
+                        <option value="Harp">
+                        <option value="Marimba">
+                        <option value="Oboe">
+                        <option value="Organ">
+                        <option value="Piano">
+                        <option value="Piccolo">
+                        <option value="Recorder">
+                        <option value="Soprano Saxophone">
+                        <option value="Timpani">
+                        <option value="Triangle">
+                        <option value="Trombone">
+                        <option value="Trumpet">
+                        <option value="Tuba">
+                        <option value="Ukelele">
+                        <option value="Vibraphone">
+                        <option value="Viola">
+                        <option value="Violin">
+                        <option value="Xylophone">
+                    </datalist>
+                </div>
             </div>
+            <button type="button" (click)="onAddInstrument()" class="btn btn-add mb-3">Add</button>
             <div class="mb-3">
                 <label for="last-name" class="form-label">Bio (Optional)</label>
                 <input type="text" class="form-control" id="last-name" placeholder="100 character max">
             </div>
             <hr>
             <h3>Show Off Your Talent!</h3>
-            <div class="mb-3">
-                <label for="video-recording" class="form-label">Video Recordings (Optional)</label>
-                <input type="text" class="form-control" id="video-recording" placeholder="YouTube Link">
-                <button type="button" class="btn btn-add">Add</button>
+            <div class="mb-3" formArrayName="videos" *ngFor="let videoControl of videoControls; let i = index">
+                <div class="form-group" [formGroupName]="i">
+                    <label for="video-recording" class="form-label">Video Recordings (Optional)</label>
+                    <div class="control-array-container">
+                        <input 
+                        type="text" 
+                        class="form-control input-w-delete" 
+                        id="video-recording" 
+                        placeholder="YouTube Link"
+                        formControlName="video"
+                    >
+                    <button *ngIf="videoControls.length > 1"class="btn btn-danger" (click)="onDeleteVideo(i)">X</button>
+                    </div>
+                </div>
+                <button type="button" (click)="onAddVideo()" class="btn btn-add">Add</button>
             </div>
-            <div class="mb-3">
-                <label for="mp3-recording" class="form-label">MP3 Recordings (Optional)</label>
-                <input class="form-control" type="file" id="mp3-recording">
-                <button type="button" class="btn btn-add">Add</button>
+            <div class="mb-3" formArrayName="recordings" *ngFor="let recordingControl of recordingControls; let i = index">
+                <div class="form-group" [formGroupName]="i">
+                    <label for="mp3-recording" class="form-label">MP3 Recordings (Optional)</label>
+                    <div class="control-array-container">
+                        <input 
+                        class="form-control input-w-delete" 
+                        type="file" 
+                        id="mp3-recording"
+                        formControlName="recording">
+                        <button *ngIf="recordingControls.length > 1"class="btn btn-danger" (click)="onDeleteRecording(i)">X</button>
+                    </div>
+                </div>
+                <button type="button" (click)="onAddRecording()" class="btn btn-add">Add</button>
             </div>
             <hr>
             <div class="row">

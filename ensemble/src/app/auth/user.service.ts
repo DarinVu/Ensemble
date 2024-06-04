@@ -5,9 +5,13 @@ import { Subject } from "rxjs";
     providedIn: 'root'
 })
 export class UserService {
-    userInProgress = new Subject<Object>();
+    private userInProgress: Object
 
     public setUserInProgress(user: Object) {
-        this.userInProgress.next(user);
+        this.userInProgress = user;
+    }
+
+    public getUserInProgress() {
+        return this.userInProgress;
     }
 }

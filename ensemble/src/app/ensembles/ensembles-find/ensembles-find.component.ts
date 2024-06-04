@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EnsemblesService } from '../ensembles.service';
 import { Subscription } from 'rxjs';
-import { EnsemblesStorageService } from '../ensembles-storage.service';
 
 @Component({
   selector: 'app-ensembles-find',
@@ -15,7 +14,7 @@ export class EnsemblesFindComponent implements OnInit, OnDestroy {
   ensembles = []
   subscription: Subscription;
 
-  constructor(private ensemblesService: EnsemblesService, private ensemblesStorageService: EnsemblesStorageService) {}
+  constructor(private ensemblesService: EnsemblesService) {}
 
   ngOnInit(): void {
     this.subscription = this.ensemblesService.ensemblesChanged.subscribe(

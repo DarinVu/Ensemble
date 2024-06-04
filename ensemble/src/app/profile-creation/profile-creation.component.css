@@ -36,3 +36,16 @@ h3 {
 .progress-bar {
     background-color: #f18f01;
 }
+
+.btn-add {
+    margin-top: 0px;
+}
+
+.control-array-container {
+    display: flex;
+
+}
+
+.input-w-delete {
+    width: 98%;
+}
