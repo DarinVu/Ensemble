@@ -48,6 +48,12 @@ h4 {
     color: white;
 }
 
+.name-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .profile-numbers-container {
     width: 100%;
     display: flex;
@@ -76,6 +82,12 @@ h4 {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.small-name-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
 }
 
 .edit-info-container {
@@ -126,13 +138,24 @@ h4 {
     margin-bottom: 20px;
 }
 
+.instrument-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-bottom: -10px;
+    align-items: center;
+}
+
 .hr{
     border-bottom: 2px solid #e9ecef;
 }
 
-.instrument {
-    margin-bottom: 10px;
+.instrument-title {
     font-weight: 600;
+}
+
+.instrument {
+    font-weight: 500;
 }
 
 .bio {

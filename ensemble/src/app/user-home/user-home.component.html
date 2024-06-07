@@ -9,19 +9,32 @@
                     <div class="profile-card-container">
                        <div 
                         class="profile-image-container" 
-                        style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdh-7WGKhECkm5SXX_6FS1OxjEZiyEXSKIAQ&s');"
+                        style="background-image: url('https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg');"
                         >
-                            <h3>User</h3>
-                            <p>email&#64;gmail.com</p>
+                            <div class="name-container">
+                                <h3>{{ profile.firstName }}</h3>
+                                <h3>{{ profile.lastName }}</h3>
+                            </div>
+                            
+                            <p>{{ profile.email }}</p>
                         </div>
                         <div class="personal-details-container">
                             <div class="instrument-container">
-                                <p class="instrument">Instruments: Clarinet</p>
-                                <div class="hr"></div>
+                                <p class="instrument-title">Instruments: </p>
+                                <div *ngFor="let instrument of profile.instruments; let i = index" class="instrument">
+                                    <p *ngIf="i == profile.instruments.length - 1">
+                                        {{ instrument.instrument }}
+                                    </p>
+                                    <p *ngIf="i < profile.instruments.length - 1">
+                                        {{ instrument.instrument }},
+                                    </p>
+                                </div>
+                                
                             </div>
+                            <div class="hr"></div> 
                             <div class="bio-container">
-                                <p class="bio">This is my bio</p>
-                            <div class="hr"></div>
+                                <p class="bio">{{ profile.bio }}</p>
+                                <div class="hr"></div>
                             </div>
                             
                         </div>
@@ -40,7 +53,10 @@
                     <div class="profile-edit-container">
                         <img src="../../assets/account-circle.svg">
                         <div class="edit-info-container">                
-                            <p>Darin</p>
+                            <div class="small-name-container">
+                                <p>{{ profile.firstName }}</p>
+                                <p>{{ profile.lastName }}</p>
+                            </div>
                             <a class="edit-profile-link" title="Edit Profile">Edit Profile</a>              
                         </div>
                     </div>

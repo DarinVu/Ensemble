@@ -3,6 +3,8 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Ensemble } from '../ensemble.model';
 import { EnsemblesStorageService } from '../ensembles-storage.service';
 import { EnsemblesService } from '../ensembles.service';
+import { Profile } from '../../profile-creation/profile.model';
+import { ProfileService } from '../../profile-creation/profile.service';
 
 @Component({
   selector: 'app-ensembles-create',
@@ -12,10 +14,12 @@ import { EnsemblesService } from '../ensembles.service';
 export class EnsemblesCreateComponent implements OnInit{
   ensembleSize: number;
   ensembleForm: FormGroup;
+  currentProfile: Profile = null;
   
   constructor(
     private ensemblesStorageService: EnsemblesStorageService,
-    private ensemblesService: EnsemblesService
+    private ensemblesService: EnsemblesService,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +34,13 @@ export class EnsemblesCreateComponent implements OnInit{
       'genre': new FormControl("Select a Genre", Validators.required),
       'status': new FormControl(null, Validators.required)
     })
+
+    this.profileService.currentProfileChanged.subscribe(
+      profile => {
+        this.currentProfile = profile;
+      }
+    );
+    console.log(this.currentProfile);
   }
 
   onChangeSize() {
@@ -64,6 +75,6 @@ export class EnsemblesCreateComponent implements OnInit{
 
     this.ensemblesStorageService.storeEnsemble(newEnsemble);
     this.ensemblesService.addEnsemble(newEnsemble);
-
+    
   }
 }

@@ -21,6 +21,7 @@ export class EnsemblesService {
 
     public setEnsembles(ensembles: Ensemble[]) {
         this.ensembles = ensembles;
+        console.log(this.ensembles)
         this.ensemblesChanged.next(this.ensembles.slice());
     }
 

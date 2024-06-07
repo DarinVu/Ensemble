@@ -5,7 +5,7 @@
             <div class="progress-bar" style="width: 50%"></div>
         </div>
         <h2>Set Up Your Profile</h2>
-        <form [formGroup]="profileForm">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
                 <label for="first-name" class="form-label">First Name</label>
                 <input 
@@ -20,7 +20,7 @@
                     type="text" 
                     class="form-control" 
                     id="last-name"
-                    formControlname="lastName">
+                    formControlName="lastName">
             </div>
             <div class="mb-3 control" formArrayName="instruments" *ngFor="let instConrol of instrumentControls; let i = index">
                 <div class="form-group" [formGroupName]="i">
@@ -32,7 +32,7 @@
                         id="instrumentList" 
                         placeholder="Type to search..."
                         formControlName="instrument">
-                        <button *ngIf="instrumentControls.length > 1"class="btn btn-danger" (click)="onDeleteInstrument(i)">X</button>
+                        <button type="button" *ngIf="instrumentControls.length > 1"class="btn btn-danger" (click)="onDeleteInstrument(i)">X</button>
                     </div>
                     <datalist id="datalistOptions">
                         <option value="Accordion">
@@ -73,9 +73,14 @@
             <button type="button" (click)="onAddInstrument()" class="btn btn-add mb-3">Add</button>
             <div class="mb-3">
                 <label for="last-name" class="form-label">Bio (Optional)</label>
-                <input type="text" class="form-control" id="last-name" placeholder="100 character max">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="last-name" 
+                    placeholder="100 character max"
+                    formControlName="bio">
             </div>
-            <hr>
+            <hr class="main-divider">
             <h3>Show Off Your Talent!</h3>
             <div class="mb-3" formArrayName="videos" *ngFor="let videoControl of videoControls; let i = index">
                 <div class="form-group" [formGroupName]="i">
@@ -88,11 +93,12 @@
                         placeholder="YouTube Link"
                         formControlName="video"
                     >
-                    <button *ngIf="videoControls.length > 1"class="btn btn-danger" (click)="onDeleteVideo(i)">X</button>
+                    <button type="button" *ngIf="videoControls.length > 1"class="btn btn-danger" (click)="onDeleteVideo(i)">X</button>
                     </div>
                 </div>
                 <button type="button" (click)="onAddVideo()" class="btn btn-add">Add</button>
             </div>
+            <hr>
             <div class="mb-3" formArrayName="recordings" *ngFor="let recordingControl of recordingControls; let i = index">
                 <div class="form-group" [formGroupName]="i">
                     <label for="mp3-recording" class="form-label">MP3 Recordings (Optional)</label>
@@ -102,14 +108,14 @@
                         type="file" 
                         id="mp3-recording"
                         formControlName="recording">
-                        <button *ngIf="recordingControls.length > 1"class="btn btn-danger" (click)="onDeleteRecording(i)">X</button>
+                        <button type="button" *ngIf="recordingControls.length > 1"class="btn btn-danger" (click)="onDeleteRecording(i)">X</button>
                     </div>
                 </div>
                 <button type="button" (click)="onAddRecording()" class="btn btn-add">Add</button>
             </div>
             <hr>
             <div class="row">
-                <button type="submit" (click)="onSubmit()" class="btn btn-submit">Finish</button>
+                <button type="submit" class="btn btn-submit">Finish</button>
             </div>
         </form>
     </div>

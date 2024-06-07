@@ -1,3 +1,4 @@
+import { ProfileService } from './../profile-creation/profile.service';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
@@ -23,7 +24,7 @@ export class AuthService {
     user = new BehaviorSubject<User>(null);
     private tokenExpirationtimer: any;
 
-    constructor(private http: HttpClient, private router: Router){}
+    constructor(private http: HttpClient, private router: Router, private profileService: ProfileService){}
 
     signup(email: string, password: string) {
         return this.http.post<AuthResponseData>(
@@ -82,11 +83,13 @@ export class AuthService {
             const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
             this.autoLogout(expirationDuration);
         }
+
+        
     }
 
     logout() {
         this.user.next(null);
-        this.router.navigate(['/welcome']);
+        this.router.navigate(['/home']);
         localStorage.removeItem('userData');
         if (this.tokenExpirationtimer) {
             clearTimeout(this.tokenExpirationtimer);

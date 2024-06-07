@@ -49,3 +49,7 @@ h3 {
 .input-w-delete {
     width: 98%;
 }
+
+.main-divider {
+    border-top: 5px solid black;
+}

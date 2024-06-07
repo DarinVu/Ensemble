@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
 import { Subscription } from 'rxjs';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProfileStorageService } from './profile-storage.service';
+import { Profile } from './profile.model';
+import { ProfileService } from './profile.service';
 
 @Component({
   selector: 'app-profile-creation',
@@ -14,7 +17,12 @@ export class ProfileCreationComponent implements OnInit {
   profileForm: FormGroup;
   
   
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private router: Router, 
+    private userService: UserService,
+    private profileStorageService: ProfileStorageService,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
     this.currentUser = this.userService.getUserInProgress();
@@ -93,6 +101,20 @@ export class ProfileCreationComponent implements OnInit {
   }
 
   onSubmit() {
+    const email = this.userService.getUserInProgress()['email'];
+
+    const newProfile = new Profile(
+      email,
+      this.profileForm.value['firstName'],
+      this.profileForm.value['lastName'],
+      this.profileForm.value['instruments'],
+      this.profileForm.value['videos'],
+      this.profileForm.value['recordings'],
+      this.profileForm.value['bio']
+    )
+    this.profileStorageService.storeProfile(newProfile);
+    this.profileService.addProfile(newProfile);
+
     this.router.navigate(['user-home']);
   }
 

@@ -17,14 +17,12 @@ export class EnsemblesDetailsComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         var ensembles: Ensemble[] = this.ensemblesService.getEnsembles();
-        console.log(ensembles);
         for (let ensemble of ensembles) {
           var key = Object.keys(ensemble)[0]
           if (key == params['id']) {
             this.ensemble = ensemble[key];
           }
         }
-        console.log(this.ensemble[key]);
       }
     )
   }
