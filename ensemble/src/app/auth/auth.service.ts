@@ -5,6 +5,7 @@ import { catchError, tap } from "rxjs/operators";
 import { BehaviorSubject, Subject, throwError } from "rxjs"
 import { Router } from "@angular/router";
 import { User } from "./user.model";
+import { ProfileStorageService } from '../profile-creation/profile-storage.service';
 
 
 interface AuthResponseData {
@@ -24,7 +25,12 @@ export class AuthService {
     user = new BehaviorSubject<User>(null);
     private tokenExpirationtimer: any;
 
-    constructor(private http: HttpClient, private router: Router, private profileService: ProfileService){}
+    constructor(
+        private http: HttpClient, 
+        private router: Router, 
+        private profileService: ProfileService,
+        private profileStorageService: ProfileStorageService
+    ){}
 
     signup(email: string, password: string) {
         return this.http.post<AuthResponseData>(
@@ -84,6 +90,25 @@ export class AuthService {
             this.autoLogout(expirationDuration);
         }
 
+        this.user.subscribe(
+            user => {
+                this.profileStorageService.fetchProfiles().subscribe(
+                    resData => {
+                        var profiles = this.profileService.getProfiles();
+                        if (profiles.length == 1) {
+                          this.profileService.setCurrentProfile(profiles[0]);
+                        }
+                        for (let profile of profiles) {
+                          var key = Object.keys(profile)[0];
+                          if (profile[key]['email'] == user.email) {
+                            this.profileService.setCurrentProfile(profile[key]);
+                        }
+                      }
+                    }
+                );
+               
+            }
+        )
         
     }
 

@@ -6,6 +6,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfileStorageService } from './profile-storage.service';
 import { Profile } from './profile.model';
 import { ProfileService } from './profile.service';
+import { Ensemble } from '../ensembles/ensemble.model';
 
 @Component({
   selector: 'app-profile-creation',
@@ -108,9 +109,11 @@ export class ProfileCreationComponent implements OnInit {
       this.profileForm.value['firstName'],
       this.profileForm.value['lastName'],
       this.profileForm.value['instruments'],
+      [new Ensemble('aaa', 'aaa', 'aaa', 'aaa', 0, ['aaa'], 'aaa', 'aaa')],
       this.profileForm.value['videos'],
       this.profileForm.value['recordings'],
-      this.profileForm.value['bio']
+      this.profileForm.value['bio'],
+    
     )
     this.profileStorageService.storeProfile(newProfile);
     this.profileService.addProfile(newProfile);

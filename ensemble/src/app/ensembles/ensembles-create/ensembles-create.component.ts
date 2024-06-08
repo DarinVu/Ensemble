@@ -1,3 +1,4 @@
+import { ProfileStorageService } from './../../profile-creation/profile-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Ensemble } from '../ensemble.model';
@@ -19,7 +20,8 @@ export class EnsemblesCreateComponent implements OnInit{
   constructor(
     private ensemblesStorageService: EnsemblesStorageService,
     private ensemblesService: EnsemblesService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private profileStorageService: ProfileStorageService
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class EnsemblesCreateComponent implements OnInit{
         this.currentProfile = profile;
       }
     );
-    console.log(this.currentProfile);
+    
   }
 
   onChangeSize() {
@@ -75,6 +77,8 @@ export class EnsemblesCreateComponent implements OnInit{
 
     this.ensemblesStorageService.storeEnsemble(newEnsemble);
     this.ensemblesService.addEnsemble(newEnsemble);
-    
+
+    this.currentProfile.ensembles.push(newEnsemble);
+    this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles);
   }
 }

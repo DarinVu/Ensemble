@@ -1,3 +1,4 @@
+import { ProfileService } from './../profile-creation/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -20,7 +21,8 @@ export class AuthComponent implements OnInit {
     private router: Router, 
     private userService: UserService, 
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +63,7 @@ export class AuthComponent implements OnInit {
         resData => {
           this.isLoading = false;
           this.error = null;
+          this.changeCurrentProfile();
           this.router.navigate(['/user-home']);
         }, 
         errorMessage => {
@@ -73,6 +76,7 @@ export class AuthComponent implements OnInit {
         resData => {
           this.isLoading = false;
           this.error = null;
+          this.changeCurrentProfile();
           this.router.navigate(['/profile-creation']);
         }, 
         errorMessage => {
@@ -81,10 +85,23 @@ export class AuthComponent implements OnInit {
         }
       );
     }
+  }
 
-
-
-   
+  changeCurrentProfile() {
+    this.authService.user.subscribe(
+      user => {
+        var profiles = this.profileService.getProfiles();
+        if (profiles.length == 1) {
+          this.profileService.setCurrentProfile(profiles[0]);
+        }
+        for (let profile of profiles) {
+          var key = Object.keys(profile)[0];
+          if (profile[key]['email'] == user.email) {
+            this.profileService.setCurrentProfile(profile[key]);
+          }
+      }
+      }
+    )
   }
 
   onSignUp() {

@@ -12,10 +12,9 @@ import { ProfileService } from './profile-creation/profile.service';
 export class AppComponent implements OnInit{
   title = 'ensemble';
 
-  constructor(private authService: AuthService, private profileService: ProfileService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.autoLogin();
-
   }
 }

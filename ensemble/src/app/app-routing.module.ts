@@ -16,7 +16,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'auth/:status', component: AuthComponent },
     { path: 'profile-creation', component: ProfileCreationComponent },
-    { path: 'user-home', component: UserHomeComponent, resolve: [ProfileResolverService], canActivate: [AuthGuard] },
+    { path: 'user-home', component: UserHomeComponent, resolve: [ProfileResolverService, EnsemblesResolverService], canActivate: [AuthGuard] },
     { path: 'ensembles-find', component: EnsemblesFindComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] },
     { path: 'ensembles-create', component: EnsemblesCreateComponent, canActivate: [AuthGuard] },
     { path: 'ensembles-details/:id', component: EnsemblesDetailsComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] }

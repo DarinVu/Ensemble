@@ -6,9 +6,9 @@ export class Profile {
         public firstName: string,
         public lastName: string,
         public instruments: string[],
+        public ensembles: Ensemble[],
         public videos?: string[],
         public recordings?: any,
         public bio?: string,
-        public ensembles: Ensemble[] = []
     ) {}
 }
