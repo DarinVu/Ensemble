@@ -72,7 +72,8 @@ export class EnsemblesCreateComponent implements OnInit{
       this.ensembleForm.value['size'],
       this.ensembleForm.value['instruments'],
       this.ensembleForm.value['genre'],
-      this.ensembleForm.value['status']
+      this.ensembleForm.value['status'],
+      [this.currentProfile.email]
     )
 
     this.ensemblesStorageService.storeEnsemble(newEnsemble);

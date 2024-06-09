@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
@@ -7,6 +8,7 @@ import { ProfileStorageService } from './profile-storage.service';
 import { Profile } from './profile.model';
 import { ProfileService } from './profile.service';
 import { Ensemble } from '../ensembles/ensemble.model';
+import { User } from '../auth/user.model';
 
 @Component({
   selector: 'app-profile-creation',
@@ -14,8 +16,9 @@ import { Ensemble } from '../ensembles/ensemble.model';
   styleUrl: './profile-creation.component.css'
 })
 export class ProfileCreationComponent implements OnInit {
-  currentUser: any;
+  currentUser: Object;
   profileForm: FormGroup;
+ 
   
   
   constructor(
@@ -27,6 +30,8 @@ export class ProfileCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.userService.getUserInProgress();
+    
+  
     
     let instruments = new FormArray([new FormGroup({
       'instrument': new FormControl(null, Validators.required)
@@ -109,7 +114,7 @@ export class ProfileCreationComponent implements OnInit {
       this.profileForm.value['firstName'],
       this.profileForm.value['lastName'],
       this.profileForm.value['instruments'],
-      [new Ensemble('aaa', 'aaa', 'aaa', 'aaa', 0, ['aaa'], 'aaa', 'aaa')],
+      [new Ensemble('aaa', 'aaa', 'aaa', 'aaa', 0, ['aaa'], 'aaa', 'aaa', ['aaa'])],
       this.profileForm.value['videos'],
       this.profileForm.value['recordings'],
       this.profileForm.value['bio'],

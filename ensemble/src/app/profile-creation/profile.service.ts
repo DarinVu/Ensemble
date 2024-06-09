@@ -21,7 +21,7 @@ export class ProfileService {
     }
 
     getProfiles() {
-        return this.profiles;
+       return this.profiles.slice();
     }
 
     setCurrentProfile(profile: Profile) {

@@ -94,6 +94,7 @@ export class AuthService {
             user => {
                 this.profileStorageService.fetchProfiles().subscribe(
                     resData => {
+        
                         var profiles = this.profileService.getProfiles();
                         if (profiles.length == 1) {
                           this.profileService.setCurrentProfile(profiles[0]);

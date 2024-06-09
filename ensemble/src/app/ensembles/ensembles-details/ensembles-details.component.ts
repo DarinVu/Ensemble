@@ -1,3 +1,4 @@
+import { ProfileService } from './../../profile-creation/profile.service';
 import { EnsemblesService } from './../ensembles.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params } from '@angular/router';
@@ -10,8 +11,13 @@ import { Ensemble } from '../ensemble.model';
 })
 export class EnsemblesDetailsComponent implements OnInit {
   ensemble: Ensemble;
+  host: string;
 
-  constructor(private route: ActivatedRoute, private ensemblesService: EnsemblesService) {}
+  constructor(
+    private route: ActivatedRoute, 
+    private ensemblesService: EnsemblesService,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -25,6 +31,15 @@ export class EnsemblesDetailsComponent implements OnInit {
         }
       }
     )
+    let profiles = this.profileService.getProfiles();
+    for (let profile of profiles) {
+      var key = Object.keys(profile)[0];
+      if (profile[key]['email'] == this.ensemble.members[0]) {
+        this.host = profile[key]['firstName'] + ' ' + profile[key]['lastName'];
+      }
+    }
   }
+
+
 
 }
