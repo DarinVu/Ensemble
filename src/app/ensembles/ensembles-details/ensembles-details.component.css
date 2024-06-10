@@ -1,5 +1,5 @@
 .title-container {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 30px;
 }
 
@@ -34,6 +34,42 @@ h1 {
     padding-top: 30px;
 }
 
+.big-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.important-info-container {
+    background-color: white;
+    height: fit-content;
+    border-radius: 20px;
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 25px;
+    padding-right: 25px;  
+}
+
+.ensemble-status {
+    font-weight: 500;
+    color: #6C6D6D;
+}
+
+.date-info-container {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    color: #6C6D6D;
+}
+
+.chat-btn {
+    width: 100%;
+    background-color: #006e90;
+    color: white;
+
+}
+
 hr {
     margin: 0;
     color: #B4B6B6;
@@ -46,7 +82,11 @@ h4 {
 .details-container {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
+}
+
+.ensemble-description {
+    font-weight: 500;
 }
 
 .footer {
