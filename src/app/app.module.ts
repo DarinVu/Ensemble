@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EnsemblesItemComponent } from './ensembles/ensembles-find/ensembles-item/ensembles-item.component';
 import { EnsemblesDetailsComponent } from './ensembles/ensembles-details/ensembles-details.component';
+import { EnsemblesChatComponent } from './ensembles/ensembles-chat/ensembles-chat.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EnsemblesDetailsComponent } from './ensembles/ensembles-details/ensembl
     ClickOutsideDirective,
     EnsemblesCreateComponent,
     EnsemblesItemComponent,
-    EnsemblesDetailsComponent
+    EnsemblesDetailsComponent,
+    EnsemblesChatComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { EnsemblesResolverService } from "./ensembles/ensembles-resolver.service
 import { EnsemblesDetailsComponent } from "./ensembles/ensembles-details/ensembles-details.component";
 import { ProfileResolverService } from "./profile-creation/profile-resolver.service";
 import { AuthGuard } from "./auth/auth.guard";
+import { EnsemblesChatComponent } from "./ensembles/ensembles-chat/ensembles-chat.component";
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
     { path: 'user-home', component: UserHomeComponent, resolve: [ProfileResolverService, EnsemblesResolverService], canActivate: [AuthGuard] },
     { path: 'ensembles-find', component: EnsemblesFindComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] },
     { path: 'ensembles-create', component: EnsemblesCreateComponent, canActivate: [AuthGuard] },
-    { path: 'ensembles-details/:id', component: EnsemblesDetailsComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] }
+    { path: 'ensembles-details/:id', component: EnsemblesDetailsComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] },
+    { path: 'ensembles-details/:id/chat', component: EnsemblesChatComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] }
 ]
 
 

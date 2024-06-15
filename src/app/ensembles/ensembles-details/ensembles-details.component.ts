@@ -1,7 +1,7 @@
 import { ProfileService } from './../../profile-creation/profile.service';
 import { EnsemblesService } from './../ensembles.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Ensemble } from '../ensemble.model';
 
 @Component({
@@ -16,7 +16,8 @@ export class EnsemblesDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute, 
     private ensemblesService: EnsemblesService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +39,10 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.host = profile[key]['firstName'] + ' ' + profile[key]['lastName'];
       }
     }
+  }
+
+  onChat() {
+    this.router.navigate(['chat'], {relativeTo: this.route });
   }
 
 
