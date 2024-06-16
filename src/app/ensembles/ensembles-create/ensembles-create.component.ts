@@ -6,11 +6,15 @@ import { EnsemblesStorageService } from '../ensembles-storage.service';
 import { EnsemblesService } from '../ensembles.service';
 import { Profile } from '../../profile-creation/profile.model';
 import { ProfileService } from '../../profile-creation/profile.service';
+import { formatDate } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ensembles-create',
   templateUrl: './ensembles-create.component.html',
-  styleUrl: './ensembles-create.component.css'
+  styleUrl: './ensembles-create.component.css',
+  providers: [DatePipe]
 })
 export class EnsemblesCreateComponent implements OnInit{
   ensembleSize: number;
@@ -21,7 +25,9 @@ export class EnsemblesCreateComponent implements OnInit{
     private ensemblesStorageService: EnsemblesStorageService,
     private ensemblesService: EnsemblesService,
     private profileService: ProfileService,
-    private profileStorageService: ProfileStorageService
+    private profileStorageService: ProfileStorageService,
+    private datePipe: DatePipe,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,10 +70,15 @@ export class EnsemblesCreateComponent implements OnInit{
   }
 
   onSubmit() {
+    // let months = ['January', 'February', 'Match', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    const formattedDate = this.datePipe.transform(this.ensembleForm.value['date'], 'mediumDate');
+    const formattedTime = this.datePipe.transform(this.ensembleForm.value['date'] + ' ' + this.ensembleForm.value['time'] + ':00', 'shortTime')
+
     const newEnsemble = new Ensemble(
       this.ensembleForm.value['name'],
-      this.ensembleForm.value['date'],
-      this.ensembleForm.value['time'],
+      formattedDate,
+      formattedTime,
       this.ensembleForm.value['description'],
       this.ensembleForm.value['size'],
       this.ensembleForm.value['instruments'],
@@ -81,5 +92,7 @@ export class EnsemblesCreateComponent implements OnInit{
 
     this.currentProfile.ensembles.push(newEnsemble);
     this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles);
+
+    this.router.navigate(['/ensembles-find']);
   }
 }

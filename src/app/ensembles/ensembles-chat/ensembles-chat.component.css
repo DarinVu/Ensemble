@@ -12,6 +12,12 @@ h1 {
     font-weight: 600;
 }
 
+.content-container {
+    height: 100vh;
+    background-color: #F6F6F6;
+    padding-top: 30px;
+}
+
 .host-container {
     display: flex;
     flex-direction: row;
@@ -45,6 +51,13 @@ h1 {
     gap: 20px;
 }
 
+.event-link {
+    color: #006e90;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+}
+
 .important-info-container {
     background-color: white;
     height: fit-content;
@@ -54,4 +67,42 @@ h1 {
     padding-bottom: 30px;
     padding-left: 25px;
     padding-right: 25px;  
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
 }
+
+.ensemble-status {
+    font-weight: 500;
+    color: #6C6D6D;
+}
+
+.date-info-container {
+    color: #6C6D6D;
+}
+
+.chat-container {
+    background-color: white;
+    height: 50vh;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.chat {
+    background-color: black;
+    height: 40vh;
+}
+
+input {
+    height: 5vh;
+}
+
+
+

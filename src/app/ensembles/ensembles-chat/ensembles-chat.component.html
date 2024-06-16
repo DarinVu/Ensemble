@@ -2,16 +2,67 @@
 <hr>
 <div class="row justify-content-center title-container">
     <div class="col-xs-12 col-md-10 col-lg-10 col-xxl-7">
-        <!-- <h1>{{ ensemble.name }}</h1> -->
+        <h1>{{ ensemble.name }}</h1>
         <div class="host-container">
             <div>
                 <img src="../../../assets/account-circle.svg">
             </div>
             <div class="host-details">
                 <p>Hosted By</p>
-                <!-- <p class="host-name">{{ host }}</p> -->
+                <p class="host-name">{{ host }}</p>
             </div>
         </div>
     </div>
 </div>
 <hr>
+<div class="row justify-content-center content-container">
+    <div class="col-xs-12 col-md-10 col-lg-10 col-xxl-7">
+        <div class="row justify-content-between">
+            <div class="col-xs-12 col-md-4">
+                <div class="big-info-container">
+                    <div class="important-info-container">
+                        <img src="../../../assets/info.svg">
+                        <a class="event-link" (click)="onViewDetails()">View Event Details</a>
+                    </div>
+                    <div class="important-info-container">
+                        <img src="../../../assets/note.svg">
+                        <div>
+                            <div>
+                                {{ensemble.name}}
+                            </div>
+                            <div class="ensemble-status">
+                                {{ensemble.status}} group
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="important-info-container date-info-container">
+                        <div>
+                            <img src="../../../assets/clock.svg">  
+                        </div>
+                        <div class="date-and-time">
+                            <div>
+                                {{ensemble.date}}
+                            </div>
+                            <div>
+                                {{ensemble.time}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-7 chat-container">
+                <div class="chat">
+
+                </div>
+                <form [formGroup]="messageForm" (keydown)="onSubmit($event)">
+                    <input 
+                        type="textarea" 
+                        class="form-control"
+                        placeholder="Enter message"
+                        formControlName="message">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

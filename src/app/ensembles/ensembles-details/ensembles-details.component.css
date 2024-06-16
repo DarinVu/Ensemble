@@ -49,6 +49,10 @@ h1 {
     padding-bottom: 30px;
     padding-left: 25px;
     padding-right: 25px;  
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
 }
 
 .ensemble-status {
@@ -57,9 +61,6 @@ h1 {
 }
 
 .date-info-container {
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
     color: #6C6D6D;
 }
 
@@ -83,6 +84,7 @@ h4 {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-bottom: 20px;
 }
 
 .ensemble-description {
@@ -90,6 +92,15 @@ h4 {
 }
 
 .members-container {
+    background-color: white;
+    height: fit-content;
+    border-radius: 20px;
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 25px;
+    padding-right: 25px;  
+    margin-top: 20px;
     padding-bottom: 80px;
 }
 
