@@ -11,8 +11,8 @@ export class EnsemblesStorageService {
     constructor(private http: HttpClient, private ensemblesService: EnsemblesService) {}
 
     storeEnsemble(ensemble: Ensemble) {
-        this.http.post('https://ensemble-163c3-default-rtdb.firebaseio.com/ensembles.json', 
-        ensemble).subscribe();
+        return this.http.post('https://ensemble-163c3-default-rtdb.firebaseio.com/ensembles.json', 
+        ensemble);
     }
 
     fetchEnsembles() {

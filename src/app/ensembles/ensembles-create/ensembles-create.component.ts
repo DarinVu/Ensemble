@@ -46,6 +46,7 @@ export class EnsemblesCreateComponent implements OnInit{
     this.profileService.currentProfileChanged.subscribe(
       profile => {
         this.currentProfile = profile;
+        console.log(profile)
       }
     );
     
@@ -87,12 +88,15 @@ export class EnsemblesCreateComponent implements OnInit{
       [this.currentProfile.email]
     )
 
-    this.ensemblesStorageService.storeEnsemble(newEnsemble);
-    this.ensemblesService.addEnsemble(newEnsemble);
-
-    this.currentProfile.ensembles.push(newEnsemble);
-    this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles);
-
-    this.router.navigate(['/ensembles-find']);
+    this.ensemblesStorageService.storeEnsemble(newEnsemble).subscribe(
+      resDate => {
+        this.ensemblesService.addEnsemble(newEnsemble);
+        this.currentProfile.ensembles.push(newEnsemble);
+        console.log(this.currentProfile)
+        this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles);
+        this.router.navigate(['/ensembles-find']);
+      }
+    );
+    
   }
 }

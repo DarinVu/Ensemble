@@ -9,7 +9,6 @@ import { Ensemble } from "../ensembles/ensemble.model";
     providedIn: 'root'
 })
 export class ProfileStorageService {
-    private profileId: string;
 
     constructor(private http: HttpClient, private profileService: ProfileService) {}
 
@@ -23,9 +22,9 @@ export class ProfileStorageService {
             let profilesArray = []
             for (var key in profiles) {
                 if (profiles.hasOwnProperty(key)) {
-                    this.profileId = key;
+                    let profileId = key;
                     var profileObj = {};
-                    profileObj[this.profileId] = profiles[key];
+                    profileObj[profileId] = profiles[key];
                     profilesArray.push(profileObj);
                 }
             }
@@ -34,7 +33,14 @@ export class ProfileStorageService {
     )}
 
     addEnsembleToProfile(ensembles: Ensemble[]) {
-        this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles/' + this.profileId + '.json',
+        var profileId: string = null;
+        this.profileService.currentProfileId.subscribe(
+            id => {
+                profileId = id;
+            }
+        )
+
+        this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles/' + profileId + '.json',
             {
                 'ensembles': ensembles
             }

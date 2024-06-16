@@ -94,7 +94,6 @@ export class AuthService {
             user => {
                 this.profileStorageService.fetchProfiles().subscribe(
                     resData => {
-        
                         var profiles = this.profileService.getProfiles();
                         if (profiles.length == 1) {
                           this.profileService.setCurrentProfile(profiles[0]);
@@ -103,6 +102,7 @@ export class AuthService {
                           var key = Object.keys(profile)[0];
                           if (profile[key]['email'] == user.email) {
                             this.profileService.setCurrentProfile(profile[key]);
+                            this.profileService.setCurrentProfileId(key);
                         }
                       }
                     }

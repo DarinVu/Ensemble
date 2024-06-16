@@ -6,6 +6,7 @@ import { Profile } from "./profile.model";
     providedIn:'root'
 })
 export class ProfileService {
+    currentProfileId = new BehaviorSubject<string>(null);
     currentProfileChanged = new BehaviorSubject<Profile>(null);
     profilesChanged = new Subject<Profile[]>();
 
@@ -32,6 +33,9 @@ export class ProfileService {
         this.profiles.push(profile);
     }
 
+    setCurrentProfileId(id: string) {
+        this.currentProfileId.next(id);
+    }
         
     
     
