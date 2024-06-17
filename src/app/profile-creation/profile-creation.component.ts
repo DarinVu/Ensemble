@@ -9,6 +9,7 @@ import { Profile } from './profile.model';
 import { ProfileService } from './profile.service';
 import { Ensemble } from '../ensembles/ensemble.model';
 import { User } from '../auth/user.model';
+import { Message } from '../ensembles/ensembles-chat/message.model';
 
 @Component({
   selector: 'app-profile-creation',

@@ -6,7 +6,7 @@ import { Ensemble } from "./ensemble.model";
     providedIn: 'root'
 })
 export class EnsemblesService {
-    currentEnsemble = new Subject<Ensemble>();
+    // currentEnsemble = new Subject<Ensemble>();
     ensemblesChanged = new Subject<Ensemble[]>();
 
     private ensembles = [];
@@ -25,9 +25,8 @@ export class EnsemblesService {
         this.ensemblesChanged.next(this.ensembles.slice());
     }
 
-    public setCurrentEnsemble(ensemble: Ensemble) {
-        this.currentEnsemble.next(ensemble);
-        console.log(ensemble)
-    }
+    // public setCurrentEnsemble(ensemble: Ensemble) {
+    //     this.currentEnsemble.next(ensemble);
+    // }
  
 }

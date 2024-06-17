@@ -1,4 +1,5 @@
 import { Profile } from "../profile-creation/profile.model";
+import { Message } from "./ensembles-chat/message.model";
 
 export class Ensemble {
     constructor(
@@ -10,6 +11,7 @@ export class Ensemble {
         public instruments: string[],
         public genre: string,
         public status: string,
-        public members: string[]
+        public members: string[],
+        public chat: Message[] = [new Message(null, 'aaa')],
     ) {}
 }

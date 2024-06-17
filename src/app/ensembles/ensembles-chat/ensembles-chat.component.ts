@@ -4,6 +4,9 @@ import { Ensemble } from '../ensemble.model';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { ProfileService } from '../../profile-creation/profile.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChatStorageService } from './chat-storage.service';
+import { Message } from './message.model';
+import { Profile } from '../../profile-creation/profile.model';
 
 @Component({
   selector: 'app-ensembles-chat',
@@ -12,14 +15,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class EnsemblesChatComponent implements OnInit{
   ensemble: Ensemble;
+  ensembleId: string;
   host: string;
   messageForm: FormGroup;
+  currentProfile: Profile;
 
   constructor(
     private route: ActivatedRoute, 
     private ensemblesService: EnsemblesService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private chatStorageService: ChatStorageService
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +36,8 @@ export class EnsemblesChatComponent implements OnInit{
           var key = Object.keys(ensemble)[0]
           if (key == params['id']) {
             this.ensemble = ensemble[key];
-            this.ensemblesService.setCurrentEnsemble(ensemble[key]);
+            this.ensembleId = key;
+            // this.ensemblesService.setCurrentEnsemble(ensemble[key]);
           }
         }
       }
@@ -46,6 +53,12 @@ export class EnsemblesChatComponent implements OnInit{
     this.messageForm = new FormGroup({
       'message': new FormControl(null, Validators.required)
     })
+
+    this.profileService.currentProfileChanged.subscribe(
+      profile => {
+        this.currentProfile = profile;
+      }
+    )
   }
 
   onViewDetails() {
@@ -54,8 +67,11 @@ export class EnsemblesChatComponent implements OnInit{
 
   onSubmit(event) {
     if (event.keyCode === 13) {
-      alert('you just pressed the enter key');
-      // rest of your code
+      console.log(this.ensemble)
+      console.log(this.ensemble.chat)
+      this.ensemble.chat.push(new Message(this.currentProfile, this.messageForm.value['message']));
+
+      this.chatStorageService.storeMessage(this.ensemble.chat, this.ensembleId).subscribe();
     }
   }
 }
