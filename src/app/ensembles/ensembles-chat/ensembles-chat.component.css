@@ -9,7 +9,7 @@ hr {
 }
 
 h1 {
-    font-weight: 600;
+    font-weight: 800;
 }
 
 .content-container {
@@ -96,8 +96,78 @@ h1 {
 }
 
 .chat {
-    background-color: black;
     height: 40vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color:white;
+    
+}
+
+.away-chat-name {
+    color: black;
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+.away-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.away-chat-bubble {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #f18f01;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    max-width: 100%;
+    width: fit-content;
+    
+}
+
+.user-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.user-bubble-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.user-chat-name {
+    color: black;
+    font-size: 10px;
+    margin-right: 5px;
+}
+
+.user-chat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.user-chat-bubble {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #006e90;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    max-width: 100%;
+    width: fit-content;
 }
 
 input {

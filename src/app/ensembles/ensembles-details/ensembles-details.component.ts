@@ -28,7 +28,7 @@ export class EnsemblesDetailsComponent implements OnInit {
           var key = Object.keys(ensemble)[0]
           if (key == params['id']) {
             this.ensemble = ensemble[key];
-            // this.ensemblesService.setCurrentEnsemble(ensemble[key]);
+            this.ensemblesService.setCurrentEnsembleId(key);
           }
         }
       }

@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { Ensemble } from "./ensemble.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class EnsemblesService {
-    // currentEnsemble = new Subject<Ensemble>();
+    currentEnsembleId = new BehaviorSubject<string>(null);
     ensemblesChanged = new Subject<Ensemble[]>();
 
     private ensembles = [];
@@ -25,8 +25,8 @@ export class EnsemblesService {
         this.ensemblesChanged.next(this.ensembles.slice());
     }
 
-    // public setCurrentEnsemble(ensemble: Ensemble) {
-    //     this.currentEnsemble.next(ensemble);
-    // }
+    public setCurrentEnsembleId(ensembleId: string) {
+        this.currentEnsembleId.next(ensembleId);
+    }
  
 }

@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChatStorageService } from './chat-storage.service';
 import { Message } from './message.model';
 import { Profile } from '../../profile-creation/profile.model';
+import { ChatService } from './chat.service';
 
 @Component({
   selector: 'app-ensembles-chat',
@@ -19,13 +20,15 @@ export class EnsemblesChatComponent implements OnInit{
   host: string;
   messageForm: FormGroup;
   currentProfile: Profile;
+  chat: Message[];
 
   constructor(
     private route: ActivatedRoute, 
     private ensemblesService: EnsemblesService,
     private profileService: ProfileService,
     private router: Router,
-    private chatStorageService: ChatStorageService
+    private chatStorageService: ChatStorageService,
+    private chatService: ChatService
   ) {}
 
   ngOnInit(): void {
@@ -37,11 +40,17 @@ export class EnsemblesChatComponent implements OnInit{
           if (key == params['id']) {
             this.ensemble = ensemble[key];
             this.ensembleId = key;
+            this.chatStorageService.fetchMessages(this.ensembleId).subscribe(
+              resData => {
+                this.chat = this.chatService.getChat();
+              }
+            );
             // this.ensemblesService.setCurrentEnsemble(ensemble[key]);
           }
         }
       }
     )
+    
     let profiles = this.profileService.getProfiles();
     for (let profile of profiles) {
       var key = Object.keys(profile)[0];
@@ -67,10 +76,7 @@ export class EnsemblesChatComponent implements OnInit{
 
   onSubmit(event) {
     if (event.keyCode === 13) {
-      console.log(this.ensemble)
-      console.log(this.ensemble.chat)
       this.ensemble.chat.push(new Message(this.currentProfile, this.messageForm.value['message']));
-
       this.chatStorageService.storeMessage(this.ensemble.chat, this.ensembleId).subscribe();
     }
   }

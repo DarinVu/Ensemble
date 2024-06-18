@@ -52,8 +52,40 @@
                 </div>
             </div>
             <div class="col-xs-12 col-md-7 chat-container">
-                <div class="chat">
-
+                <div class="row chat">
+                    <!-- <div class="col-xs-6 col-md-6 away-chat">
+                        <div *ngFor="let message of chat">
+                            <div *ngIf="message.profile['email'] != currentProfile['email']" class="away-chat-bubble">
+                                <div  style="color: white;">{{ message.message }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6 user-chat">
+                        <div *ngFor="let message of chat">
+                            <div *ngIf="message.profile['email'] == currentProfile['email']" class="user-chat-bubble">
+                                <div  style="color: white;">{{ message.message }}</div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-xs-12" *ngFor="let message of chat" >
+                        <div *ngIf="message.profile['email'] != currentProfile['email']">
+                            <div class="away-chat-name">{{ message.profile['firstName'] }}</div>
+                            <div class="away-chat-bubble">
+                                <div>{{ message.message }}</div>
+                            </div>
+                        </div>
+                        <div *ngIf="message.profile['email'] == currentProfile['email']" class="user-bubble-container">
+                            <div class="user-chat-container">
+                                <div class="user-chat-name">You</div>
+                                <div class="user-chat-bubble">
+                                    <div>{{ message.message }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                        
+              
                 </div>
                 <form [formGroup]="messageForm" (keydown)="onSubmit($event)">
                     <input 
