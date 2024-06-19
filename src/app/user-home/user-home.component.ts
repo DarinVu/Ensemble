@@ -23,6 +23,7 @@ export class UserHomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
     this.profileService.currentProfileChanged.subscribe(
       profile => {
         console.log(profile)

@@ -13,6 +13,7 @@ export class EnsemblesFindComponent implements OnInit, OnDestroy {
   displayDropdown3 = 'none';
   ensembles = []
   subscription: Subscription;
+  
 
   constructor(private ensemblesService: EnsemblesService) {}
 
@@ -23,6 +24,7 @@ export class EnsemblesFindComponent implements OnInit, OnDestroy {
       }
     )
     this.ensembles = this.ensemblesService.getEnsembles();
+    
     
 
   }

@@ -40,14 +40,10 @@ export class ProfileStorageService {
             }
         )
 
-        this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles/' + profileId + '.json',
+        return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles/' + profileId + '.json',
             {
                 'ensembles': ensembles
             }
-        ).subscribe(
-            data => {
-                console.log(data);
-            }
-        );
+        )
     }
 }

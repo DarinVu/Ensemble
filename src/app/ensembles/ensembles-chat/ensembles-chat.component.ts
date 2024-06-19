@@ -1,5 +1,5 @@
 import { EnsemblesService } from './../ensembles.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Ensemble } from '../ensemble.model';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { ProfileService } from '../../profile-creation/profile.service';
@@ -15,6 +15,7 @@ import { ChatService } from './chat.service';
   styleUrl: './ensembles-chat.component.css'
 })
 export class EnsemblesChatComponent implements OnInit{
+  @ViewChild('scroll', { read: ElementRef }) public scroll: ElementRef<any>;
   ensemble: Ensemble;
   ensembleId: string;
   host: string;
@@ -30,6 +31,14 @@ export class EnsemblesChatComponent implements OnInit{
     private chatStorageService: ChatStorageService,
     private chatService: ChatService
   ) {}
+
+  ngAfterViewChecked() {
+    this.scrollBottom()
+  }
+
+  scrollBottom() {
+    this.scroll.nativeElement.scrollTop = this.scroll.nativeElement.scrollHeight;
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -76,8 +85,11 @@ export class EnsemblesChatComponent implements OnInit{
 
   onSubmit(event) {
     if (event.keyCode === 13) {
+      this.chat.push(new Message(this.currentProfile, this.messageForm.value['message']));
       this.ensemble.chat.push(new Message(this.currentProfile, this.messageForm.value['message']));
       this.chatStorageService.storeMessage(this.ensemble.chat, this.ensembleId).subscribe();
+      this.messageForm.reset();
+
     }
   }
 }

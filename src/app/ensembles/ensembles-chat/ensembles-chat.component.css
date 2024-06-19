@@ -96,12 +96,12 @@ h1 {
 }
 
 .chat {
+    
     height: 40vh;
-    display: flex;
-    flex-direction: column;
+    width: 103%;
     gap: 10px;
     color:white;
-    
+    overflow: auto;
 }
 
 .away-chat-name {
@@ -173,6 +173,3 @@ h1 {
 input {
     height: 5vh;
 }
-
-
-

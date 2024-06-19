@@ -16,6 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { EnsemblesItemComponent } from './ensembles/ensembles-find/ensembles-item/ensembles-item.component';
 import { EnsemblesDetailsComponent } from './ensembles/ensembles-details/ensembles-details.component';
 import { EnsemblesChatComponent } from './ensembles/ensembles-chat/ensembles-chat.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { UserComponent } from './user/user.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { EnsemblesChatComponent } from './ensembles/ensembles-chat/ensembles-cha
     EnsemblesCreateComponent,
     EnsemblesItemComponent,
     EnsemblesDetailsComponent,
-    EnsemblesChatComponent
+    EnsemblesChatComponent,
+    LoadingSpinnerComponent,
+    UserComponent,
+    InboxComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { EnsemblesDetailsComponent } from "./ensembles/ensembles-details/ensembl
 import { ProfileResolverService } from "./profile-creation/profile-resolver.service";
 import { AuthGuard } from "./auth/auth.guard";
 import { EnsemblesChatComponent } from "./ensembles/ensembles-chat/ensembles-chat.component";
+import { UserComponent } from "./user/user.component";
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,7 +22,8 @@ const routes: Routes = [
     { path: 'ensembles-find', component: EnsemblesFindComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] },
     { path: 'ensembles-create', component: EnsemblesCreateComponent, canActivate: [AuthGuard] },
     { path: 'ensembles-details/:id', component: EnsemblesDetailsComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] },
-    { path: 'ensembles-details/:id/chat', component: EnsemblesChatComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] }
+    { path: 'ensembles-details/:id/chat', component: EnsemblesChatComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] },
+    { path: 'user/:id', component: UserComponent, resolve: [ProfileResolverService], canActivate: [AuthGuard]}
 ]
 
 

@@ -46,6 +46,10 @@ export class EnsemblesDetailsComponent implements OnInit {
     this.router.navigate(['chat'], {relativeTo: this.route });
   }
 
+  onRequest() {
+    
+  }
+
 
 
 }

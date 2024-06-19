@@ -92,8 +92,11 @@ export class EnsemblesCreateComponent implements OnInit{
       resDate => {
         this.ensemblesService.addEnsemble(newEnsemble);
         this.currentProfile.ensembles.push(newEnsemble);
-        this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles);
-        this.router.navigate(['/ensembles-find']);
+        this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles).subscribe(
+          resData => {
+            this.router.navigate(['/ensembles-find']);
+          }
+        )
       }
     );
     
