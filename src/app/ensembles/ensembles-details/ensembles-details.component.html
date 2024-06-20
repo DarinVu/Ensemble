@@ -9,7 +9,7 @@
             </div>
             <div class="host-details">
                 <p>Hosted By</p>
-                <p class="host-name">{{ host }}</p>
+                <p class="host-name">{{ host.firstName }} {{ host.lastName }}</p>
             </div>
         </div>
     </div>
@@ -85,6 +85,41 @@
         </div>
     </div>
    <div class="right-side">
-        <button class="btn btn-join" (click)="onRequest()">Request To Join</button>
+        <button class="btn btn-join" (click)="openModal()">Request To Join</button>
    </div>
+</div>
+<div class="modal" *ngIf="!requestSubmitted" tabindex="-1" [ngStyle]="{'display': display}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Request To Join {{ ensemble.name }}</h5>
+            
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="requestForm">
+                <textarea 
+                    class="form-control" 
+                    id="exampleFormControlTextarea1" 
+                    rows="3" 
+                    placeholder="Optional Message"
+                    formControlName="message">
+                </textarea>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button-lg" (click)="closeModal()" class="btn btn-danger">Cancel</button>
+            <button type="button-lg" (click)="onRequest()" class="btn request-btn">Request</button>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="modal" (click)="closeModal()" (clickOutside)="closeModal()" *ngIf="requestSubmitted" tabindex="-1" [ngStyle]="{'display': display}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body submitted-modal">
+            <h1>Request Sent</h1>
+            <img src="../../../assets/check.svg">
+            <p class="submit-message">Click Anywhere to Continue</p>
+        </div>
+    </div>
 </div>

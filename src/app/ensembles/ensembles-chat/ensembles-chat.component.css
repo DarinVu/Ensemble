@@ -96,7 +96,8 @@ h1 {
 }
 
 .chat {
-    
+    display: flex;
+    flex-direction: column;
     height: 40vh;
     width: 103%;
     gap: 10px;

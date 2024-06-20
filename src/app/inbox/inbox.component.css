@@ -1,0 +1,36 @@
+hr {
+    margin: 0;
+    color: #B4B6B6;
+}
+
+.content-container {
+    margin-top: 50px;
+}
+
+.inbox-container {
+    border: 1px solid #B4B6B6;
+    height: 50vh;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+}
+
+.inbox-profile {
+    width: 30%;
+    height: 100%;
+    border-right: 1px solid #B4B6B6;
+}
+
+.inbox-title {
+    padding: 25px;
+}
+
+h2 {
+    font-weight: 800;
+}
+
+.inbox-message {
+    width: 70%;
+    height: 100%;
+    
+}

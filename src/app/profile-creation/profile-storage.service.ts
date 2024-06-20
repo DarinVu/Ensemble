@@ -4,6 +4,7 @@ import { Profile } from "./profile.model";
 import { tap } from "rxjs";
 import { ProfileService } from "./profile.service";
 import { Ensemble } from "../ensembles/ensemble.model";
+import { Request } from "../inbox/request.model";
 
 @Injectable({
     providedIn: 'root'
@@ -46,4 +47,14 @@ export class ProfileStorageService {
             }
         )
     }
+
+    addRequestToProfile(hostId: string, requests: Request[]) {
+        return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles/' + hostId + '.json',
+            {
+                'requests': requests
+            }
+        )
+    }
+
+   
 }

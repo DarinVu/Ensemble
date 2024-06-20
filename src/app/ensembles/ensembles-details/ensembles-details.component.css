@@ -175,3 +175,38 @@ h4 {
     color: white;
     font-weight: 600;
 }
+
+.modal {
+    background: rgba(0,0,0, .5);
+    text-align: center;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: center;
+}
+
+.btn-danger {
+    font-weight: 600;
+}
+
+.request-btn {
+    background-color: #006e90;
+    font-weight: 600;
+    color: white
+}
+
+.submitted-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.submit-message {
+    color: #B4B6B6;
+}
