@@ -11,6 +11,6 @@ export class Profile {
         public videos?: string[],
         public recordings?: any,
         public bio?: string,
-        public requests: Request[] = [new Request(null, null, 'aaa')]
+        public requests: Request[] = [new Request(null, null, null, null, null, 'aaa')]
     ) {}
 }

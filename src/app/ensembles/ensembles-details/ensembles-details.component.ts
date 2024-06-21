@@ -18,6 +18,8 @@ export class EnsemblesDetailsComponent implements OnInit {
   host: Profile;
   hostId: string;
   currentProfileId: string;
+  currentProfileFirstName: string;
+  currentProfileLastName: string;
   display = '';
   requestForm: FormGroup;
   ensembleId: string;
@@ -60,6 +62,13 @@ export class EnsemblesDetailsComponent implements OnInit {
       }
     )
 
+    this.profileService.currentProfileChanged.subscribe(
+      profile => {
+        this.currentProfileFirstName = profile.firstName;
+        this.currentProfileLastName = profile.lastName;
+      }
+    )
+
     this.requestForm = new FormGroup({
       'message': new FormControl(null)
     })
@@ -80,9 +89,21 @@ export class EnsemblesDetailsComponent implements OnInit {
 
   onRequest() {
     if (this.requestForm.value['message'] == null) {
-      var request = new Request(this.currentProfileId, this.ensembleId)
+      var request = new Request(
+        this.currentProfileId, 
+        this.currentProfileFirstName, 
+        this.currentProfileLastName,
+        this.ensembleId,
+        this.ensemble.name
+      )
     } else {
-      var request = new Request(this.currentProfileId, this.ensembleId, this.requestForm.value['message'])
+      var request = new Request(
+        this.currentProfileId, 
+        this.currentProfileFirstName, 
+        this.currentProfileLastName,
+        this.ensembleId,
+        this.ensemble.name,
+        this.requestForm.value['message'])
     }
 
     this.host.requests.push(request);

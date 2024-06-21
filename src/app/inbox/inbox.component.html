@@ -7,6 +7,13 @@
            <div class="inbox-title">
                 <h2>Inbox</h2>
            </div>
+           <div class="inbox-header-container">
+                <div *ngFor="let request of profile.requests; let i = index">
+                    <div *ngIf="i > 0">
+                        <div class="inbox-header">{{ request.firstName + ' ' + request.lastName }}</div>
+                    </div>
+                </div>
+           </div>
         </div>
         <div class="inbox-message">
 
