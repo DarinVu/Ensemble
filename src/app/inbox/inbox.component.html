@@ -1,22 +1,24 @@
 <app-header></app-header>
 <hr>
-<div class="row content-container justify-content-center">
-    
+<div *ngIf="!isLoading" class="row content-container justify-content-center">
     <div class="col-xs-11 col-md-11 col-xxl-6 inbox-container">
         <div class="inbox-profile">
            <div class="inbox-title">
-                <h2>Inbox</h2>
+                <h1>Inbox</h1>
            </div>
            <div class="inbox-header-container">
                 <div *ngFor="let request of profile.requests; let i = index">
                     <div *ngIf="i > 0">
-                        <div class="inbox-header">{{ request.firstName + ' ' + request.lastName }}</div>
+                        <div [routerLink]="[i]" class="inbox-header">
+                            <img class="profile-img" src='https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg'>
+                            <div>{{ request.firstName + ' ' + request.lastName }}</div>
+                        </div>
                     </div>
                 </div>
            </div>
         </div>
         <div class="inbox-message">
-
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

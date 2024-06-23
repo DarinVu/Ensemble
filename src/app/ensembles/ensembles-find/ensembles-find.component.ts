@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './ensembles-find.component.css'
 })
 export class EnsemblesFindComponent implements OnInit, OnDestroy {
+
   displayDropdown1 = 'none';
   displayDropdown2 = 'none';
   displayDropdown3 = 'none';
@@ -24,9 +25,6 @@ export class EnsemblesFindComponent implements OnInit, OnDestroy {
       }
     )
     this.ensembles = this.ensemblesService.getEnsembles();
-    
-    
-
   }
 
   onDisplayDropdown1() {

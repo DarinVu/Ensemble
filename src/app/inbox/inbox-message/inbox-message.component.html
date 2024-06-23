@@ -1,0 +1,24 @@
+
+
+<div class="inbox-message">
+    <h2>Request To Join {{ request.ensembleName }}</h2>
+    <div class="user-info-big">
+        <img src='https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg'>
+        <div class="user-info-small">
+            <div class="user-name">{{ request.firstName }} {{ request.lastName }}</div>
+            <a (click)="onViewProfile()" class="view-profile">View Profile</a>
+        </div>
+    </div>
+    <div class="message">
+        <div>{{ request.message }}</div>
+    </div>
+    <div class="button-container">
+        <button class="btn btn-danger">
+            Decline
+        </button>
+        <button class="btn btn-success">
+            Accept
+        </button>
+    </div>
+</div>
+

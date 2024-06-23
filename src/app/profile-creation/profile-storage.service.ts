@@ -11,7 +11,10 @@ import { Request } from "../inbox/request.model";
 })
 export class ProfileStorageService {
 
-    constructor(private http: HttpClient, private profileService: ProfileService) {}
+    constructor(
+        private http: HttpClient, 
+        private profileService: ProfileService,
+    ) {}
 
     storeProfile(profile: Profile) {
         this.http.post('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles.json', profile).subscribe();
@@ -55,6 +58,5 @@ export class ProfileStorageService {
             }
         )
     }
-
    
 }

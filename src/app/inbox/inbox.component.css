@@ -23,10 +23,10 @@ hr {
 
 .inbox-title {
     padding: 25px;
-    background-color: black;
+    border-bottom: 1px solid #B4B6B6;
 }
 
-h2 {
+h1 {
     font-weight: 800;
 }
 
@@ -43,4 +43,20 @@ h2 {
 .inbox-header {
     border-bottom: 1px solid #B4B6B6;
     padding: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
 }
+
+.inbox-header:hover {
+    background-color: #F6F6F6;
+}
+
+.profile-img {
+    height: 30px;
+    width: 30;
+    border-radius: 50%;
+}
+

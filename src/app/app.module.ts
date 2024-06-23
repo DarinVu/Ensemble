@@ -19,6 +19,7 @@ import { EnsemblesChatComponent } from './ensembles/ensembles-chat/ensembles-cha
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { UserComponent } from './user/user.component';
 import { InboxComponent } from './inbox/inbox.component';
+import { InboxMessageComponent } from './inbox/inbox-message/inbox-message.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { InboxComponent } from './inbox/inbox.component';
     EnsemblesChatComponent,
     LoadingSpinnerComponent,
     UserComponent,
-    InboxComponent
+    InboxComponent,
+    InboxMessageComponent
   ],
   imports: [
     BrowserModule,
