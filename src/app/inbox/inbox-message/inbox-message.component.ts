@@ -16,17 +16,21 @@ import { Member } from '../../ensembles/member.model';
 })
 export class InboxMessageComponent implements OnInit{
   currentProfile: Profile;
+  currentProfileId: string;
   request: Request;
   requestProfileId: string;
   requestEmail: string;
   ensemble: Ensemble;
+  requestNum: number
 
   constructor(
     private profileService: ProfileService,
     private route: ActivatedRoute,
     private router: Router,
     private ensemblesStorageService: EnsemblesStorageService,
-    private ensemblesService: EnsemblesService
+    private ensemblesService: EnsemblesService,
+    private profileStorageService: ProfileStorageService
+
   ) {}
 
   ngOnInit(): void {
@@ -36,10 +40,16 @@ export class InboxMessageComponent implements OnInit{
       }
     )
 
+    this.profileService.currentProfileId.subscribe(
+      id => {
+        this.currentProfileId = id;
+      }
+    )
+
     this.route.params.subscribe(
       (params: Params) => {
-        let requestNum = +params['request-num']
-        this.request = this.currentProfile.requests[requestNum];
+        this.requestNum = +params['request-num']
+        this.request = this.currentProfile.requests[this.requestNum];
       }
     )
 
@@ -73,6 +83,8 @@ export class InboxMessageComponent implements OnInit{
   onAccept() {
     this.ensemble.members.push(new Member(this.requestProfileId, this.request.firstName));
     this.ensemblesStorageService.addMemberToEnsemble(this.ensemble.members, this.request.ensembleId).subscribe();
+    this.currentProfile.requests.splice(this.requestNum, 1);
+    this.profileStorageService.addRequestToProfile(this.currentProfileId, this.currentProfile.requests);
   }
 } 
 

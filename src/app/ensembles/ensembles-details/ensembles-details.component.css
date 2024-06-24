@@ -108,6 +108,7 @@ h4 {
     display: flex;
     flex-direction: row;
     gap: 2vh;
+    flex-wrap: wrap;
 }
 
 .card {
