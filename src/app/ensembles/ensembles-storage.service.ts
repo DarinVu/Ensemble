@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { EnsemblesService } from "./ensembles.service";
 import { Ensemble } from "./ensemble.model";
 import { map, tap } from "rxjs/operators";
+import { Profile } from "../profile-creation/profile.model";
+import { Member } from "./member.model";
 
 @Injectable({
     providedIn: 'root'
@@ -31,6 +33,12 @@ export class EnsemblesStorageService {
         })
     )}
 
-    
+    addMemberToEnsemble(members: Member[], ensembleId: string) {
+        return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/ensembles/' + ensembleId + '.json', 
+            {
+                'members': members
+            }
+        )
+    }
 
 }

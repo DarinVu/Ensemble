@@ -9,6 +9,7 @@ import { ProfileService } from '../../profile-creation/profile.service';
 import { formatDate } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { Member } from '../member.model';
 
 @Component({
   selector: 'app-ensembles-create',
@@ -20,6 +21,7 @@ export class EnsemblesCreateComponent implements OnInit{
   ensembleSize: number;
   ensembleForm: FormGroup;
   currentProfile: Profile = null;
+  currentProfileId: string;
   
   constructor(
     private ensemblesStorageService: EnsemblesStorageService,
@@ -50,6 +52,12 @@ export class EnsemblesCreateComponent implements OnInit{
       }
     );
     
+    this.profileService.currentProfileId.subscribe(
+      id => {
+        this.currentProfileId = id;
+        console.log(id)
+      }
+    );
   }
 
   onChangeSize() {
@@ -71,8 +79,6 @@ export class EnsemblesCreateComponent implements OnInit{
   }
 
   onSubmit() {
-    // let months = ['January', 'February', 'Match', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
     const formattedDate = this.datePipe.transform(this.ensembleForm.value['date'], 'mediumDate');
     const formattedTime = this.datePipe.transform(this.ensembleForm.value['date'] + ' ' + this.ensembleForm.value['time'] + ':00', 'shortTime')
 
@@ -85,8 +91,10 @@ export class EnsemblesCreateComponent implements OnInit{
       this.ensembleForm.value['instruments'],
       this.ensembleForm.value['genre'],
       this.ensembleForm.value['status'],
-      [this.currentProfile.email]
+      [new Member(this.currentProfileId, this.currentProfile.firstName)]
     )
+
+    console.log(newEnsemble)
 
     this.ensemblesStorageService.storeEnsemble(newEnsemble).subscribe(
       resDate => {

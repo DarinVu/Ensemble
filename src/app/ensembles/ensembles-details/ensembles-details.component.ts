@@ -18,6 +18,7 @@ export class EnsemblesDetailsComponent implements OnInit {
   host: Profile;
   hostId: string;
   currentProfileId: string;
+  currentProfile: Profile;
   currentProfileFirstName: string;
   currentProfileLastName: string;
   display = '';
@@ -41,6 +42,7 @@ export class EnsemblesDetailsComponent implements OnInit {
           var key = Object.keys(ensemble)[0]
           if (key == params['id']) {
             this.ensembleId = key;
+            console.log(key)
             this.ensemble = ensemble[key];
             this.ensemblesService.setCurrentEnsembleId(key);
           }
@@ -50,7 +52,7 @@ export class EnsemblesDetailsComponent implements OnInit {
     let profiles = this.profileService.getProfiles();
     for (let profile of profiles) {
       var key = Object.keys(profile)[0];
-      if (profile[key]['email'] == this.ensemble.members[0]) {
+      if (key == this.ensemble.members[0]['id']) {
         this.hostId = key;
         this.host = profile[key];
       }
@@ -64,6 +66,7 @@ export class EnsemblesDetailsComponent implements OnInit {
 
     this.profileService.currentProfileChanged.subscribe(
       profile => {
+        this.currentProfile = profile;
         this.currentProfileFirstName = profile.firstName;
         this.currentProfileLastName = profile.lastName;
       }
@@ -98,7 +101,7 @@ export class EnsemblesDetailsComponent implements OnInit {
       )
     } else {
       var request = new Request(
-        this.currentProfileId, 
+        this.currentProfileId,
         this.currentProfileFirstName, 
         this.currentProfileLastName,
         this.ensembleId,
@@ -112,6 +115,10 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.requestSubmitted = true;
       }
     )
+  }
+
+  onViewProfile(member) {
+    this.router.navigate(['/user', member.id])
   }
 
 

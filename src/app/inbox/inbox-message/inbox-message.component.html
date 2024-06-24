@@ -13,10 +13,10 @@
         <div>{{ request.message }}</div>
     </div>
     <div class="button-container">
-        <button class="btn btn-danger">
+        <button class="btn btn-danger" (click)="onDecline()">
             Decline
         </button>
-        <button class="btn btn-success">
+        <button class="btn btn-success" (click)="onAccept()">
             Accept
         </button>
     </div>

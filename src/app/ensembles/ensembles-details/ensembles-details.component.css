@@ -104,6 +104,12 @@ h4 {
     padding-bottom: 80px;
 }
 
+.card-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2vh;
+}
+
 .card {
     display: flex;
     flex-direction: column;

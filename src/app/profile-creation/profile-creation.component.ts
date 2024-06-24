@@ -115,7 +115,7 @@ export class ProfileCreationComponent implements OnInit {
       this.profileForm.value['firstName'],
       this.profileForm.value['lastName'],
       this.profileForm.value['instruments'],
-      [new Ensemble('aaa', 'aaa', 'aaa', 'aaa', 0, ['aaa'], 'aaa', 'aaa', ['aaa'])],
+      [new Ensemble('aaa', 'aaa', 'aaa', 'aaa', 0, ['aaa'], 'aaa', 'aaa', null)],
       this.profileForm.value['videos'],
       this.profileForm.value['recordings'],
       this.profileForm.value['bio'],

@@ -28,10 +28,13 @@
                     <div>
                         <h4 class="mb-3">Members</h4>
                     </div>
-                    <div class="card">
-                        <img src="https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg" class="card-img-top" alt="...">      
-                        <p class="card-text">Darin</p>
+                    <div class="card-container">
+                        <div *ngFor="let member of ensemble.members" (click)="onViewProfile(member)" class="card">
+                            <img src="https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg" class="card-img-top" alt="...">      
+                            <p class="card-text">{{ member.name }}</p>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
             <div class="col-xs-12 col-md-4 col-lg-4 col-xxl-4" style="justify-content: center;">
