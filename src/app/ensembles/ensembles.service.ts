@@ -7,7 +7,7 @@ import { Ensemble } from "./ensemble.model";
 })
 export class EnsemblesService {
     currentEnsembleId = new BehaviorSubject<string>(null);
-    ensemblesChanged = new Subject<Ensemble[]>();
+    ensemblesChanged = new BehaviorSubject<Ensemble[]>(null);
 
     private ensembles = [];
 

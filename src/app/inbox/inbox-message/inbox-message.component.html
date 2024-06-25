@@ -1,9 +1,7 @@
-
-
 <div class="inbox-message">
     <h2>Request To Join {{ request.ensembleName }}</h2>
     <div class="user-info-big">
-        <img src='https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg'>
+        <img class="profile-pic" src='https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg'>
         <div class="user-info-small">
             <div class="user-name">{{ request.firstName }} {{ request.lastName }}</div>
             <a (click)="onViewProfile()" class="view-profile">View Profile</a>
@@ -16,9 +14,18 @@
         <button class="btn btn-danger" (click)="onDecline()">
             Decline
         </button>
-        <button class="btn btn-success" (click)="onAccept()">
+        <button class="btn btn-success" (click)="onAccept()" >
             Accept
         </button>
     </div>
 </div>
-
+<div class="modal" (click)="closeModal()" *ngIf="acceptMode"  tabindex="-1" [ngStyle]="{'display': display}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body submitted-modal">
+            <h1>{{ request.firstName }} {{ request.lastName }} has officially joined {{ request.ensembleName }}!</h1>
+            <img class="modal-img" src="../../../assets/celebration.svg">
+            <p class="submit-message">Click Anywhere to Continue</p>
+        </div>
+    </div>
+</div>

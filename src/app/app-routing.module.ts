@@ -26,7 +26,7 @@ const routes: Routes = [
     { path: 'ensembles-details/:id', component: EnsemblesDetailsComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] },
     { path: 'ensembles-details/:id/chat', component: EnsemblesChatComponent, resolve: [EnsemblesResolverService], canActivate: [AuthGuard] },
     { path: 'user/:id', component: UserComponent, resolve: [ProfileResolverService], canActivate: [AuthGuard]},
-    { path: 'inbox', component: InboxComponent, resolve: [ProfileResolverService], canActivate: [AuthGuard], children:[
+    { path: 'inbox', component: InboxComponent, resolve: [ProfileResolverService, EnsemblesResolverService], canActivate: [AuthGuard], children:[
         { path: ':request-num', component: InboxMessageComponent, resolve: [ProfileResolverService], canActivate: [AuthGuard]}
     ]},
     

@@ -11,7 +11,7 @@ h2 {
     color: #006e90;
 }
 
-img {
+.profile-pic {
     width: 7vh;
     height: 7vh;
     border-radius: 50%;
@@ -50,4 +50,34 @@ img {
     display: flex;
     flex-direction: row;
     gap: 2vh;
+}
+
+.modal {
+    background: rgba(0,0,0, .5);
+    text-align: center;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: center;
+}
+
+.modal-img {
+    max-width: 20vh;
+}
+
+.submitted-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.submit-message {
+    color: #B4B6B6;
 }

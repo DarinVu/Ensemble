@@ -21,7 +21,9 @@ export class InboxMessageComponent implements OnInit{
   requestProfileId: string;
   requestEmail: string;
   ensemble: Ensemble;
-  requestNum: number
+  requestNum: number;
+  acceptMode = false;
+  display = ''
 
   constructor(
     private profileService: ProfileService,
@@ -54,7 +56,18 @@ export class InboxMessageComponent implements OnInit{
     )
 
     let profiles = this.profileService.getProfiles();
-    let ensembles = this.ensemblesService.getEnsembles();
+    
+    this.ensemblesService.ensemblesChanged.subscribe(
+      ensembles => {
+        for (let ensemble of ensembles) {
+          var key = Object.keys(ensemble)[0];
+          if (key == this.request.ensembleId) {
+            this.ensemble = ensemble[key];
+          }
+        }
+      }
+    ) 
+
 
     for (let profile of profiles) {
       var key = Object.keys(profile)[0]
@@ -64,12 +77,7 @@ export class InboxMessageComponent implements OnInit{
       }
     }
 
-    for (let ensemble of ensembles) {
-      var key = Object.keys(ensemble)[0];
-      if (key == this.request.ensembleId) {
-        this.ensemble = ensemble[key];
-      }
-    }
+   
   }
 
   onViewProfile() {
@@ -81,10 +89,23 @@ export class InboxMessageComponent implements OnInit{
   }
 
   onAccept() {
+    this.display = 'block';
+    this.acceptMode = true;
     this.ensemble.members.push(new Member(this.requestProfileId, this.request.firstName));
     this.ensemblesStorageService.addMemberToEnsemble(this.ensemble.members, this.request.ensembleId).subscribe();
-    this.currentProfile.requests.splice(this.requestNum, 1);
-    this.profileStorageService.addRequestToProfile(this.currentProfileId, this.currentProfile.requests);
+    let modifiedRequests = [];
+    for (let i = 0; i < this.currentProfile.requests.length; i++) {
+      if (i != this.requestNum) {
+        modifiedRequests.push(this.currentProfile.requests[i]);
+      }
+    }
+    this.profileStorageService.addRequestToProfile(this.currentProfileId, modifiedRequests).subscribe();
+    
+  }
+
+  closeModal() {
+    this.display = '';
+    this.router.navigate(['..'], {relativeTo: this.route});
   }
 } 
 
