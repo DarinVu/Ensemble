@@ -7,7 +7,7 @@
   position: absolute;
   width: 120px;
   height: 120px;
-  border: 20px solid #598392;
+  border: 20px solid #006e90;
   border-top-color: transparent;
   border-radius: 50%;
 }
@@ -21,7 +21,7 @@
   height: 200px;
   display: inline-block;
   overflow: hidden;
-  background: #e0e1dd;
+  background: #F6F6F6;
 }
 .ldio-yzaezf3dcmj {
   width: 100%;

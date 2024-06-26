@@ -14,6 +14,7 @@ import { EnsemblesService } from '../ensembles/ensembles.service';
 })
 export class UserHomeComponent implements OnInit {
   user: User = null;
+  isLoading = true;
   profile: Profile;
 
   constructor(
@@ -23,11 +24,10 @@ export class UserHomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
     this.profileService.currentProfileChanged.subscribe(
       profile => {
-        console.log(profile)
         this.profile = profile;
+        this.isLoading = false;
       }
     )
   }

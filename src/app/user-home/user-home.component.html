@@ -1,10 +1,17 @@
 
 <app-header></app-header>
 <hr>
-<div class="big-container container-fluid">
+
+<div *ngIf="isLoading" class="big-container container-fluid">
+    <div class="loading-container">
+
+        <app-loading-spinner></app-loading-spinner>
+    </div>
+</div>
+<div *ngIf="!isLoading" class="big-container container-fluid">
     <div class="row justify-content-center">
         <div class="col-xs-12">
-            <div class="row justify-content-xl-center">
+            <div *ngIf="!isLoading" class="row justify-content-xl-center">
                 <div class="main-profile-container col-xs-12 col-md-auto">
                     <div class="profile-card-container">
                        <div 
