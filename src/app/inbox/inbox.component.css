@@ -38,6 +38,8 @@ h1 {
 .inbox-header-container {
     display: flex;
     flex-direction: column;
+    height: 39.8vh;
+    overflow: auto;
 }
 
 .inbox-header {
@@ -58,5 +60,11 @@ h1 {
     height: 30px;
     width: 30;
     border-radius: 50%;
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 

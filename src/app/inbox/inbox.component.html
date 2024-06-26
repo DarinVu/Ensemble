@@ -1,5 +1,10 @@
 <app-header></app-header>
 <hr>
+<div *ngIf="isLoading" class="row content-container justify-content-center">
+    <div class="loading-container">
+        <app-loading-spinner></app-loading-spinner>
+    </div>
+</div>
 <div *ngIf="!isLoading" class="row content-container justify-content-center">
     <div class="col-xs-11 col-md-11 col-xxl-6 inbox-container">
         <div class="inbox-profile">
