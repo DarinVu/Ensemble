@@ -6,6 +6,9 @@
         </div>
         <h2>Set Up Your Profile</h2>
         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!profileForm.controls['firstName'].valid && profileForm.controls['firstName'].touched">This field must be filled.</div>
+            </div>
             <div class="mb-3">
                 <label for="first-name" class="form-label">First Name</label>
                 <input 
@@ -13,6 +16,9 @@
                     class="form-control" 
                     id="first-name"
                     formControlName="firstName">
+            </div>
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!profileForm.controls['lastName'].valid && profileForm.controls['lastName'].touched">This field must be filled.</div>
             </div>
             <div class="mb-3">
                 <label for="last-name" class="form-label">Last Name</label>
@@ -22,8 +28,14 @@
                     id="last-name"
                     formControlName="lastName">
             </div>
-            <div class="mb-3 control" formArrayName="instruments" *ngFor="let instConrol of instrumentControls; let i = index">
+            <!-- <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!profileForm.controls['instruments'].valid && profileForm.controls['instruments'].touched">This field must be filled.</div>
+            </div> -->
+            <div class="mb-3 control" formArrayName="instruments" *ngFor="let instControl of instrumentControls; let i = index">
                 <div class="form-group" [formGroupName]="i">
+                    <div class="col-xs-auto col-md-auto">
+                        <div class="warning-message" *ngIf="!instControl.valid && instControl.touched">This field must be filled.</div>
+                    </div>
                     <label for="instrumentList" class="form-label">Instrument</label>
                     <div class="control-array-container">
                         <input 
@@ -84,6 +96,9 @@
             <h3>Show Off Your Talent!</h3>
             <div class="mb-3" formArrayName="videos" *ngFor="let videoControl of videoControls; let i = index">
                 <div class="form-group" [formGroupName]="i">
+                    <div class="col-xs-auto col-md-auto">
+                        <div class="warning-message" *ngIf="!videoControl.valid && videoControl.touched">This field must be filled.</div>
+                    </div>
                     <label for="video-recording" class="form-label">Video Recordings (Optional)</label>
                     <div class="control-array-container">
                         <input 
@@ -101,6 +116,9 @@
             <hr>
             <div class="mb-3" formArrayName="recordings" *ngFor="let recordingControl of recordingControls; let i = index">
                 <div class="form-group" [formGroupName]="i">
+                    <div class="col-xs-auto col-md-auto">
+                        <div class="warning-message" *ngIf="!recordingControl.valid && recordingControl.touched">This field must be filled.</div>
+                    </div>
                     <label for="mp3-recording" class="form-label">MP3 Recordings (Optional)</label>
                     <div class="control-array-container">
                         <input 
@@ -115,7 +133,7 @@
             </div>
             <hr>
             <div class="row">
-                <button type="submit" class="btn btn-submit">Finish</button>
+                <button type="submit" [disabled]="!profileForm.valid" class="btn btn-submit">Finish</button>
             </div>
         </form>
     </div>

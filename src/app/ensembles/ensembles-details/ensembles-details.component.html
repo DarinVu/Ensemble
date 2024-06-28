@@ -45,8 +45,8 @@
                             <div>
                                 {{ensemble.name}}
                             </div>
-                            <div class="ensemble-status">
-                                {{ensemble.status}} group
+                            <div class="ensemble-location">
+                                {{ ensemble.location }}
                             </div>
                         </div>
                         
@@ -64,17 +64,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="important-info-container">
-                        <button type="button" class="btn chat-btn" (click)="onChat()">
+                    <div class="important-info-container chat-container">
+                        <button type="button" class="btn chat-btn" [disabled]="!member" (click)="onChat()">
                             <img src='../../../assets/chat.svg'> Ensemble Chat
                         </button>
+                        <div class="chat-warning">You must be a member to access this ensemble's chat.</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="footer">
+<div *ngIf="!member" class="footer">
     <div class="left-side">
         <div class="footer-info">
             <div class="footer-date">
@@ -82,9 +83,6 @@
                 <p>{{ ensemble.time }}</p>
             </div>
             <p class="footer-ensemble-name">{{ ensemble.name }}</p>
-        </div>
-        <div class="status-container">
-            {{ ensemble.status }}
         </div>
     </div>
    <div class="right-side">
@@ -96,7 +94,6 @@
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Request To Join {{ ensemble.name }}</h5>
-            
         </div>
         <div class="modal-body">
             <form [formGroup]="requestForm">

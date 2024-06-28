@@ -9,10 +9,21 @@ h1 {
     cursor: pointer;
 }
 
+.form-control.ng-touched.ng-invalid {
+    border:1px solid red;
+}
+
+.warning-message {
+    color: red;
+    font-style: italic;
+    font-size: 13px;
+}
+
 h2 {
     font-weight: 800;
     margin-bottom: 20px;
     text-align: center;
+
 }
 
 .btn-add {

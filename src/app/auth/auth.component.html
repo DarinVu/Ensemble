@@ -8,6 +8,9 @@
         </div>
         <div class="row">
             <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="!signupForm.controls['email'].valid && signupForm.controls['email'].touched">This field must be filled.</div>
+                </div>
                 <div class="form-floating mb-3">
                     <input 
                         type="email" 
@@ -16,6 +19,9 @@
                         formControlName="email"
                         placeholder="name@example.com">
                     <label for="floatingInput">Email address</label>
+                </div>
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="!signupForm.controls['password'].valid && signupForm.controls['password'].touched">This field must be filled.</div>
                 </div>
                 <div class="form-floating mb-3">
                     <input 

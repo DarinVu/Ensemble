@@ -55,7 +55,7 @@ h1 {
     gap: 25px;
 }
 
-.ensemble-status {
+.ensemble-location {
     font-weight: 500;
     color: #6C6D6D;
 }
@@ -64,11 +64,22 @@ h1 {
     color: #6C6D6D;
 }
 
+.chat-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
 .chat-btn {
     width: 100%;
     background-color: #006e90;
     color: white;
 
+}
+
+.chat-warning {
+    font-size: 10px;
+    color: #6C6D6D;               
 }
 
 hr {

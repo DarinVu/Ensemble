@@ -25,6 +25,7 @@ export class EnsemblesDetailsComponent implements OnInit {
   requestForm: FormGroup;
   ensembleId: string;
   requestSubmitted = false;
+  member = false;
 
   constructor(
     private route: ActivatedRoute, 
@@ -71,6 +72,14 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.currentProfileLastName = profile.lastName;
       }
     )
+
+    for (let member of this.ensemble.members) {
+      if (member['id'] == this.currentProfileId) {
+        this.member = true;
+      }
+    }
+
+    console.log(this.member)
 
     this.requestForm = new FormGroup({
       'message': new FormControl(null)

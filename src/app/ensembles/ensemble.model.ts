@@ -11,7 +11,7 @@ export class Ensemble {
         public size: number,
         public instruments: string[],
         public genre: string,
-        public status: string,
+        public location: string,
         public members: Member[],
         public chat: Message[] = [new Message(null, 'aaa')],
     ) {}

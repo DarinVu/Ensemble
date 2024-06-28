@@ -27,7 +27,15 @@ h3 {
     font-size: 100%;
 }
 
+.form-control.ng-touched.ng-invalid {
+    border:1px solid red;
+}
 
+.warning-message {
+    color: red;
+    font-style: italic;
+    font-size: 13px;
+}
 
 .google-signup-container {
     display: flex;

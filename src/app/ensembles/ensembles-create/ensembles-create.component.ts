@@ -22,6 +22,7 @@ export class EnsemblesCreateComponent implements OnInit{
   ensembleForm: FormGroup;
   currentProfile: Profile = null;
   currentProfileId: string;
+  confirmedSize = false;
   
   constructor(
     private ensemblesStorageService: EnsemblesStorageService,
@@ -42,28 +43,24 @@ export class EnsemblesCreateComponent implements OnInit{
       'size': new FormControl(null, Validators.required),
       'instruments': instruments,
       'genre': new FormControl("Select a Genre", Validators.required),
-      'status': new FormControl(null, Validators.required)
+      'location': new FormControl(null, Validators.required)
     })
 
     this.profileService.currentProfileChanged.subscribe(
       profile => {
         this.currentProfile = profile;
-        console.log(profile)
       }
     );
     
     this.profileService.currentProfileId.subscribe(
       id => {
         this.currentProfileId = id;
-        console.log(id)
       }
     );
   }
 
   onChangeSize() {
     (<FormArray>this.ensembleForm.get('instruments')).clear();
-    console.log(this.ensembleForm.value.size)
-    console.log(this.ensembleForm.value['size']);
     this.ensembleSize = this.ensembleForm.value['size'];
     for (let i = 0; i < this.ensembleSize; i++) {
       (<FormArray>this.ensembleForm.get('instruments')).push(
@@ -72,6 +69,7 @@ export class EnsemblesCreateComponent implements OnInit{
         })
       )
     }
+    this.confirmedSize = true;
   }
 
   get controls() {
@@ -90,7 +88,7 @@ export class EnsemblesCreateComponent implements OnInit{
       this.ensembleForm.value['size'],
       this.ensembleForm.value['instruments'],
       this.ensembleForm.value['genre'],
-      this.ensembleForm.value['status'],
+      this.ensembleForm.value['location'],
       [new Member(this.currentProfileId, this.currentProfile.firstName)]
     )
 

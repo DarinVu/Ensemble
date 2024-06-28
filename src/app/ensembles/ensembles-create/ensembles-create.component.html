@@ -7,6 +7,9 @@
             <h3 class="curr-page">Create</h3>
         </div>
         <form [formGroup]="ensembleForm" (ngSubmit)="onSubmit()">
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!ensembleForm.controls['name'].valid && ensembleForm.controls['name'].touched">This field must be filled.</div>
+            </div>
             <div class="form-floating mb-3 control">
                 <input 
                     type="text" 
@@ -16,6 +19,9 @@
                     formControlName="name">
                 <label for="name">Ensemble Name</label>
             </div>
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!ensembleForm.controls['date'].valid && ensembleForm.controls['date'].touched">This field must be filled.</div>
+            </div>
             <div class="form-floating mb-3 control">
                 <input 
                     type="date" 
@@ -24,6 +30,9 @@
                     formControlName="date">
                 <label for="name">Date</label>
             </div>
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!ensembleForm.controls['time'].valid && ensembleForm.controls['time'].touched">This field must be filled.</div>
+            </div>
             <div class="form-floating mb-3 control">
                 <input 
                     type="time" 
@@ -31,6 +40,9 @@
                     id="time" 
                     formControlName="time">
                 <label for="name">Time</label>
+            </div>
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!ensembleForm.controls['description'].valid && ensembleForm.controls['description'].touched">This field must be filled.</div>
             </div>
             <div class="description-container">
                 <p class="description-rec">*Recommended to include music piece title in description</p>
@@ -42,6 +54,12 @@
                     <label for="description">Description</label>
                 </div>
             </div>
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!ensembleForm.controls['size'].valid && ensembleForm.controls['size'].touched">This field must be filled and confirmed.</div>
+            </div>
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="ensembleForm.controls['size'].valid && ensembleForm.controls['size'].touched && !confirmedSize ">Please confirm the ensemble size.</div>
+            </div>
             <div class="form-floating mb-3 control size-container">
                 <input 
                     type="number" 
@@ -50,9 +68,9 @@
                     placeholder="1"
                     formControlName="size">
                 <label for="size">Size</label>
-                <div type="button" class="btn confirm-btn" (click)="onChangeSize()">Confirm</div>
-                
+                <button type="button" [disabled]="!ensembleForm.controls['size'].valid" class="btn confirm-btn" (click)="onChangeSize()">Confirm</button>
             </div>
+            c
             <div class="mb-3 control" formArrayName="instruments" *ngFor="let instConrol of controls; let i = index">
                 <div class="form-group" [formGroupName]="i">
                     <label for="instrumentList" class="form-label">Instrument</label>
@@ -99,6 +117,9 @@
                 </div>
                
             </div>
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!ensembleForm.controls['genre'].valid && ensembleForm.controls['genre'].touched">This field must be filled.</div>
+            </div>
             <div class="mb-3 control">
                 <select 
                     class="form-select form-select-lg"
@@ -116,31 +137,19 @@
                     <option value="Rock">Rock</option>
                 </select>
             </div>
-            <div class="mb-3">
-                <div class="form-check">
-                    <input 
-                        class="form-check-input" 
-                        type="radio" 
-                        id="flexRadioDefault1"
-                        value="Open"
-                        formControlName="status">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      Public
-                    </label>
-                  </div>
-                <div class="form-check">
-                <input 
-                    class="form-check-input" 
-                    type="radio" 
-                    id="flexRadioDefault2"
-                    value="Invite-Only"
-                    formControlName="status">
-                <label class="form-check-label" for="flexRadioDefault2">
-                    Private
-                </label>
-                </div>
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!ensembleForm.controls['location'].valid && ensembleForm.controls['location'].touched">This field must be filled.</div>
             </div>
-            <button type="submit" class="btn create-btn">Create</button>
+            <div class="form-floating mb-3 control">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="location" 
+                    placeholder="Location"
+                    formControlName="location">
+                <label for="location">Location</label>
+            </div>
+            <button type="submit" [disabled]="!ensembleForm.valid" class="btn create-btn">Create</button>
         </form>
     </div>
 </div>
