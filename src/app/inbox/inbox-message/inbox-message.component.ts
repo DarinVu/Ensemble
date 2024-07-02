@@ -8,6 +8,8 @@ import { EnsemblesStorageService } from '../../ensembles/ensembles-storage.servi
 import { EnsemblesService } from '../../ensembles/ensembles.service';
 import { Ensemble } from '../../ensembles/ensemble.model';
 import { Member } from '../../ensembles/member.model';
+import { EnsembleShort } from '../../ensembles/ensembleShort.model';
+import { isFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-inbox-message',
@@ -23,7 +25,8 @@ export class InboxMessageComponent implements OnInit{
   ensemble: Ensemble;
   requestNum: number;
   acceptMode = false;
-  display = ''
+  display = '';
+  profiles: Profile[];
 
   constructor(
     private profileService: ProfileService,
@@ -36,6 +39,13 @@ export class InboxMessageComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    this.profileService.profilesChanged.subscribe(
+      profiles => {
+        this.profiles = profiles;
+      }
+    )
+    this.profiles = this.profileService.getProfiles()
+
     this.profileService.currentProfileChanged.subscribe(
       profile => {
         this.currentProfile = profile;
@@ -99,7 +109,18 @@ export class InboxMessageComponent implements OnInit{
         modifiedRequests.push(this.currentProfile.requests[i]);
       }
     }
+
+    var requestedUserEnsembles = [];
+    for (let profile of this.profiles) {
+      const key = Object.keys(profile)[0];
+      if (key == this.request.profileId) {
+        requestedUserEnsembles = Object.values(profile)[0]['ensembles'];
+        
+      }
+    }
+    requestedUserEnsembles.push(new EnsembleShort(this.request.ensembleId, this.request.ensembleName));
     this.profileStorageService.addRequestToProfile(this.currentProfileId, modifiedRequests).subscribe();
+    this.profileStorageService.addEnsembleToProfile(requestedUserEnsembles, this.request.profileId).subscribe()
     
   }
 

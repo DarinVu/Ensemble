@@ -70,7 +70,6 @@
                 <label for="size">Size</label>
                 <button type="button" [disabled]="!ensembleForm.controls['size'].valid" class="btn confirm-btn" (click)="onChangeSize()">Confirm</button>
             </div>
-            c
             <div class="mb-3 control" formArrayName="instruments" *ngFor="let instConrol of controls; let i = index">
                 <div class="form-group" [formGroupName]="i">
                     <label for="instrumentList" class="form-label">Instrument</label>

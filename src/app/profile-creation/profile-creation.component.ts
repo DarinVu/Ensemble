@@ -10,6 +10,7 @@ import { ProfileService } from './profile.service';
 import { Ensemble } from '../ensembles/ensemble.model';
 import { User } from '../auth/user.model';
 import { Message } from '../ensembles/ensembles-chat/message.model';
+import { EnsembleShort } from '../ensembles/ensembleShort.model';
 
 @Component({
   selector: 'app-profile-creation',
@@ -115,7 +116,7 @@ export class ProfileCreationComponent implements OnInit {
       this.profileForm.value['firstName'],
       this.profileForm.value['lastName'],
       this.profileForm.value['instruments'],
-      [new Ensemble('aaa', 'aaa', 'aaa', 'aaa', 0, ['aaa'], 'aaa', 'aaa', null)],
+      [new EnsembleShort('aaa', null)],
       this.profileForm.value['videos'],
       this.profileForm.value['recordings'],
       this.profileForm.value['bio'],

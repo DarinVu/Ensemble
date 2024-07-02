@@ -9,19 +9,20 @@ import { EnsemblesService } from '../../ensembles.service';
   styleUrl: './ensembles-item.component.css'
 })
 export class EnsemblesItemComponent implements OnInit {
-  @Input() ensembleId: string;
-  @Input() ensemble: Ensemble;
-  // ensemble: Ensemble
+  ensemble: Ensemble;
+  @Input() ensembleObj: Object;
+  isEnsembleFull: boolean;
 
 
   ngOnInit(): void {
-    // console.log(this.ensemble)
-    // this.ensemble = Object.values(this.ensembleObj)[0];
+    this.ensemble = Object.values(this.ensembleObj)[0];
+   
   }
 
   constructor(private router: Router, private ensemblesService: EnsemblesService) {}
 
   onGetDetails() {
-    this.router.navigate(['/ensembles-details', this.ensembleId]);
+    const key = Object.keys(this.ensembleObj)[0]
+    this.router.navigate(['/ensembles-details', key]);
   }
 }

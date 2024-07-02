@@ -1,4 +1,4 @@
-import { Ensemble } from "../ensembles/ensemble.model";
+import { EnsembleShort } from "../ensembles/ensembleShort.model";
 import { Request } from "../inbox/request.model";
 
 export class Profile {
@@ -7,7 +7,7 @@ export class Profile {
         public firstName: string,
         public lastName: string,
         public instruments: string[],
-        public ensembles: Ensemble[],
+        public ensembles: EnsembleShort[],
         public videos?: string[],
         public recordings?: any,
         public bio?: string,

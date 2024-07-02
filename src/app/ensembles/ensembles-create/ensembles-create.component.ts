@@ -10,6 +10,8 @@ import { formatDate } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Member } from '../member.model';
+import { consumerMarkDirty } from '@angular/core/primitives/signals';
+import { EnsembleShort } from '../ensembleShort.model';
 
 @Component({
   selector: 'app-ensembles-create',
@@ -92,13 +94,19 @@ export class EnsemblesCreateComponent implements OnInit{
       [new Member(this.currentProfileId, this.currentProfile.firstName)]
     )
 
-    console.log(newEnsemble)
+    
+
 
     this.ensemblesStorageService.storeEnsemble(newEnsemble).subscribe(
-      resDate => {
+      resData => {
+        const newEnsembleShort = new EnsembleShort(
+          resData['name'],
+          this.ensembleForm.value['name']
+        )
+       
         this.ensemblesService.addEnsemble(newEnsemble);
-        this.currentProfile.ensembles.push(newEnsemble);
-        this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles).subscribe(
+        this.currentProfile.ensembles.push(newEnsembleShort);
+        this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles, this.currentProfileId).subscribe(
           resData => {
             this.router.navigate(['/ensembles-find']);
           }

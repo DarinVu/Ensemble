@@ -5,6 +5,7 @@ import { tap } from "rxjs";
 import { ProfileService } from "./profile.service";
 import { Ensemble } from "../ensembles/ensemble.model";
 import { Request } from "../inbox/request.model";
+import { EnsembleShort } from "../ensembles/ensembleShort.model";
 
 @Injectable({
     providedIn: 'root'
@@ -36,14 +37,7 @@ export class ProfileStorageService {
         })
     )}
 
-    addEnsembleToProfile(ensembles: Ensemble[]) {
-        var profileId: string = null;
-        this.profileService.currentProfileId.subscribe(
-            id => {
-                profileId = id;
-            }
-        )
-
+    addEnsembleToProfile(ensembles: EnsembleShort[], profileId: string) {
         return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles/' + profileId + '.json',
             {
                 'ensembles': ensembles
