@@ -12,7 +12,9 @@ export class EnsemblesFindComponent implements OnInit, OnDestroy {
   displayDropdown1 = 'none';
   displayDropdown2 = 'none';
   displayDropdown3 = 'none';
-  ensembles = []
+  ensembles = [];
+  ensembleValues = [];
+  ensembleIds = []
   subscription: Subscription;
   
 
@@ -22,9 +24,17 @@ export class EnsemblesFindComponent implements OnInit, OnDestroy {
     this.subscription = this.ensemblesService.ensemblesChanged.subscribe(
       ensembles => {
         this.ensembles = ensembles;
+        for (let ensemble of this.ensembles) {
+          this.ensembleValues.push(Object.values(ensemble)[0])
+          this.ensembleIds.push(Object.keys(ensemble)[0])
+        }
       }
     )
     this.ensembles = this.ensemblesService.getEnsembles();
+    this.ensembleValues = Object.values(this.ensembleValues);
+    this.ensembleIds.push(Object.keys(this.ensembleValues)[0])
+   
+
   }
 
   onDisplayDropdown1() {
