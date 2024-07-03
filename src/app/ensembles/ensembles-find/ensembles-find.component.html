@@ -87,15 +87,7 @@
             
         </div>
         <ul class="list-group">
-            <app-ensembles-item *ngFor="let ensemble of ensembles" [ensembleObj]="ensemble"></app-ensembles-item>
-            <!-- <div *ngFor="let ensemble of ensembleValues; let i = index">
-                <app-ensembles-item 
-                *ngIf="ensemble.size - ensemble.members.length > 0"
-               [ensemble]="ensemble"
-               [ensembleId]="ensembleIds[i]"
-              ></app-ensembles-item>
-            </div> -->
-            
+            <app-ensembles-item *ngFor="let ensemble of ensembles" [ensembleObj]="ensemble"></app-ensembles-item>           
         </ul>
     </div>
 </div>

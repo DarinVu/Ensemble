@@ -20,7 +20,8 @@ import { EnsembleShort } from '../ensembles/ensembleShort.model';
 export class ProfileCreationComponent implements OnInit {
   currentUser: Object;
   profileForm: FormGroup;
- 
+  selectedFile: File;
+  profilePicLink
   
   
   constructor(
@@ -52,6 +53,7 @@ export class ProfileCreationComponent implements OnInit {
       'lastName': new FormControl(null, Validators.required),
       'instruments': instruments,
       'bio': new FormControl(null, [Validators.required, Validators.maxLength(100)]),
+      'profilePic': new FormControl(null, Validators.required),
       'videos': videos,
       'recordings': recordings
     })
@@ -108,8 +110,35 @@ export class ProfileCreationComponent implements OnInit {
     return (<FormArray>this.profileForm.get('recordings')).controls;
   }
 
+  fileChange(files: File[]) {
+    if (files.length > 0) {
+        this.selectedFile = files[0];
+        console.log(this.selectedFile);
+    }
+
+    const reader = new FileReader();
+   
+    reader.readAsDataURL(this.selectedFile);
+    
+    var result: any;
+    reader.onload = () => {
+      //me.modelvalue = reader.result;
+      this.profilePicLink = reader.result
+      console.log(reader.result)
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+    console.log(result)
+    console.log(this.profilePicLink)
+  }
+
+  
+
   onSubmit() {
     const email = this.userService.getUserInProgress()['email'];
+
+    
 
     const newProfile = new Profile(
       email,
@@ -120,7 +149,7 @@ export class ProfileCreationComponent implements OnInit {
       this.profileForm.value['videos'],
       this.profileForm.value['recordings'],
       this.profileForm.value['bio'],
-    
+      this.profilePicLink
     )
     this.profileStorageService.storeProfile(newProfile);
     this.profileService.addProfile(newProfile);

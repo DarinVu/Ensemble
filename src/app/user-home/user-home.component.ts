@@ -30,6 +30,7 @@ export class UserHomeComponent implements OnInit {
         this.isLoading = false;
       }
     )
+    console.log(this.profile.profilePic);
   }
 
   onViewEnsemble(selectedEnsemble: Ensemble) {

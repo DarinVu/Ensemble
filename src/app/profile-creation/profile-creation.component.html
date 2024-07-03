@@ -92,12 +92,28 @@
                     placeholder="100 character max"
                     formControlName="bio">
             </div>
+            <div class="mb-3">           
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="!profileForm.controls['profilePic'].valid && profileForm.controls['profilePic'].touched">This field must be filled.</div>
+                </div>
+                <label for="mp3-recording" class="form-label">Profile Picture (Optional)</label>
+                <div class="control-array-container">
+                    <input 
+                    class="form-control input-w-delete" 
+                    type="file" 
+                    id="profile-pic"
+                    formControlName="profilePic"
+                    (change)="fileChange($event.target.files)"
+                    >
+                  
+                </div>    
+            </div>
             <hr class="main-divider">
             <h3>Show Off Your Talent!</h3>
             <div class="mb-3" formArrayName="videos" *ngFor="let videoControl of videoControls; let i = index">
                 <div class="form-group" [formGroupName]="i">
                     <div class="col-xs-auto col-md-auto">
-                        <div class="warning-message" *ngIf="!videoControl.valid && videoControl.touched">This field must be filled.</div>
+                        <div class="warning-message">This field must be filled.</div>
                     </div>
                     <label for="video-recording" class="form-label">Video Recordings (Optional)</label>
                     <div class="control-array-container">
@@ -117,7 +133,7 @@
             <div class="mb-3" formArrayName="recordings" *ngFor="let recordingControl of recordingControls; let i = index">
                 <div class="form-group" [formGroupName]="i">
                     <div class="col-xs-auto col-md-auto">
-                        <div class="warning-message" *ngIf="!recordingControl.valid && recordingControl.touched">This field must be filled.</div>
+                        <div class="warning-message">This field must be filled.</div>
                     </div>
                     <label for="mp3-recording" class="form-label">MP3 Recordings (Optional)</label>
                     <div class="control-array-container">

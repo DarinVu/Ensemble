@@ -1,7 +1,6 @@
 
 <app-header></app-header>
 <hr>
-
 <div *ngIf="isLoading" class="big-container container-fluid">
     <div class="loading-container">
         <app-loading-spinner></app-loading-spinner>
@@ -15,7 +14,7 @@
                     <div class="profile-card-container">
                        <div 
                         class="profile-image-container" 
-                        style="background-image: url('https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg');"
+                        style="background-image: url('{{profile.profilePic}}'); background-size: 90%;"
                         >
                             <div class="name-container">
                                 <h3>{{ profile.firstName }}</h3>

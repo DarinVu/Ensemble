@@ -26,7 +26,5 @@ export class InboxComponent implements OnInit{
         this.isLoading = false;
       }
     )
-
-    // this.requests = this.profileService.getCurrentProfileRequests();
   }
 }
