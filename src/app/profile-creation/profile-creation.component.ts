@@ -1,4 +1,5 @@
 import { Subject } from 'rxjs';
+import { finalize } from 'rxjs/operators'
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../auth/user.service';
@@ -11,6 +12,7 @@ import { Ensemble } from '../ensembles/ensemble.model';
 import { User } from '../auth/user.model';
 import { Message } from '../ensembles/ensembles-chat/message.model';
 import { EnsembleShort } from '../ensembles/ensembleShort.model';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-profile-creation',
@@ -21,17 +23,20 @@ export class ProfileCreationComponent implements OnInit {
   currentUser: Object;
   profileForm: FormGroup;
   selectedFile: File;
-  profilePicLink
+  profilePicLink;
+  isLoading: boolean;
   
   
   constructor(
     private router: Router, 
     private userService: UserService,
     private profileStorageService: ProfileStorageService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = false;
     this.currentUser = this.userService.getUserInProgress();
     
   
@@ -112,49 +117,72 @@ export class ProfileCreationComponent implements OnInit {
 
   fileChange(files: File[]) {
     if (files.length > 0) {
-        this.selectedFile = files[0];
-        console.log(this.selectedFile);
+      if (files[0].size <= 1000000) {
+        this.selectedFile = files[0]
+        // this.selectedFile = files[0];
+        // console.log(this.selectedFile);
+        // const reader = new FileReader();
+   
+        // reader.readAsDataURL(this.selectedFile);
+        
+        // var result: any;
+        // reader.onload = () => {
+        //   this.profilePicLink = reader.result
+        //   console.log(reader.result)
+        // };
+        // reader.onerror = function (error) {
+        //   alert('Error: ');
+        // };
+        // console.log(result)
+        // console.log(this.profilePicLink)
+      } else {
+        alert('error');
+      }
+        
     }
 
-    const reader = new FileReader();
-   
-    reader.readAsDataURL(this.selectedFile);
     
-    var result: any;
-    reader.onload = () => {
-      //me.modelvalue = reader.result;
-      this.profilePicLink = reader.result
-      console.log(reader.result)
-    };
-    reader.onerror = function (error) {
-      console.log('Error: ', error);
-    };
-    console.log(result)
-    console.log(this.profilePicLink)
   }
 
   
 
   onSubmit() {
+    this.isLoading = true;
     const email = this.userService.getUserInProgress()['email'];
+    const filePath = `profile-pics/${this.selectedFile.name}`;
+    const fileRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, this.selectedFile);
+    const url = uploadTask.snapshotChanges().pipe(
+      finalize(() => {
+        //Get image url after file uploads
+        fileRef.getDownloadURL().subscribe(
+          url => {
+            //Create a new profile with information from form
+            const newProfile = new Profile(
+              email,
+              this.profileForm.value['firstName'],
+              this.profileForm.value['lastName'],
+              this.profileForm.value['instruments'],
+              [new EnsembleShort('aaa', null)],
+              this.profileForm.value['videos'],
+              this.profileForm.value['recordings'],
+              this.profileForm.value['bio'],
+              url
+            )
+        
+        
+        
+            this.profileStorageService.storeProfile(newProfile);
+            this.profileService.addProfile(newProfile);
+            
+            this.router.navigate(['user-home']);
+          }
+        )
+        
+      })
+    ).subscribe()
 
     
-
-    const newProfile = new Profile(
-      email,
-      this.profileForm.value['firstName'],
-      this.profileForm.value['lastName'],
-      this.profileForm.value['instruments'],
-      [new EnsembleShort('aaa', null)],
-      this.profileForm.value['videos'],
-      this.profileForm.value['recordings'],
-      this.profileForm.value['bio'],
-      this.profilePicLink
-    )
-    this.profileStorageService.storeProfile(newProfile);
-    this.profileService.addProfile(newProfile);
-
-    this.router.navigate(['user-home']);
   }
 
 }

@@ -20,6 +20,9 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import { UserComponent } from './user/user.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { InboxMessageComponent } from './inbox/inbox-message/inbox-message.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from '../environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,9 @@ import { InboxMessageComponent } from './inbox/inbox-message/inbox-message.compo
     InboxMessageComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
