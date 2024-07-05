@@ -23,6 +23,8 @@ import { InboxMessageComponent } from './inbox/inbox-message/inbox-message.compo
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment.prod';
+import { SafePipe } from './shared/safe.pipe';
+import { EmbedPipe } from './shared/embed.pipe';
 
 @NgModule({
   declarations: [
@@ -41,16 +43,17 @@ import { environment } from '../environments/environment.prod';
     LoadingSpinnerComponent,
     UserComponent,
     InboxComponent,
-    InboxMessageComponent
+    InboxMessageComponent,
+    SafePipe,
+    EmbedPipe,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -25,6 +25,7 @@ export class ProfileCreationComponent implements OnInit {
   selectedFile: File;
   profilePicLink;
   isLoading: boolean;
+  profilePicError = null;
   
   
   constructor(
@@ -46,11 +47,11 @@ export class ProfileCreationComponent implements OnInit {
     })]);
 
     let videos = new FormArray([new FormGroup({
-      'video': new FormControl(null, Validators.required)
+      'video': new FormControl(null)
     })]);
 
     let recordings = new FormArray([new FormGroup({
-      'recording': new FormControl(null, Validators.required)
+      'recording': new FormControl(null)
     })]);
 
     this.profileForm = new FormGroup({
@@ -58,7 +59,7 @@ export class ProfileCreationComponent implements OnInit {
       'lastName': new FormControl(null, Validators.required),
       'instruments': instruments,
       'bio': new FormControl(null, [Validators.required, Validators.maxLength(100)]),
-      'profilePic': new FormControl(null, Validators.required),
+      'profilePic': new FormControl(null),
       'videos': videos,
       'recordings': recordings
     })
@@ -118,30 +119,14 @@ export class ProfileCreationComponent implements OnInit {
   fileChange(files: File[]) {
     if (files.length > 0) {
       if (files[0].size <= 1000000) {
+        this.profilePicError = false;
         this.selectedFile = files[0]
-        // this.selectedFile = files[0];
-        // console.log(this.selectedFile);
-        // const reader = new FileReader();
-   
-        // reader.readAsDataURL(this.selectedFile);
-        
-        // var result: any;
-        // reader.onload = () => {
-        //   this.profilePicLink = reader.result
-        //   console.log(reader.result)
-        // };
-        // reader.onerror = function (error) {
-        //   alert('Error: ');
-        // };
-        // console.log(result)
-        // console.log(this.profilePicLink)
       } else {
-        alert('error');
-      }
-        
+        //If file selected is > than 1mb than write error to screen and reset the form control
+        this.profilePicError = true;
+        this.profileForm.controls['profilePic'].setValue(null);
+      }    
     }
-
-    
   }
 
   

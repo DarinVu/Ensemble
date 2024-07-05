@@ -4,12 +4,12 @@
 <div class="big-container container-fluid">
     <div class="row justify-content-center">
         <div class="col-xs-12">
-            <div class="row justify-content-xl-center">
+            <div class="row justify-content-center">
                 <div class="main-profile-container col-xs-12 col-md-auto">
                     <div class="profile-card-container">
-                       <div 
+                       <div
                         class="profile-image-container" 
-                        style="background-image: url('https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg');"
+                        style="background-image: url('{{profile.profilePic}}'); background-size: 90%;"
                         >
                             <div class="name-container">
                                 <h3>{{ profile.firstName }}</h3>
@@ -62,37 +62,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6 col-lg-4 col-xl-4 details-container">
-                    
+                <div class="col-xs-12 col-md-6 col-lg-7 col-xl-6 col-xxl-5 details-container">
                     <div class="specific-container">
                         <div class="specific-container-title">
                             <div class="title-with-number">
-                                <h4>My Ensembles</h4>
+                                <h4>{{ profile.firstName}}'s Ensembles</h4>
                                 <h4>({{ profile.ensembles.length - 1 }})</h4>
                             </div>
                             <a class="add-group" routerLink="/ensembles-find" title="Add Ensemble">
                                 <img src="../../assets/add.svg">
                             </a>
                         </div>
-                        <div>
-                            <div *ngFor="let ensemble of profile.ensembles; let i = index">
-                                <p (click)="onViewEnsemble(ensemble)" class="group-name" *ngIf="i != 0">
-                                    {{ ensemble.name }}
-                                </p>
+                        <div class="card-container">
+                            <div *ngFor="let ensemble of ensembles; let i = index" (click)="onViewEnsemble(ensemble)" class="card">
+                                <div class="card-text">{{ ensemble.name }}</div>
                             </div>
+                            
                         </div>
-                        
-                        
                     </div>
                     <div class="specific-container">
                         <div class="specific-container-title">
-                            <h4>My Communities (0)</h4>
-                            <a class="add-group" title="Add Community">
-                                <img src="../../assets/add.svg">
-                            </a>
+                            <h4>{{ profile.firstName}}'s Recordings</h4>
                         </div>
-                        
-                    </div>  
+                        <div class="video-container">
+                            <div *ngFor="let video of profile.videos">
+                                <iframe [src]="video.video | embed | safe:'resourceUrl'" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

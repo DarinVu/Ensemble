@@ -42,7 +42,7 @@ export class EnsemblesCreateComponent implements OnInit{
       'date': new FormControl(null, Validators.required),
       'time': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required),
-      'size': new FormControl(null, Validators.required),
+      'size': new FormControl(null, [Validators.required, Validators.min(2)]),
       'instruments': instruments,
       'genre': new FormControl("Select a Genre", Validators.required),
       'location': new FormControl(null, Validators.required)

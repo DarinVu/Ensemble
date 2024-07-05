@@ -5,6 +5,7 @@ import { EnsemblesService } from '../ensembles/ensembles.service';
 import { Profile } from '../profile-creation/profile.model';
 import { User } from '../auth/user.model';
 import { Ensemble } from '../ensembles/ensemble.model';
+import { EnsembleShort } from '../ensembles/ensembleShort.model';
 
 @Component({
   selector: 'app-user',
@@ -14,6 +15,7 @@ import { Ensemble } from '../ensembles/ensemble.model';
 export class UserComponent implements OnInit {
   user: User = null;
   profile: Profile;
+  ensembles: EnsembleShort[];
 
   constructor(
     private profileService: ProfileService,
@@ -31,7 +33,7 @@ export class UserComponent implements OnInit {
           let key = Object.keys(profile)[0];
           if (key == params['id']) {
             this.profile = profile[key];
-            console.log(profile)
+            this.ensembles = this.profile.ensembles.slice(1);
           }
         }
       }

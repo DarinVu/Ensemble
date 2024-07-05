@@ -6,6 +6,7 @@ import { ProfileService } from '../profile-creation/profile.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { EnsemblesService } from '../ensembles/ensembles.service';
+import { EnsembleShort } from '../ensembles/ensembleShort.model';
 
 @Component({
   selector: 'app-user-home',
@@ -16,6 +17,7 @@ export class UserHomeComponent implements OnInit {
   user: User = null;
   isLoading = true;
   profile: Profile;
+  ensembles: EnsembleShort[]
 
   constructor(
     private profileService: ProfileService,
@@ -27,10 +29,11 @@ export class UserHomeComponent implements OnInit {
     this.profileService.currentProfileChanged.subscribe(
       profile => {
         this.profile = profile;
+        this.ensembles = this.profile.ensembles.slice(1);
+        
         this.isLoading = false;
       }
     )
-    console.log(this.profile.profilePic);
   }
 
   onViewEnsemble(selectedEnsemble: Ensemble) {

@@ -60,6 +60,9 @@
             <div class="col-xs-auto col-md-auto">
                 <div class="warning-message" *ngIf="ensembleForm.controls['size'].valid && ensembleForm.controls['size'].touched && !confirmedSize ">Please confirm the ensemble size.</div>
             </div>
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="ensembleForm.value['size'] == 1">Ensembles must have a minimum of 2 members.</div>
+            </div>
             <div class="form-floating mb-3 control size-container">
                 <input 
                     type="number" 

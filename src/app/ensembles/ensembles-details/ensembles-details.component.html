@@ -68,7 +68,7 @@
                         <button type="button" class="btn chat-btn" [disabled]="!member" (click)="onChat()">
                             <img src='../../../assets/chat.svg'> Ensemble Chat
                         </button>
-                        <div class="chat-warning">You must be a member to access this ensemble's chat.</div>
+                        <div class="chat-warning" *ngIf="!member">You must be a member to access this ensemble's chat.</div>
                     </div>
                 </div>
             </div>
