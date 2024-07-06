@@ -31,7 +31,8 @@
                     <div class="card-container">
                         <div *ngFor="let member of ensemble.members" (click)="onViewProfile(member)" class="card">
                             <img src="https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg" class="card-img-top" alt="...">      
-                            <p class="card-text">{{ member.name }}</p>
+                            <p *ngIf="currentProfile.firstName == member.name" class="card-text">You</p>
+                            <p *ngIf="currentProfile.firstName != member.name" class="card-text">{{ member.name }}</p>
                         </div>
                     </div>
                     

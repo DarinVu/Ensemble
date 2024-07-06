@@ -25,6 +25,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment.prod';
 import { SafePipe } from './shared/safe.pipe';
 import { EmbedPipe } from './shared/embed.pipe';
+import { SetBackgroundImageDirective } from './shared/set-background-image.directive';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { EmbedPipe } from './shared/embed.pipe';
     InboxMessageComponent,
     SafePipe,
     EmbedPipe,
+    SetBackgroundImageDirective
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

@@ -9,8 +9,7 @@
                     <div class="profile-card-container">
                        <div
                         class="profile-image-container" 
-                        style="background-image: url('{{profile.profilePic}}'); background-size: 90%;"
-                        >
+                        setBackgroundImage [imageUrl]="profile.profilePic">
                             <div class="name-container">
                                 <h3>{{ profile.firstName }}</h3>
                                 <h3>{{ profile.lastName }}</h3>
@@ -51,16 +50,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="profile-edit-container">
-                        <img src="../../assets/account-circle.svg">
-                        <div class="edit-info-container">                
-                            <div class="small-name-container">
-                                <p>{{ profile.firstName }}</p>
-                                <p>{{ profile.lastName }}</p>
-                            </div>
-                            <a class="edit-profile-link" title="Edit Profile">Edit Profile</a>              
-                        </div>
-                    </div>
                 </div>
                 <div class="col-xs-12 col-md-6 col-lg-7 col-xl-6 col-xxl-5 details-container">
                     <div class="specific-container">
@@ -82,13 +71,24 @@
                     </div>
                     <div class="specific-container">
                         <div class="specific-container-title">
-                            <h4>{{ profile.firstName}}'s Recordings</h4>
+                            <h4>{{ profile.firstName }}'s Recordings</h4>
                         </div>
-                        <div class="video-container">
-                            <div *ngFor="let video of profile.videos">
+                        <div class="carousel slide">
+                            <div class="carousel-inner">
+                              <div *ngFor="let video of profile.videos; let i = index" [ngClass]="i == sliderCounter ? 'active' : ''" class="carousel-item">
                                 <iframe [src]="video.video | embed | safe:'resourceUrl'" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                              </div>
                             </div>
+                            <button class="carousel-control-prev" (click)="onPrev()" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" (click)="onNext()" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
+                        
                     </div>
                 </div>
             </div>

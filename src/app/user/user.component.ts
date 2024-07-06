@@ -16,6 +16,7 @@ export class UserComponent implements OnInit {
   user: User = null;
   profile: Profile;
   ensembles: EnsembleShort[];
+  sliderCounter: number;
 
   constructor(
     private profileService: ProfileService,
@@ -25,6 +26,7 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.sliderCounter = 0;
     this.route.params.subscribe(
       (params: Params) => {
         let profiles = this.profileService.getProfiles();
@@ -49,6 +51,19 @@ export class UserComponent implements OnInit {
       }
     }
   }
+
+  onPrev() {
+    if (this.sliderCounter > 0) {
+      this.sliderCounter--;
+    }
+  }
+
+  onNext() {
+    if (this.sliderCounter < this.profile.videos.length - 1) {
+      this.sliderCounter++;
+    }
+  }
+  
 }
 
 

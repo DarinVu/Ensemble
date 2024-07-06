@@ -17,7 +17,8 @@ export class UserHomeComponent implements OnInit {
   user: User = null;
   isLoading = true;
   profile: Profile;
-  ensembles: EnsembleShort[]
+  ensembles: EnsembleShort[];
+  sliderCounter: number;
 
   constructor(
     private profileService: ProfileService,
@@ -26,6 +27,7 @@ export class UserHomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.sliderCounter = 0;
     this.profileService.currentProfileChanged.subscribe(
       profile => {
         this.profile = profile;
@@ -45,4 +47,18 @@ export class UserHomeComponent implements OnInit {
       }
     }
   }
+
+  onPrev() {
+    if (this.sliderCounter > 0) {
+      this.sliderCounter--;
+    }
+  }
+
+  onNext() {
+    if (this.sliderCounter < this.profile.videos.length - 1) {
+      this.sliderCounter++;
+    }
+  }
+  
+
 }

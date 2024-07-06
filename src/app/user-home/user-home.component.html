@@ -12,17 +12,17 @@
             <div *ngIf="!isLoading" class="row justify-content-center">
                 <div class="main-profile-container col-xs-12 col-md-auto">
                     <div class="profile-card-container">
-                       <div
-                        class="profile-image-container" 
-                        style="background-image: url('{{profile.profilePic}}'); background-size: 90%;"
-                        >
-                            <div class="name-container">
+                        <div class="profile-image-container" setBackgroundImage [imageUrl]="profile.profilePic">
+                            <!-- <img [src]="profile.profilePic" style="z-index: 2; height: 100%; max-width: 100%;"> -->
+                            <div class="name-container" style="z-index: 1">
                                 <h3>{{ profile.firstName }}</h3>
                                 <h3>{{ profile.lastName }}</h3>
                             </div>
                             
                             <p>{{ profile.email }}</p>
                         </div>
+                       
+                        
                         <div class="personal-details-container">
                             <div class="instrument-container">
                                 <p class="instrument-title">Instruments: </p>
@@ -49,11 +49,6 @@
                                 <p *ngIf="profile.ensembles.length - 1 == 1">Ensemble</p>
                                 <p *ngIf="profile.ensembles.length - 1 > 1">Ensembles</p>
                             </div>
-                            <!-- <div class="vl"></div>
-                            <div class="numbers-container" style="width: 50%">
-                                <h1>0</h1>
-                                <p>Communities</p>
-                            </div> -->
                         </div>
                     </div>
                     <div class="profile-edit-container">
@@ -63,7 +58,7 @@
                                 <p>{{ profile.firstName }}</p>
                                 <p>{{ profile.lastName }}</p>
                             </div>
-                            <a class="edit-profile-link" title="Edit Profile">Edit Profile</a>              
+                            <a class="edit-profile-link" routerLink="/profile-edit" title="Edit Profile">Edit Profile</a>              
                         </div>
                     </div>
                 </div>
@@ -90,11 +85,22 @@
                         <div class="specific-container-title">
                             <h4>My Recordings</h4>
                         </div>
-                        <div class="video-container">
-                            <div *ngFor="let video of profile.videos">
+                        <div class="carousel slide">
+                            <div class="carousel-inner">
+                              <div *ngFor="let video of profile.videos; let i = index" [ngClass]="i == sliderCounter ? 'active' : ''" class="carousel-item">
                                 <iframe [src]="video.video | embed | safe:'resourceUrl'" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                              </div>
                             </div>
+                            <button class="carousel-control-prev" (click)="onPrev()" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" (click)="onNext()" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
+                        
                     </div>
                 </div>
             </div>

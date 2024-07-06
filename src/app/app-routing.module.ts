@@ -29,6 +29,7 @@ const routes: Routes = [
     { path: 'inbox', component: InboxComponent, resolve: [ProfileResolverService, EnsemblesResolverService], canActivate: [AuthGuard], children:[
         { path: ':request-num', component: InboxMessageComponent, resolve: [ProfileResolverService], canActivate: [AuthGuard]}
     ]},
+    { path: 'profile-edit', component: ProfileCreationComponent },
     
 ]
 
