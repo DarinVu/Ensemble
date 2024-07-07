@@ -52,5 +52,12 @@ export class ProfileStorageService {
             }
         )
     }
+
+    editProfile(profileId: string, newProfile: Profile) {
+        console.log(profileId + '     ' + newProfile);
+        this.http.put('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles/' + profileId + '.json',
+            newProfile
+        ).subscribe()
+    }
    
 }

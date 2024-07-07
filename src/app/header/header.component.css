@@ -21,6 +21,16 @@
 
 .nav-link {
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile-pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-size: cover;
 }
 
 .dropdown {

@@ -1,20 +1,36 @@
-import { Component } from '@angular/core';
+import { ProfileService } from './../profile-creation/profile.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { Profile } from '../profile-creation/profile.model';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  profile: Profile;
   show = false;
   displayDropdown = 'none';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private profileService: ProfileService
+  ) {}
+
+  ngOnInit(): void {
+    this.profileService.currentProfileChanged.subscribe(
+      profile => {
+        this.profile = profile;
+      }
+    )
+  }
 
   onShow() {
     this.show = !this.show;
+    
   }
 
   onDisplayDropdown() {

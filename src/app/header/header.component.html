@@ -19,13 +19,13 @@
                 <li class="nav-item">
                     <div class="dropdown">
                         <a class="nav-link" (clickOutside)="onCloseDropdown()" (click)="onDisplayDropdown()" title="View Profile">
-                            <img src="../../assets/account-circle.svg">
+                            <!-- <img src="../../assets/account-circle.svg"> -->
+                            <div class="profile-pic" setBackgroundImage [imageUrl]="profile.profilePic"></div>
                             <img src="../../assets/chevron-down.svg">
                         </a>
                         <div class="dropdown-options"  [ngStyle]="{'display' : displayDropdown}">
                             <div  class="options-container">
-                                <a class="dropdown-item">Your Events</a>
-                                <a class="dropdown-item">Your Groups</a>
+                                <a class="dropdown-item">Edit Profile</a>
                                 <hr>
                                 <a (click)="onLogout()" class="dropdown-item">Logout</a>
                             </div>

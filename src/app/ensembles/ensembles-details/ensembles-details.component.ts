@@ -58,6 +58,7 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.host = profile[key];
       }
     }
+    console.log(this.host)
 
     this.profileService.currentProfileId.subscribe(
       profile => {

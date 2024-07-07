@@ -101,7 +101,18 @@ export class InboxMessageComponent implements OnInit{
   onAccept() {
     this.display = 'block';
     this.acceptMode = true;
-    this.ensemble.members.push(new Member(this.requestProfileId, this.request.firstName));
+
+    var requestedUserEnsembles = [];
+    var requestedUserProfilePic: string;
+    for (let profile of this.profiles) {
+      const key = Object.keys(profile)[0];
+      if (key == this.request.profileId) {
+        requestedUserEnsembles = Object.values(profile)[0]['ensembles'];
+        requestedUserProfilePic = Object.values(profile)[0]['profilePic']
+      }
+    }
+
+    this.ensemble.members.push(new Member(this.requestProfileId, this.request.firstName, requestedUserProfilePic));
     this.ensemblesStorageService.addMemberToEnsemble(this.ensemble.members, this.request.ensembleId).subscribe();
     let modifiedRequests = [];
     for (let i = 0; i < this.currentProfile.requests.length; i++) {
@@ -111,11 +122,12 @@ export class InboxMessageComponent implements OnInit{
     }
 
     var requestedUserEnsembles = [];
+    var requestedUserProfilePic: string;
     for (let profile of this.profiles) {
       const key = Object.keys(profile)[0];
       if (key == this.request.profileId) {
         requestedUserEnsembles = Object.values(profile)[0]['ensembles'];
-        
+        requestedUserProfilePic = Object.values(profile)[0]['profilePic']
       }
     }
     requestedUserEnsembles.push(new EnsembleShort(this.request.ensembleId, this.request.ensembleName));

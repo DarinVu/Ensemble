@@ -17,7 +17,6 @@ import { EnsemblesItemComponent } from './ensembles/ensembles-find/ensembles-ite
 import { EnsemblesDetailsComponent } from './ensembles/ensembles-details/ensembles-details.component';
 import { EnsemblesChatComponent } from './ensembles/ensembles-chat/ensembles-chat.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { UserComponent } from './user/user.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { InboxMessageComponent } from './inbox/inbox-message/inbox-message.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
@@ -42,7 +41,6 @@ import { SetBackgroundImageDirective } from './shared/set-background-image.direc
     EnsemblesDetailsComponent,
     EnsemblesChatComponent,
     LoadingSpinnerComponent,
-    UserComponent,
     InboxComponent,
     InboxMessageComponent,
     SafePipe,

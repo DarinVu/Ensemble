@@ -8,8 +8,7 @@ export class Profile {
         public lastName: string,
         public instruments: string[],
         public ensembles: EnsembleShort[],
-        public videos?: string[],
-        public recordings?: any,
+        public recordings?: string[],
         public bio?: string,
         public profilePic?: any,
         public requests: Request[] = [new Request(null, null, null, null, null, 'aaa')]

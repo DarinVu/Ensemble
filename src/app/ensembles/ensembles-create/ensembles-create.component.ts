@@ -91,7 +91,7 @@ export class EnsemblesCreateComponent implements OnInit{
       this.ensembleForm.value['instruments'],
       this.ensembleForm.value['genre'],
       this.ensembleForm.value['location'],
-      [new Member(this.currentProfileId, this.currentProfile.firstName)]
+      [new Member(this.currentProfileId, this.currentProfile.firstName, this.currentProfile.profilePic)]
     )
 
     

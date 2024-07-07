@@ -19,23 +19,44 @@ export class UserHomeComponent implements OnInit {
   profile: Profile;
   ensembles: EnsembleShort[];
   sliderCounter: number;
+  homeMode: boolean;
 
   constructor(
     private profileService: ProfileService,
     private router: Router,
-    private ensembleService: EnsemblesService
+    private ensembleService: EnsemblesService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.sliderCounter = 0;
-    this.profileService.currentProfileChanged.subscribe(
-      profile => {
-        this.profile = profile;
-        this.ensembles = this.profile.ensembles.slice(1);
-        
-        this.isLoading = false;
+    this.route.params.subscribe(
+      (params: Params) => {
+        //Checks if the link is the user home link or link to other users
+        if (params['id']) {
+          this.homeMode = false;
+          let profiles = this.profileService.getProfiles();
+          for (let profile of profiles) {
+            let key = Object.keys(profile)[0];
+            if (key == params['id']) {
+              this.profile = profile[key];
+              this.ensembles = this.profile.ensembles.slice(1);
+              this.isLoading = false;
+            } 
+          }
+        } else {
+          this.homeMode = true;
+          this.profileService.currentProfileChanged.subscribe(
+            profile => {
+              this.profile = profile;
+              this.ensembles = this.profile.ensembles.slice(1);
+              this.isLoading = false;
+            }
+          )
+        }
       }
     )
+    this.sliderCounter = 0;
+    
   }
 
   onViewEnsemble(selectedEnsemble: Ensemble) {
@@ -55,10 +76,14 @@ export class UserHomeComponent implements OnInit {
   }
 
   onNext() {
-    if (this.sliderCounter < this.profile.videos.length - 1) {
+    if (this.sliderCounter < this.profile.recordings.length - 1) {
       this.sliderCounter++;
     }
-  }
+   }
+
+   onEdit() {
+    this.router.navigate(['/profile-creation', 1]);
+   }
   
 
 }

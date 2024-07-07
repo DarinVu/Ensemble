@@ -4,9 +4,7 @@
     <div class="col-xs-12 col-md-10 col-lg-10 col-xxl-7">
         <h1>{{ ensemble.name }}</h1>
         <div class="host-container">
-            <div>
-                <img src="../../../assets/account-circle.svg">
-            </div>
+            <div class="small-pfp" setBackgroundImage [imageUrl]="host.profilePic"></div>
             <div class="host-details">
                 <p>Hosted By</p>
                 <p class="host-name">{{ host.firstName }} {{ host.lastName }}</p>
@@ -29,10 +27,18 @@
                         <h4 class="mb-3">Members</h4>
                     </div>
                     <div class="card-container">
-                        <div *ngFor="let member of ensemble.members" (click)="onViewProfile(member)" class="card">
-                            <img src="https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg" class="card-img-top" alt="...">      
-                            <p *ngIf="currentProfile.firstName == member.name" class="card-text">You</p>
-                            <p *ngIf="currentProfile.firstName != member.name" class="card-text">{{ member.name }}</p>
+                        <div *ngFor="let member of ensemble.members" >
+                            <div *ngIf="currentProfile.firstName == member.name" style="cursor: default" class="card">
+                                <div class="card-img-top" setBackgroundImage [imageUrl]="member.profilePic"></div>      
+                                <p class="card-text">You</p>
+    
+                            </div>
+                            <div *ngIf="currentProfile.firstName != member.name" class="card" (click)="onViewProfile(member)">
+                                <div class="card-img-top" setBackgroundImage [imageUrl]="member.profilePic"></div>      
+                                <p class="card-text">{{ member.name }}</p>
+    
+                            </div>
+                            
                         </div>
                     </div>
                     

@@ -63,7 +63,7 @@ export class EnsemblesChatComponent implements OnInit{
     let profiles = this.profileService.getProfiles();
     for (let profile of profiles) {
       var key = Object.keys(profile)[0];
-      if (profile[key]['email'] == this.ensemble.members[0]) {
+      if (key == this.ensemble.members[0]['id']) {
         this.host = profile[key]['firstName'] + ' ' + profile[key]['lastName'];
       }
     }

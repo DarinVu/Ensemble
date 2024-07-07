@@ -77,7 +77,7 @@ export class AuthComponent implements OnInit {
           this.isLoading = false;
           this.error = null;
           this.changeCurrentProfile();
-          this.router.navigate(['/profile-creation']);
+          this.router.navigate(['/profile-creation', 0]);
         }, 
         errorMessage => {
           this.error = errorMessage

@@ -6,14 +6,13 @@
         <app-loading-spinner></app-loading-spinner>
     </div>
 </div>
-<div *ngIf="!isLoading" class="big-container container-fluid">
+<div  class="big-container container-fluid">
     <div class="row justify-content-center">
         <div class="col-xs-12">
             <div *ngIf="!isLoading" class="row justify-content-center">
                 <div class="main-profile-container col-xs-12 col-md-auto">
                     <div class="profile-card-container">
                         <div class="profile-image-container" setBackgroundImage [imageUrl]="profile.profilePic">
-                            <!-- <img [src]="profile.profilePic" style="z-index: 2; height: 100%; max-width: 100%;"> -->
                             <div class="name-container" style="z-index: 1">
                                 <h3>{{ profile.firstName }}</h3>
                                 <h3>{{ profile.lastName }}</h3>
@@ -51,22 +50,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="profile-edit-container">
-                        <img src="../../assets/account-circle.svg">
+                    <div *ngIf="homeMode" class="profile-edit-container">
+                        <div class="small-pfp" setBackgroundImage [imageUrl]="profile.profilePic"></div>
                         <div class="edit-info-container">                
                             <div class="small-name-container">
                                 <p>{{ profile.firstName }}</p>
                                 <p>{{ profile.lastName }}</p>
                             </div>
-                            <a class="edit-profile-link" routerLink="/profile-edit" title="Edit Profile">Edit Profile</a>              
+                            <a class="edit-profile-link" (click)="onEdit()" title="Edit Profile">Edit Profile</a>              
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-6 col-lg-7 col-xl-6 col-xxl-5 details-container">
                     <div class="specific-container">
                         <div class="specific-container-title">
-                            <div class="title-with-number">
+                            <div *ngIf="homeMode" class="title-with-number">
                                 <h4>My Ensembles</h4>
+                                <h4>({{ profile.ensembles.length - 1 }})</h4>
+                            </div>
+                            <div *ngIf="!homeMode" class="title-with-number">
+                                <h4>{{ profile.firstName }}'s' Ensembles</h4>
                                 <h4>({{ profile.ensembles.length - 1 }})</h4>
                             </div>
                             <a class="add-group" routerLink="/ensembles-find" title="Add Ensemble">
@@ -82,13 +85,16 @@
                         
                     </div>
                     <div class="specific-container">
-                        <div class="specific-container-title">
+                        <div *ngIf="homeMode" class="specific-container-title">
                             <h4>My Recordings</h4>
+                        </div>
+                        <div *ngIf="!homeMode" class="specific-container-title">
+                            <h4>{{ profile.firstName }}'s' Recordings</h4>
                         </div>
                         <div class="carousel slide">
                             <div class="carousel-inner">
-                              <div *ngFor="let video of profile.videos; let i = index" [ngClass]="i == sliderCounter ? 'active' : ''" class="carousel-item">
-                                <iframe [src]="video.video | embed | safe:'resourceUrl'" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                              <div *ngFor="let recording of profile.recordings; let i = index" [ngClass]="i == sliderCounter ? 'active' : ''" class="carousel-item">
+                                <iframe [src]="recording.recording | embed | safe:'resourceUrl'" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                               </div>
                             </div>
                             <button class="carousel-control-prev" (click)="onPrev()" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

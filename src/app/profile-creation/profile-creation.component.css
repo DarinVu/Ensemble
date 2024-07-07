@@ -72,3 +72,8 @@ h3 {
 .main-divider {
     border-top: 5px solid black;
 }
+
+.profile-pic-sample {
+    height: 30%;
+    width: 30%;
+}
