@@ -59,19 +59,26 @@ export class ProfileCreationComponent implements OnInit {
                 }))
               }
 
+             
               let recordings = new FormArray([]);
-
-              for (let recording of this.currentProfile.recordings) {
+              if (this.currentProfile.recordings) {
+                for (let recording of this.currentProfile.recordings) {
+                  recordings.push(new FormGroup({
+                    'recording': new FormControl(recording['recording'])
+                  }))
+                }
+              } else {
                 recordings.push(new FormGroup({
-                  'recording': new FormControl(recording['recording'], Validators.required)
+                  'recording': new FormControl(null)
                 }))
               }
+              
           
               this.profileForm = new FormGroup({
                 'firstName': new FormControl(this.currentProfile.firstName, Validators.required),
                 'lastName': new FormControl(this.currentProfile.lastName, Validators.required),
                 'instruments': instruments,
-                'bio': new FormControl(this.currentProfile.bio, [Validators.required, Validators.maxLength(100)]),
+                'bio': new FormControl(this.currentProfile.bio, Validators.maxLength(100)),
                 'profilePic': new FormControl(null),
                 'recordings': recordings
               })
@@ -94,7 +101,7 @@ export class ProfileCreationComponent implements OnInit {
             'firstName': new FormControl(null, Validators.required),
             'lastName': new FormControl(null, Validators.required),
             'instruments': instruments,
-            'bio': new FormControl(null, [Validators.required, Validators.maxLength(100)]),
+            'bio': new FormControl(null, Validators.maxLength(100)),
             'profilePic': new FormControl(null),
             'recordings': recordings
           })
@@ -168,44 +175,18 @@ export class ProfileCreationComponent implements OnInit {
           currentProfileId = id;
         }
       )
-      const filePath = `profile-pics/${this.selectedFile.name}`;
-      const fileRef = this.storage.ref(filePath);
-      const uploadTask = this.storage.upload(filePath, this.selectedFile);
-      const url = uploadTask.snapshotChanges().pipe(
-        finalize(() => {
-          //Get image url after file uploads
-          fileRef.getDownloadURL().subscribe(
-            url => {
-              console.log(this.profileForm.value['firstName'])
-              const newProfile = new Profile(
-              this.currentProfile.email,
-              this.profileForm.value['firstName'],
-              this.profileForm.value['lastName'],
-              this.profileForm.value['instruments'],
-              [new EnsembleShort('aaa', null)],
-              this.profileForm.value['recordings'],
-              this.profileForm.value['bio'],
-              url
-            )
-            this.profileStorageService.editProfile(currentProfileId, newProfile);
-            this.router.navigate(['user-home']);
-          }
-        )
-      })
-     ).subscribe()
-    } else {
-      const email = this.userService.getUserInProgress()['email'];
-      const filePath = `profile-pics/${this.selectedFile.name}`;
-      const fileRef = this.storage.ref(filePath);
-      const uploadTask = this.storage.upload(filePath, this.selectedFile);
-      const url = uploadTask.snapshotChanges().pipe(
-        finalize(() => {
-          //Get image url after file uploads
-          fileRef.getDownloadURL().subscribe(
-            url => {
-              //Create a new profile with information from form
-              const newProfile = new Profile(
-                email,
+      if (this.selectedFile) {
+        const filePath = `profile-pics/${this.selectedFile.name}`;
+        const fileRef = this.storage.ref(filePath);
+        const uploadTask = this.storage.upload(filePath, this.selectedFile);
+        const url = uploadTask.snapshotChanges().pipe(
+          finalize(() => {
+            //Get image url after file uploads
+            fileRef.getDownloadURL().subscribe(
+              url => {
+                console.log(this.profileForm.value['firstName'])
+                const newProfile = new Profile(
+                this.currentProfile.email,
                 this.profileForm.value['firstName'],
                 this.profileForm.value['lastName'],
                 this.profileForm.value['instruments'],
@@ -214,15 +195,77 @@ export class ProfileCreationComponent implements OnInit {
                 this.profileForm.value['bio'],
                 url
               )
-              this.profileStorageService.storeProfile(newProfile);
-              this.profileService.addProfile(newProfile);
-              
+              this.profileStorageService.editProfile(currentProfileId, newProfile);
+              this.profileService.setCurrentProfile(newProfile);
               this.router.navigate(['user-home']);
             }
           )
-          
         })
-      ).subscribe()
+       ).subscribe()
+      } else {
+        const newProfile = new Profile(
+          this.currentProfile.email,
+          this.profileForm.value['firstName'],
+          this.profileForm.value['lastName'],
+          this.profileForm.value['instruments'],
+          [new EnsembleShort('aaa', null)],
+          this.profileForm.value['recordings'],
+          this.profileForm.value['bio'],
+          this.currentProfile.profilePic
+        )
+        this.profileStorageService.editProfile(currentProfileId, newProfile);
+        this.profileService.setCurrentProfile(newProfile);
+        this.router.navigate(['user-home']);
+        }
+    } else {
+      if (this.selectedFile) {
+        const email = this.userService.getUserInProgress()['email'];
+        const filePath = `profile-pics/${this.selectedFile.name}`;
+        const fileRef = this.storage.ref(filePath);
+        const uploadTask = this.storage.upload(filePath, this.selectedFile);
+        const url = uploadTask.snapshotChanges().pipe(
+          finalize(() => {
+            //Get image url after file uploads
+            fileRef.getDownloadURL().subscribe(
+              url => {
+                //Create a new profile with information from form
+                const newProfile = new Profile(
+                  email,
+                  this.profileForm.value['firstName'],
+                  this.profileForm.value['lastName'],
+                  this.profileForm.value['instruments'],
+                  [new EnsembleShort('aaa', null)],
+                  this.profileForm.value['recordings'],
+                  this.profileForm.value['bio'],
+                  url
+                )
+                this.profileStorageService.storeProfile(newProfile);
+                this.profileService.addProfile(newProfile);
+                
+                this.router.navigate(['user-home']);
+              }
+            )
+            
+          })
+        ).subscribe()
+      } else {
+        const email = this.userService.getUserInProgress()['email'];
+        const newProfile = new Profile(
+          email,
+          this.profileForm.value['firstName'],
+          this.profileForm.value['lastName'],
+          this.profileForm.value['instruments'],
+          [new EnsembleShort('aaa', null)],
+          this.profileForm.value['recordings'],
+          this.profileForm.value['bio']
+        )
+        this.profileStorageService.storeProfile(newProfile);
+        this.profileService.addProfile(newProfile);
+        
+        this.router.navigate(['user-home']);
+             
+      }
+    
     }
     
 

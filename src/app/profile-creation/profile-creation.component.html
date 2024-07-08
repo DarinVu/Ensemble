@@ -114,7 +114,7 @@
                 </div>    
             </div>
             <img *ngIf="!editMode" #profilePicSample class="profile-pic-sample">
-            <img *ngIf="editMode" #profilePicSample class="profile-pic-sample" [src]="currentProfile.profilePic">
+            <img *ngIf="editMode && currentProfile.profilePic" #profilePicSample class="profile-pic-sample" [src]="currentProfile.profilePic">
             <hr class="main-divider">
             <h3>Show Off Your Talent!</h3>
             <div class="mb-3" formArrayName="recordings" *ngFor="let recordingControl of recordingControls; let i = index">

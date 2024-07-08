@@ -26,6 +26,13 @@
     align-items: center;
 }
 
+.inbox-btn {
+    padding: 0;
+    background-color: white;
+    border-color: white;
+}
+
+
 .profile-pic {
     height: 40px;
     width: 40px;

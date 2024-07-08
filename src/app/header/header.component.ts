@@ -49,4 +49,8 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/home']);
   }
+
+  onEditProfile() {
+    this.router.navigate(['/profile-creation', 1])
+  }
 }

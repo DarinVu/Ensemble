@@ -27,8 +27,8 @@ export class EnsemblesFindComponent implements OnInit, OnDestroy {
         this.ensembles = ensembles;
       }
     )
-    this.ensembles = this.ensemblesService.getEnsembles();
-    console.log(this.ensembles);
+    // this.ensembles = this.ensemblesService.getEnsembles();
+    // console.log(this.ensembles);
 
   }
 

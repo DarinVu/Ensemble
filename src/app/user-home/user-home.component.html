@@ -91,7 +91,7 @@
                         <div *ngIf="!homeMode" class="specific-container-title">
                             <h4>{{ profile.firstName }}'s' Recordings</h4>
                         </div>
-                        <div class="carousel slide">
+                        <div *ngIf="profile.recordings" class="carousel slide">
                             <div class="carousel-inner">
                               <div *ngFor="let recording of profile.recordings; let i = index" [ngClass]="i == sliderCounter ? 'active' : ''" class="carousel-item">
                                 <iframe [src]="recording.recording | embed | safe:'resourceUrl'" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin"></iframe>

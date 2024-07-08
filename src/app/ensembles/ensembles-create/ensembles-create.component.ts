@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { Member } from '../member.model';
 import { consumerMarkDirty } from '@angular/core/primitives/signals';
 import { EnsembleShort } from '../ensembleShort.model';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ensembles-create',
@@ -99,18 +100,20 @@ export class EnsemblesCreateComponent implements OnInit{
 
     this.ensemblesStorageService.storeEnsemble(newEnsemble).subscribe(
       resData => {
+        var modifiedEnsembles = this.ensemblesService.getEnsembles()
+        var newEnsembleObj = {};
+        newEnsembleObj[resData['name']] = newEnsemble;
+        modifiedEnsembles.push(newEnsembleObj);
+        console.log(modifiedEnsembles)
+        this.ensemblesService.setEnsembles(modifiedEnsembles);
+        this.router.navigate(['/ensembles-find']);
+
         const newEnsembleShort = new EnsembleShort(
           resData['name'],
           this.ensembleForm.value['name']
         )
-       
-        this.ensemblesService.addEnsemble(newEnsemble);
         this.currentProfile.ensembles.push(newEnsembleShort);
-        this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles, this.currentProfileId).subscribe(
-          resData => {
-            this.router.navigate(['/ensembles-find']);
-          }
-        )
+        this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles, this.currentProfileId).subscribe()
       }
     );
     
