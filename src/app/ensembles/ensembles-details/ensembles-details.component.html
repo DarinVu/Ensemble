@@ -7,7 +7,8 @@
             <div class="small-pfp" setBackgroundImage [imageUrl]="host.profilePic"></div>
             <div class="host-details">
                 <p>Hosted By</p>
-                <p class="host-name">{{ host.firstName }} {{ host.lastName }}</p>
+                <p *ngIf="!hostMode" class="host-name">{{ host.firstName }} {{ host.lastName }}</p>
+                <p *ngIf="hostMode" class="host-name">You</p>
             </div>
         </div>
     </div>
@@ -23,22 +24,36 @@
                 </div>
                 <hr>
                 <div class="members-container">
-                    <div>
+                    <div class="members-container-title">
                         <h4 class="mb-3">Members</h4>
+                        <div *ngIf="hostMode" (click)="onManageMembers()" class="mb-3 manage-btn-container">
+                            <div *ngIf="!manageMode" class="manage-btn">Manage</div>
+                            <div *ngIf="manageMode" class="manage-btn">Done</div>
+                            <img *ngIf="!manageMode" class="manage-btn" src="../../../assets/edit.svg">
+                        </div>
                     </div>
                     <div class="card-container">
-                        <div *ngFor="let member of ensemble.members" >
+                        <div *ngFor="let member of ensemble.members; let i = index" >
                             <div *ngIf="currentProfile.firstName == member.name" style="cursor: default" class="card">
                                 <div class="card-img-top" setBackgroundImage [imageUrl]="member.profilePic"></div>      
                                 <p class="card-text">You</p>
-    
                             </div>
-                            <div *ngIf="currentProfile.firstName != member.name" class="card" (click)="onViewProfile(member)">
+                            <div *ngIf="currentProfile.firstName != member.name && !manageMode" class="card" (click)="onViewProfile(member)">
                                 <div class="card-img-top" setBackgroundImage [imageUrl]="member.profilePic"></div>      
                                 <p class="card-text">{{ member.name }}</p>
-    
-                            </div>
-                            
+                            </div>    
+                            <div *ngIf="currentProfile.firstName != member.name && manageMode && !confirmKick" style="cursor: default" class="card">
+                                <button (click)="onKick(i)" class="btn btn-danger kick-btn">Kick</button>
+                                <p class="card-text">{{ member.name }}</p>
+                            </div>   
+                            <div *ngIf="i == confirmKickId" style="cursor: default" class="card">
+                                <p>Confirm?</p>
+                                <div class="confirm-btn-container">
+                                    <button class="btn btn-danger">X</button>
+                                    <button (click)="onConfirm(member)" class="btn btn-success">&#x2713;</button>
+                                </div>
+                                
+                            </div>   
                         </div>
                     </div>
                     

@@ -30,8 +30,6 @@ export class ProfileCreationComponent implements OnInit {
   editMode: boolean;
   currentProfile: Profile;
 
-  
-  
   constructor(
     private router: Router, 
     private userService: UserService,
@@ -241,7 +239,7 @@ export class ProfileCreationComponent implements OnInit {
                 )
                 this.profileStorageService.storeProfile(newProfile);
                 this.profileService.addProfile(newProfile);
-                
+                this.profileService.setCurrentProfile(newProfile);
                 this.router.navigate(['user-home']);
               }
             )
@@ -261,15 +259,10 @@ export class ProfileCreationComponent implements OnInit {
         )
         this.profileStorageService.storeProfile(newProfile);
         this.profileService.addProfile(newProfile);
-        
+        this.profileService.setCurrentProfile(newProfile);
         this.router.navigate(['user-home']);
              
       }
-    
-    }
-    
-
-    
+    }  
   }
-
 }

@@ -122,6 +122,24 @@ h4 {
     padding-bottom: 80px;
 }
 
+.members-container-title {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.manage-btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    color: #006e90;
+}
+
+.manage-btn {
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 
 .card-container {
@@ -130,6 +148,7 @@ h4 {
     gap: 2vh;
     flex-wrap: wrap;
 }
+
 
 .card {
     display: flex;
@@ -152,6 +171,17 @@ h4 {
     margin-bottom: 20px;
     background-size: cover;
 }
+
+.kick-btn {
+    margin-bottom: 20px;
+}
+
+.confirm-btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 
 .footer {
     position: fixed;

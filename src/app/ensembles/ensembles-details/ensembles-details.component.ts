@@ -7,6 +7,7 @@ import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Ensemble } from '../ensemble.model';
 import { Profile } from '../../profile-creation/profile.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Member } from '../member.model';
 
 @Component({
   selector: 'app-ensembles-details',
@@ -26,6 +27,10 @@ export class EnsemblesDetailsComponent implements OnInit {
   ensembleId: string;
   requestSubmitted = false;
   member = false;
+  manageMode: boolean;
+  hostMode: boolean
+  confirmKick: boolean;
+  confirmKickId: number;
 
   constructor(
     private route: ActivatedRoute, 
@@ -36,6 +41,8 @@ export class EnsemblesDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.confirmKick = false;
+    this.manageMode = false;
     this.route.params.subscribe(
       (params: Params) => {
         var ensembles: Ensemble[] = this.ensemblesService.getEnsembles();
@@ -58,8 +65,6 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.host = profile[key];
       }
     }
-    console.log(this.host)
-
     this.profileService.currentProfileId.subscribe(
       profile => {
         this.currentProfileId = profile;
@@ -74,17 +79,22 @@ export class EnsemblesDetailsComponent implements OnInit {
       }
     )
 
+    if(this.host = this.currentProfile) {
+      this.hostMode = true;
+    } else {
+      this.hostMode = false;
+    }
+
     for (let member of this.ensemble.members) {
       if (member['id'] == this.currentProfileId) {
         this.member = true;
       }
     }
-
-    console.log(this.member)
-
     this.requestForm = new FormGroup({
       'message': new FormControl(null)
     })
+
+    
   }
 
   onChat() {
@@ -131,5 +141,17 @@ export class EnsemblesDetailsComponent implements OnInit {
     this.router.navigate(['/user', member.id])
   }
 
+  onManageMembers() {
+    this.manageMode = !this.manageMode;
+  }
+
+  onKick(i: number) {
+    this.confirmKickId = i;
+    this.confirmKick = true;
+  }
+
+  onConfirm(member: Member) {
+
+  }
 
 }
