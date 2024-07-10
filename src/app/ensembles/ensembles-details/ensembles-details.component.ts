@@ -8,6 +8,7 @@ import { Ensemble } from '../ensemble.model';
 import { Profile } from '../../profile-creation/profile.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Member } from '../member.model';
+import { EnsemblesStorageService } from '../ensembles-storage.service';
 
 @Component({
   selector: 'app-ensembles-details',
@@ -28,7 +29,7 @@ export class EnsemblesDetailsComponent implements OnInit {
   requestSubmitted = false;
   member = false;
   manageMode: boolean;
-  hostMode: boolean
+  hostMode: boolean;
   confirmKick: boolean;
   confirmKickId: number;
 
@@ -37,7 +38,8 @@ export class EnsemblesDetailsComponent implements OnInit {
     private ensemblesService: EnsemblesService,
     private profileService: ProfileService,
     private router: Router,
-    private profileStorageService: ProfileStorageService
+    private profileStorageService: ProfileStorageService,
+    private ensemblesStorageService: EnsemblesStorageService
   ) {}
 
   ngOnInit(): void {
@@ -78,8 +80,8 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.currentProfileLastName = profile.lastName;
       }
     )
-
-    if(this.host = this.currentProfile) {
+    
+    if(this.host == this.currentProfile) {
       this.hostMode = true;
     } else {
       this.hostMode = false;
@@ -150,8 +152,19 @@ export class EnsemblesDetailsComponent implements OnInit {
     this.confirmKick = true;
   }
 
-  onConfirm(member: Member) {
-
+  onConfirm(indexOfMember: number) {
+    var modifiedMembers: Member[] = [];
+    for (let i = 0; i < this.ensemble.members.length; i++) {
+      if (i != indexOfMember) {
+        modifiedMembers.push(this.ensemble.members[i]);
+      }
+    }
+    console.log(modifiedMembers);
+    this.ensemblesStorageService.addMemberToEnsemble(modifiedMembers, this.ensembleId).subscribe(
+      resData => {
+        this.ensemble.members = modifiedMembers;
+      }
+    );
   }
 
 }
