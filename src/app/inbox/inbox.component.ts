@@ -18,10 +18,8 @@ export class InboxComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    // this.isLoading = true;
     this.profileService.currentProfileChanged.subscribe(
       profile => {
-        console.log(profile)
         this.profile = profile;
         this.isLoading = false;
       }

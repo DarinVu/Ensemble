@@ -40,6 +40,7 @@ export class InboxMessageComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    
     this.profileService.profilesChanged.subscribe(
       profiles => {
         this.profiles = profiles;
@@ -88,7 +89,7 @@ export class InboxMessageComponent implements OnInit{
       }
     }
 
-   
+    console.log(this.ensemble.instrumentsHave)
   }
 
   onViewProfile() {
@@ -114,6 +115,7 @@ export class InboxMessageComponent implements OnInit{
     this.display = 'block';
     this.acceptMode = true;
 
+    //Add accepted user to ensemble's list of members
     var requestedUserEnsembles = [];
     var requestedUserProfilePic: string;
     for (let profile of this.profiles) {
@@ -123,9 +125,8 @@ export class InboxMessageComponent implements OnInit{
         requestedUserProfilePic = Object.values(profile)[0]['profilePic']
       }
     }
-
     this.ensemble.members.push(new Member(this.requestProfileId, this.request.firstName, requestedUserProfilePic));
-    this.ensemblesStorageService.addMemberToEnsemble(this.ensemble.members, this.request.ensembleId).subscribe();
+    this.ensemblesStorageService.updateEnsembleMembers(this.ensemble.members, this.request.ensembleId).subscribe();
     let modifiedRequests = [];
     for (let i = 0; i < this.currentProfile.requests.length; i++) {
       if (i != this.requestNum) {
@@ -133,6 +134,7 @@ export class InboxMessageComponent implements OnInit{
       }
     }
 
+    //Add ensemble to accepted user's ensemble list
     var requestedUserEnsembles = [];
     var requestedUserProfilePic: string;
     for (let profile of this.profiles) {
@@ -150,8 +152,19 @@ export class InboxMessageComponent implements OnInit{
       })
     )
     .subscribe();
+
+    //Add new user's instrument to ensemble's list of instrumentsHave
+    //TODO this.ensemble.instrumentsHave.push({'instrument': this.request.instrument});
+    this.ensemblesStorageService.updateInstrumentsHave(this.ensemble.instrumentsHave, this.request.ensembleId).subscribe();
     
-    
+    //Remove new user's instrument from ensemble's list of instruments needed
+    var modifiedInstrumentsNeeded: string[] = [];
+    for (let instrument of this.ensemble.instrumentsNeeded) {
+      if (instrument['instrument'] != this.request.instrument) {
+        modifiedInstrumentsNeeded.push(instrument);
+      }
+    }
+    this.ensemblesStorageService.updateInstrumentsNeeded(modifiedInstrumentsNeeded, this.request.ensembleId).subscribe();
   }
 
   closeModal() {

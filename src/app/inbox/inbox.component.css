@@ -67,8 +67,10 @@ h1 {
 
 .profile-img {
     height: 30px;
-    width: 30;
+    width: 30px;
     border-radius: 50%;
+    background-size: cover;
+
 }
 
 .loading-container {

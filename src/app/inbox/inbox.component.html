@@ -18,7 +18,7 @@
                 <div *ngFor="let request of profile.requests; let i = index">
                     <div *ngIf="i > 0">
                         <div [routerLink]="[i]" class="inbox-header">
-                            <img class="profile-img" src='https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg'>
+                            <div class="profile-img" setBackgroundImage [imageUrl]="request.profilePic"></div>
                             <div>{{ request.firstName + ' ' + request.lastName }}</div>
                         </div>
                     </div>

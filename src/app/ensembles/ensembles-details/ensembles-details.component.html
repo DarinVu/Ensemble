@@ -36,11 +36,14 @@
                         <div *ngFor="let member of ensemble.members; let i = index" >
                             <div *ngIf="currentProfile.firstName == member.name" style="cursor: default" class="card">
                                 <div class="card-img-top" setBackgroundImage [imageUrl]="member.profilePic"></div>      
-                                <p class="card-text">You</p>
+                                <div class="card-text">You</div>
+                                <div class="member-instrument">{{ ensemble.instrumentsHave[i].instrument }}</div>
                             </div>
                             <div *ngIf="currentProfile.firstName != member.name && !manageMode" class="card" (click)="onViewProfile(member)">
                                 <div class="card-img-top" setBackgroundImage [imageUrl]="member.profilePic"></div>      
-                                <p class="card-text">{{ member.name }}</p>
+                                <div *ngIf="hostId == member['id']" class="card-text">{{ member.name }} (Host)</div>
+                                <div *ngIf="hostId != member['id']" class="card-text">{{ member.name }}</div>
+                                <div class="member-instrument">{{ ensemble.instrumentsHave[i].instrument }}</div>
                             </div>    
                             <div *ngIf="currentProfile.firstName != member.name && manageMode && !confirmKick" style="cursor: default" class="card">
                                 <button (click)="onKick(i)" class="btn btn-danger kick-btn">Kick</button>
@@ -50,7 +53,7 @@
                                 <p>Confirm?</p>
                                 <div class="confirm-btn-container">
                                     <button class="btn btn-danger">X</button>
-                                    <button (click)="onConfirm(i)" class="btn btn-success">&#x2713;</button>
+                                    <button (click)="onConfirm(i, member)" class="btn btn-success">&#x2713;</button>
                                 </div>
                                 
                             </div>   
@@ -119,6 +122,16 @@
         </div>
         <div class="modal-body">
             <form [formGroup]="requestForm">
+                <select 
+                    class="form-select form-select-sm mb-2"
+                    formControlName="instrument"
+                >
+                    <option class="default-option" selected>Choose an instrument</option>
+                    <option *ngFor="let instrument of ensemble.instrumentsNeeded">
+                        {{ instrument.instrument }}
+                    </option>
+                    
+                </select>
                 <textarea 
                     class="form-control" 
                     id="exampleFormControlTextarea1" 

@@ -8,6 +8,8 @@ export class Request {
         public lastName: string,
         public ensembleId: string,
         public ensembleName: string,
+        public profilePic: string,
+        public instrument: string,
         public message?: string
     ) {}
 }

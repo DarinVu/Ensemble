@@ -80,6 +80,7 @@ export class EnsemblesCreateComponent implements OnInit{
   }
 
   onSubmit() {
+    console.log(this.ensembleForm.value['instruments'])
     const formattedDate = this.datePipe.transform(this.ensembleForm.value['date'], 'mediumDate');
     const formattedTime = this.datePipe.transform(this.ensembleForm.value['date'] + ' ' + this.ensembleForm.value['time'] + ':00', 'shortTime')
 
@@ -89,7 +90,8 @@ export class EnsemblesCreateComponent implements OnInit{
       formattedTime,
       this.ensembleForm.value['description'],
       this.ensembleForm.value['size'],
-      this.ensembleForm.value['instruments'],
+      this.ensembleForm.value['instruments'].slice(1),
+      [this.ensembleForm.value['instruments'][0]],
       this.ensembleForm.value['genre'],
       this.ensembleForm.value['location'],
       [new Member(this.currentProfileId, this.currentProfile.firstName, this.currentProfile.profilePic)]

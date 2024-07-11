@@ -75,7 +75,8 @@
             </div>
             <div class="mb-3 control" formArrayName="instruments" *ngFor="let instConrol of controls; let i = index">
                 <div class="form-group" [formGroupName]="i">
-                    <label for="instrumentList" class="form-label">Instrument</label>
+                    <label *ngIf="i != 0" for="instrumentList" class="form-label">Instrument</label>
+                    <label *ngIf="i == 0" for="instrumentList" class="form-label">Instrument YOU will be playing</label>
                     <input 
                         class="form-control" 
                         list="datalistOptions" 
@@ -117,8 +118,52 @@
                         <option value="Xylophone">
                     </datalist>
                 </div>
-               
             </div>
+            <!-- <div class="mb-3 control">
+                <div class="form-group">
+                    <label for="instrumentList" class="form-label">Instrument YOU will be playing</label>
+                    <input 
+                        class="form-control" 
+                        list="datalistOptions" 
+                        id="instrumentList" 
+                        placeholder="Type to search..."
+                        formControlName="instrument">
+                    <datalist id="datalistOptions">
+                        <option value="Accordion">
+                        <option value="Alto Saxophone">
+                        <option value="Baritone Saxophone">
+                        <option value="Bass Clarinet">
+                        <option value="Bass Guitar">
+                        <option value="Bassoon">
+                        <option value="Cello">
+                        <option value="Clarinet">
+                        <option value="Double Bass">
+                        <option value="Drumset">
+                        <option value="Euphonium">
+                        <option value="Flute">
+                        <option value="French Horn">
+                        <option value="Guitar">  
+                        <option value="Harp">
+                        <option value="Marimba">
+                        <option value="Oboe">
+                        <option value="Organ">
+                        <option value="Piano">
+                        <option value="Piccolo">
+                        <option value="Recorder">
+                        <option value="Soprano Saxophone">
+                        <option value="Timpani">
+                        <option value="Triangle">
+                        <option value="Trombone">
+                        <option value="Trumpet">
+                        <option value="Tuba">
+                        <option value="Ukelele">
+                        <option value="Vibraphone">
+                        <option value="Viola">
+                        <option value="Violin">
+                        <option value="Xylophone">
+                    </datalist>
+                </div>
+            </div> -->
             <div class="col-xs-auto col-md-auto">
                 <div class="warning-message" *ngIf="!ensembleForm.controls['genre'].valid && ensembleForm.controls['genre'].touched">This field must be filled.</div>
             </div>

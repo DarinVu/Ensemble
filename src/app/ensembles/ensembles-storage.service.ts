@@ -33,10 +33,26 @@ export class EnsemblesStorageService {
         })
     )}
 
-    addMemberToEnsemble(members: Member[], ensembleId: string) {
+    updateEnsembleMembers(members: Member[], ensembleId: string) {
         return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/ensembles/' + ensembleId + '.json', 
             {
                 'members': members
+            }
+        )
+    }
+
+    updateInstrumentsNeeded(instrumentsNeeded: string[], ensembleId: string) {
+        return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/ensembles/' + ensembleId + '.json', 
+            {
+                'instrumentsNeeded': instrumentsNeeded
+            }
+        )
+    }
+
+    updateInstrumentsHave(instrumentsHave: string[], ensembleId: string) {
+        return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/ensembles/' + ensembleId + '.json', 
+            {
+                'instrumentsHave': instrumentsHave
             }
         )
     }

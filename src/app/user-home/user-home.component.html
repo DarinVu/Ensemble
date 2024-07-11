@@ -46,7 +46,7 @@
                             <div class="numbers-container" style="width: 50%">
                                 <h1>{{ profile.ensembles.length - 1 }}</h1>
                                 <p *ngIf="profile.ensembles.length - 1 == 1">Ensemble</p>
-                                <p *ngIf="profile.ensembles.length - 1 > 1">Ensembles</p>
+                                <p *ngIf="profile.ensembles.length - 1 > 1 || profile.ensembles.length - 1 == 0">Ensembles</p>
                             </div>
                         </div>
                     </div>
@@ -97,16 +97,15 @@
                                 <iframe [src]="recording.recording | embed | safe:'resourceUrl'" title="YouTube video player" frameborder="0" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                               </div>
                             </div>
-                            <button class="carousel-control-prev" (click)="onPrev()" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <button *ngIf="sliderCounter != 0" class="carousel-control-prev" (click)="onPrev()" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" (click)="onNext()" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <button *ngIf="sliderCounter != profile.recordings.length - 1" class="carousel-control-next" (click)="onNext()" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
                               <span class="visually-hidden">Next</span>
                             </button>
-                        </div>
-                        
+                        </div>           
                     </div>
                 </div>
             </div>

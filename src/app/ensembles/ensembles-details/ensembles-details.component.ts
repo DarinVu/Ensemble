@@ -9,6 +9,7 @@ import { Profile } from '../../profile-creation/profile.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Member } from '../member.model';
 import { EnsemblesStorageService } from '../ensembles-storage.service';
+import { EnsembleShort } from '../ensembleShort.model';
 
 @Component({
   selector: 'app-ensembles-details',
@@ -32,6 +33,7 @@ export class EnsemblesDetailsComponent implements OnInit {
   hostMode: boolean;
   confirmKick: boolean;
   confirmKickId: number;
+  
 
   constructor(
     private route: ActivatedRoute, 
@@ -55,6 +57,7 @@ export class EnsemblesDetailsComponent implements OnInit {
             console.log(key)
             this.ensemble = ensemble[key];
             this.ensemblesService.setCurrentEnsembleId(key);
+            break;
           }
         }
       }
@@ -92,8 +95,10 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.member = true;
       }
     }
+
     this.requestForm = new FormGroup({
-      'message': new FormControl(null)
+      'message': new FormControl(null),
+      'instrument': new FormControl(null, Validators.required)
     })
 
     
@@ -119,7 +124,9 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.currentProfileFirstName, 
         this.currentProfileLastName,
         this.ensembleId,
-        this.ensemble.name
+        this.ensemble.name,
+        this.currentProfile.profilePic,
+        this.requestForm.value['instrument']
       )
     } else {
       var request = new Request(
@@ -128,6 +135,8 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.currentProfileLastName,
         this.ensembleId,
         this.ensemble.name,
+        this.currentProfile.profilePic,
+        this.requestForm.value['instrument'],
         this.requestForm.value['message'])
     }
 
@@ -148,23 +157,39 @@ export class EnsemblesDetailsComponent implements OnInit {
   }
 
   onKick(i: number) {
+    //switch to confirm button when kick is pressed
     this.confirmKickId = i;
     this.confirmKick = true;
   }
 
-  onConfirm(indexOfMember: number) {
+  onConfirm(indexOfMember: number, member: Member) {
+    //Update the list of members for ensemble
     var modifiedMembers: Member[] = [];
     for (let i = 0; i < this.ensemble.members.length; i++) {
       if (i != indexOfMember) {
         modifiedMembers.push(this.ensemble.members[i]);
       }
     }
-    console.log(modifiedMembers);
-    this.ensemblesStorageService.addMemberToEnsemble(modifiedMembers, this.ensembleId).subscribe(
+    this.ensemblesStorageService.updateEnsembleMembers(modifiedMembers, this.ensembleId).subscribe(
       resData => {
         this.ensemble.members = modifiedMembers;
       }
     );
-  }
+
+    //Update the kicked member's ensemble page.
+    let profiles: Profile[] = this.profileService.getProfiles() 
+    for (let profile of profiles) {
+      var key = Object.keys(profile)[0];
+      if (key == member['id']) {
+        var modifiedEnsembles: EnsembleShort[] = []
+        for (let ensemble of Object.values(profile)[0]['ensembles']) {
+          if (ensemble['id'] != this.ensembleId) {
+            modifiedEnsembles.push(ensemble);
+          }
+        }
+        this.profileStorageService.addEnsembleToProfile(modifiedEnsembles, key).subscribe();
+      }
+    }
+  } 
 
 }
