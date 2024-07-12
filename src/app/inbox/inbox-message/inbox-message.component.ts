@@ -154,11 +154,13 @@ export class InboxMessageComponent implements OnInit{
     .subscribe();
 
     //Add new user's instrument to ensemble's list of instrumentsHave
-    //TODO this.ensemble.instrumentsHave.push({'instrument': this.request.instrument});
+    var newInstrumentObj = {};
+    newInstrumentObj['instrument'] = this.request.instrument
+    this.ensemble.instrumentsHave.push(newInstrumentObj);
     this.ensemblesStorageService.updateInstrumentsHave(this.ensemble.instrumentsHave, this.request.ensembleId).subscribe();
     
     //Remove new user's instrument from ensemble's list of instruments needed
-    var modifiedInstrumentsNeeded: string[] = [];
+    var modifiedInstrumentsNeeded: Object[] = [];
     for (let instrument of this.ensemble.instrumentsNeeded) {
       if (instrument['instrument'] != this.request.instrument) {
         modifiedInstrumentsNeeded.push(instrument);

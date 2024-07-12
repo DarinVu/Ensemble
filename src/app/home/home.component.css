@@ -63,6 +63,10 @@ p {
     font-weight: 700;
 }
 
+.intro-main-container {
+    margin-bottom: 10vh;
+}
+
 .intro-container {
     display: flex;
     flex-direction: column;
@@ -78,3 +82,10 @@ p {
     cursor: pointer;
 }
 
+h3 {
+    font-weight: 700;
+}
+
+.how-container {
+    
+}

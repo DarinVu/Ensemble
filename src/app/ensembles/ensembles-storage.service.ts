@@ -41,7 +41,7 @@ export class EnsemblesStorageService {
         )
     }
 
-    updateInstrumentsNeeded(instrumentsNeeded: string[], ensembleId: string) {
+    updateInstrumentsNeeded(instrumentsNeeded: Object[], ensembleId: string) {
         return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/ensembles/' + ensembleId + '.json', 
             {
                 'instrumentsNeeded': instrumentsNeeded
@@ -49,7 +49,7 @@ export class EnsemblesStorageService {
         )
     }
 
-    updateInstrumentsHave(instrumentsHave: string[], ensembleId: string) {
+    updateInstrumentsHave(instrumentsHave: Object[], ensembleId: string) {
         return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/ensembles/' + ensembleId + '.json', 
             {
                 'instrumentsHave': instrumentsHave

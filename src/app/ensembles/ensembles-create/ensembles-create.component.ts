@@ -80,7 +80,6 @@ export class EnsemblesCreateComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log(this.ensembleForm.value['instruments'])
     const formattedDate = this.datePipe.transform(this.ensembleForm.value['date'], 'mediumDate');
     const formattedTime = this.datePipe.transform(this.ensembleForm.value['date'] + ' ' + this.ensembleForm.value['time'] + ':00', 'shortTime')
 
@@ -106,7 +105,6 @@ export class EnsemblesCreateComponent implements OnInit{
         var newEnsembleObj = {};
         newEnsembleObj[resData['name']] = newEnsemble;
         modifiedEnsembles.push(newEnsembleObj);
-        console.log(modifiedEnsembles)
         this.ensemblesService.setEnsembles(modifiedEnsembles);
         this.router.navigate(['/ensembles-find']);
 

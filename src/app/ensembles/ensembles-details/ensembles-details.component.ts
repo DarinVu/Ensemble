@@ -153,6 +153,10 @@ export class EnsemblesDetailsComponent implements OnInit {
   }
 
   onManageMembers() {
+    if (this.manageMode == true) {
+      this.confirmKick = false;
+      this.confirmKickId = null;
+    }
     this.manageMode = !this.manageMode;
   }
 
