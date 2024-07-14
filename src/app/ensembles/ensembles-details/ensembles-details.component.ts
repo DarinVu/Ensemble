@@ -33,6 +33,8 @@ export class EnsemblesDetailsComponent implements OnInit {
   hostMode: boolean;
   confirmKick: boolean;
   confirmKickId: number;
+  disbandMode = false;
+  disbandDisplay = '';
   
 
   constructor(
@@ -45,6 +47,7 @@ export class EnsemblesDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.disbandMode)
     this.confirmKick = false;
     this.manageMode = false;
     this.route.params.subscribe(
@@ -54,7 +57,6 @@ export class EnsemblesDetailsComponent implements OnInit {
           var key = Object.keys(ensemble)[0]
           if (key == params['id']) {
             this.ensembleId = key;
-            console.log(key)
             this.ensemble = ensemble[key];
             this.ensemblesService.setCurrentEnsembleId(key);
             break;
@@ -196,4 +198,19 @@ export class EnsemblesDetailsComponent implements OnInit {
     }
   } 
 
+  onDisband() {
+    this.disbandMode = true;
+    this.disbandDisplay = 'block';
+  }
+
+  closeDisbandModal() {
+    this.disbandDisplay = '';
+    this.disbandMode = false;
+  }
+
+  onConfirmDisband() {
+    this.ensemblesStorageService.deleteEnsemble(this.ensembleId).subscribe(
+
+    )
+  }
 }

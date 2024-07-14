@@ -84,8 +84,57 @@ p {
 
 h3 {
     font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .how-container {
-    
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.how-box {
+    background-color: rgb(0, 110, 144, 0.1);
+    height: fit-content;
+    padding: 30px;
+    width: 49%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: start;
+    cursor: pointer;
+}
+
+.how-box:hover {
+    background-color: rgb(0, 110, 144, 0.2);
+    height: fit-content;
+    padding: 30px;
+    width: 49%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: start;
+    cursor: pointer;
+}
+
+.how-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.how-title {
+    font-size: 20px;
+}
+
+.how-message {
+    font-weight: 500;
+    color: #6C6D6D;
+}
+
+.how-link {
+    color: #006e90;
 }

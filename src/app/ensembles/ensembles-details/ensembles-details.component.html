@@ -54,10 +54,13 @@
                                 <div class="confirm-btn-container">
                                     <button class="btn btn-danger">X</button>
                                     <button (click)="onConfirm(i, member)" class="btn btn-success">&#x2713;</button>
-                                </div>
-                                
+                                </div> 
                             </div>   
                         </div>
+                    </div>
+                    <div *ngIf="manageMode" class="disband-container">
+                        <button class="btn btn-danger disband-btn" (click)="onDisband()">Disband Ensemble</button>
+
                     </div>
                     
                 </div>
@@ -95,6 +98,7 @@
                         </button>
                         <div class="chat-warning" *ngIf="!member">You must be a member to access this ensemble's chat.</div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -114,7 +118,17 @@
         <button class="btn btn-join" (click)="openModal()">Request To Join</button>
    </div>
 </div>
-<div class="modal" *ngIf="!requestSubmitted" tabindex="-1" [ngStyle]="{'display': display}">
+<div class="modal" (click)="closeModal()" (clickOutside)="closeModal()" *ngIf="requestSubmitted && !disbandMode" tabindex="-1" [ngStyle]="{'display': display}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-body submitted-modal">
+            <h1>Request Sent</h1>
+            <img src="../../../assets/check.svg">
+            <p class="submit-message">Click Anywhere to Continue</p>
+        </div>
+    </div>
+</div>
+<div class="modal" *ngIf="!requestSubmitted && !disbandMode" tabindex="-1" [ngStyle]="{'display': display}">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
@@ -148,13 +162,19 @@
         </div>
     </div>
 </div>
-<div class="modal" (click)="closeModal()" (clickOutside)="closeModal()" *ngIf="requestSubmitted" tabindex="-1" [ngStyle]="{'display': display}">
+<div class="modal" *ngIf="disbandMode" tabindex="-1" [ngStyle]="{'display': disbandDisplay}" >
     <div class="modal-dialog">
         <div class="modal-content">
-        <div class="modal-body submitted-modal">
-            <h1>Request Sent</h1>
-            <img src="../../../assets/check.svg">
-            <p class="submit-message">Click Anywhere to Continue</p>
+        <div class="modal-header">
+            <h5 class="modal-title">Request To Join {{ ensemble.name }}</h5>
+        </div>
+        <div class="modal-body">
+           <div>Confirm</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button-lg" (click)="closeModal()" class="btn btn-danger">Cancel</button>
+            <button type="button-lg" (click)="onConfirmDisband()" class="btn request-btn">Request</button>
+        </div>
         </div>
     </div>
 </div>

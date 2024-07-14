@@ -57,4 +57,8 @@ export class EnsemblesStorageService {
         )
     }
 
+    deleteEnsemble(ensembleId: string) {
+        return this.http.delete('https://ensemble-163c3-default-rtdb.firebaseio.com/ensembles/' + ensembleId + '.json');
+    }
+
 }

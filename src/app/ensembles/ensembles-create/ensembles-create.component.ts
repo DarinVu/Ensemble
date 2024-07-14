@@ -82,9 +82,10 @@ export class EnsemblesCreateComponent implements OnInit{
   onSubmit() {
     const formattedDate = this.datePipe.transform(this.ensembleForm.value['date'], 'mediumDate');
     const formattedTime = this.datePipe.transform(this.ensembleForm.value['date'] + ' ' + this.ensembleForm.value['time'] + ':00', 'shortTime')
+    const ensembleName = this.ensembleForm.value['name'].charAt(0).toUpperCase() + this.ensembleForm.value['name'].substring(1);
 
     const newEnsemble = new Ensemble(
-      this.ensembleForm.value['name'],
+      ensembleName,
       formattedDate,
       formattedTime,
       this.ensembleForm.value['description'],

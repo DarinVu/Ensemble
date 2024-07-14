@@ -17,7 +17,7 @@
     </div>
 </nav>
 <div class="row justify-content-center">
-    <div class="col-xs-12 col-md-10 col-xxl-6">
+    <div class="col-xs-12 col-md-10 col-xxl-8">
         <div class="row intro-main-container">
             <div class="col-xs-12 col-md-8 intro-container">
                 <div class="intro-message">
@@ -37,14 +37,26 @@
                 <img src="../../assets/home-page-image.svg">
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-8">
-                <h3>How Ensemble Works</h3>
-                <div class="how-container">
-                    <div></div>
+        <div class="row how-container">
+            <h3>How Ensemble Works</h3>
+            <div class="how-box">
+                <img src="../../assets/discover.svg">
+                <div class="how-content-container" (click)="onSignup()">
+                    <div class="how-title">Discover Ensembles</div>
+                    <div class="how-message">See who's hosting ensembles for all the music you love and join one today</div>
+                    <div class="how-link">Search Ensembles</div>
+                </div>
+            </div>
+            <div class="how-box">
+                <img src="../../assets/add.svg">
+                <div class="how-content-container" (click)="onSignup()">
+                    <div class="how-title">Start Your Own Ensemble</div>
+                    <div class="how-message">Create your own Ensemble, and draw from a massive community of musicians</div>
+                    <div class="how-link">Start an Ensemble</div>
                 </div>
             </div>
         </div>
+  
     </div>
 </div>
 
