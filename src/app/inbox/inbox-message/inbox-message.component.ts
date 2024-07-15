@@ -147,7 +147,7 @@ export class InboxMessageComponent implements OnInit{
     requestedUserEnsembles.push(new EnsembleShort(this.request.ensembleId, this.request.ensembleName));
     this.profileStorageService.addRequestToProfile(this.currentProfileId, modifiedRequests).pipe(
       finalize(() => {
-        this.profileStorageService.addEnsembleToProfile(requestedUserEnsembles, this.request.profileId).subscribe()
+        this.profileStorageService.updateProfileEnsembles(requestedUserEnsembles, this.request.profileId).subscribe()
         this.currentProfile.requests = modifiedRequests;
       })
     )

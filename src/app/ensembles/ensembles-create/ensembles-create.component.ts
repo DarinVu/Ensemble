@@ -97,9 +97,6 @@ export class EnsemblesCreateComponent implements OnInit{
       [new Member(this.currentProfileId, this.currentProfile.firstName, this.currentProfile.profilePic)]
     )
 
-    
-
-
     this.ensemblesStorageService.storeEnsemble(newEnsemble).subscribe(
       resData => {
         var modifiedEnsembles = this.ensemblesService.getEnsembles()
@@ -111,10 +108,10 @@ export class EnsemblesCreateComponent implements OnInit{
 
         const newEnsembleShort = new EnsembleShort(
           resData['name'],
-          this.ensembleForm.value['name']
+          ensembleName
         )
         this.currentProfile.ensembles.push(newEnsembleShort);
-        this.profileStorageService.addEnsembleToProfile(this.currentProfile.ensembles, this.currentProfileId).subscribe()
+        this.profileStorageService.updateProfileEnsembles(this.currentProfile.ensembles, this.currentProfileId).subscribe()
       }
     );
     

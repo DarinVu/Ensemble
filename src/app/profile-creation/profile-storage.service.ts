@@ -37,7 +37,7 @@ export class ProfileStorageService {
         })
     )}
 
-    addEnsembleToProfile(ensembles: EnsembleShort[], profileId: string) {
+    updateProfileEnsembles(ensembles: EnsembleShort[], profileId: string) {
         return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles/' + profileId + '.json',
             {
                 'ensembles': ensembles

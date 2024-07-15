@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { ProfileStorageService } from './../../profile-creation/profile-storage.service';
 import { Request } from './../../inbox/request.model';
 import { ProfileService } from './../../profile-creation/profile.service';
@@ -10,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Member } from '../member.model';
 import { EnsemblesStorageService } from '../ensembles-storage.service';
 import { EnsembleShort } from '../ensembleShort.model';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ensembles-details',
@@ -29,12 +31,10 @@ export class EnsemblesDetailsComponent implements OnInit {
   ensembleId: string;
   requestSubmitted = false;
   member = false;
-  manageMode: boolean;
+  manageMode = false;
   hostMode: boolean;
-  confirmKick: boolean;
+  confirmKick = false;
   confirmKickId: number;
-  disbandMode = false;
-  disbandDisplay = '';
   
 
   constructor(
@@ -47,9 +47,6 @@ export class EnsemblesDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.disbandMode)
-    this.confirmKick = false;
-    this.manageMode = false;
     this.route.params.subscribe(
       (params: Params) => {
         var ensembles: Ensemble[] = this.ensemblesService.getEnsembles();
@@ -183,7 +180,7 @@ export class EnsemblesDetailsComponent implements OnInit {
     );
 
     //Update the kicked member's ensemble page.
-    let profiles: Profile[] = this.profileService.getProfiles() 
+    let profiles: Profile[] = this.profileService.getProfiles(); 
     for (let profile of profiles) {
       var key = Object.keys(profile)[0];
       if (key == member['id']) {
@@ -193,24 +190,37 @@ export class EnsemblesDetailsComponent implements OnInit {
             modifiedEnsembles.push(ensemble);
           }
         }
-        this.profileStorageService.addEnsembleToProfile(modifiedEnsembles, key).subscribe();
+        this.profileStorageService.updateProfileEnsembles(modifiedEnsembles, key).subscribe();
       }
     }
   } 
 
-  onDisband() {
-    this.disbandMode = true;
-    this.disbandDisplay = 'block';
-  }
-
-  closeDisbandModal() {
-    this.disbandDisplay = '';
-    this.disbandMode = false;
-  }
-
   onConfirmDisband() {
-    this.ensemblesStorageService.deleteEnsemble(this.ensembleId).subscribe(
+    //Delete Ensemble from database
+    this.ensemblesStorageService.deleteEnsemble(this.ensembleId).pipe(
+      finalize(() => {
+        this.ensemblesStorageService.fetchEnsembles().subscribe()
+      })
+    ).subscribe();
 
-    )
+    //Remove ensemble from all members' profiles
+    let profiles: Profile[] = this.profileService.getProfiles() 
+    for (let profile of profiles) {
+      var key = Object.keys(profile)[0];
+      let modifiedEnsembles: EnsembleShort[] = [];
+
+      for (let ensemble of Object.values(profile)[0]['ensembles']) {
+        if (ensemble['id'] != this.ensembleId) {
+          modifiedEnsembles.push(ensemble);
+        }
+      }
+      this.profileStorageService.updateProfileEnsembles(modifiedEnsembles, key).subscribe();
+      if (key == this.currentProfileId) {
+        this.currentProfile.ensembles = modifiedEnsembles;
+      }
+    }
+
+    //Route back to the user home page
+    this.router.navigate(['/user-home']);
   }
 }

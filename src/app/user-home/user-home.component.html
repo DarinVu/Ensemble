@@ -19,9 +19,7 @@
                             </div>
                             
                             <p>{{ profile.email }}</p>
-                        </div>
-                       
-                        
+                        </div>   
                         <div class="personal-details-container">
                             <div class="instrument-container">
                                 <p class="instrument-title">Instruments: </p>
@@ -32,15 +30,13 @@
                                     <p *ngIf="i < profile.instruments.length - 1">
                                         {{ instrument.instrument }},
                                     </p>
-                                </div>
-                                
+                                </div> 
                             </div>
                             <div class="hr"></div> 
                             <div class="bio-container">
                                 <p class="bio">{{ profile.bio }}</p>
                                 <div class="hr"></div>
                             </div>
-                            
                         </div>
                         <div class="profile-numbers-container">
                             <div class="numbers-container" style="width: 50%">
