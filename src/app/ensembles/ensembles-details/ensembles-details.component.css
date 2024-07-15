@@ -90,6 +90,10 @@ h1 {
     color: #6C6D6D;               
 }
 
+.leave-btn {
+    width: 100%;
+}
+
 hr {
     margin: 0;
     color: #B4B6B6;

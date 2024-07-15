@@ -82,12 +82,6 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.currentProfileLastName = profile.lastName;
       }
     )
-    
-    if(this.host == this.currentProfile) {
-      this.hostMode = true;
-    } else {
-      this.hostMode = false;
-    }
 
     for (let member of this.ensemble.members) {
       if (member['id'] == this.currentProfileId) {
@@ -95,12 +89,16 @@ export class EnsemblesDetailsComponent implements OnInit {
       }
     }
 
+    if(this.host == this.currentProfile) {
+      this.hostMode = true;
+    } else {
+      this.hostMode = false;
+    }
+
     this.requestForm = new FormGroup({
       'message': new FormControl(null),
       'instrument': new FormControl(null, Validators.required)
     })
-
-    
   }
 
   onChat() {
@@ -222,5 +220,49 @@ export class EnsemblesDetailsComponent implements OnInit {
 
     //Route back to the user home page
     this.router.navigate(['/user-home']);
+  }
+
+  onLeave() {
+    //Remove member from ensemble's member list
+    let modifiedMembers = [];
+    for (let member of this.ensemble.members) {
+      if (this.currentProfileId != member['id']) {
+        modifiedMembers.push(member);
+      }
+    }
+    this.ensemble.members = modifiedMembers;
+    this.ensemblesStorageService.updateEnsembleMembers(modifiedMembers, this.ensembleId).subscribe();
+
+    //Remove ensemble from user's ensemble list
+    let modifiedEnsembles = [];
+    for (let ensemble of this.currentProfile.ensembles) {
+      if (ensemble['id'] != this.ensembleId) {
+        modifiedEnsembles.push(ensemble);
+      }
+    }
+    this.currentProfile.ensembles = modifiedEnsembles;
+    this.profileStorageService.updateProfileEnsembles(modifiedEnsembles, this.currentProfileId).subscribe();
+    this.router.navigate(['/user-home']);
+
+    //Get Index of member to match with instrument index
+    var memberIndex = null;
+    for (let i = 0; i < this.ensemble.members.length; i++) {
+      if (this.ensemble.members[i]['id'] == this.currentProfileId) {
+        memberIndex = i;
+      }
+    }
+
+    //Add member's instrument to instrumentNeeded and remove it from instrumentsHave
+    let modifiedInstrumentsHave = []
+    for (let i = 0; i < this.ensemble.instrumentsHave.length; i++) {
+      if (i != memberIndex) {
+        modifiedInstrumentsHave.push(this.ensemble.instrumentsHave[i]);
+      } else {
+        this.ensemble.instrumentsNeeded.push(this.ensemble.instrumentsHave[i]);
+      }
+    }
+    this.ensemble.instrumentsHave = modifiedInstrumentsHave;
+    this.ensemblesStorageService.updateInstrumentsHave(modifiedInstrumentsHave, this.ensembleId).subscribe();
+    this.ensemblesStorageService.updateInstrumentsNeeded(this.ensemble.instrumentsNeeded, this.ensembleId).subscribe();
   }
 }

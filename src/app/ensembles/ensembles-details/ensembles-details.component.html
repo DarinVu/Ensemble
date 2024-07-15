@@ -98,7 +98,11 @@
                         </button>
                         <div class="chat-warning" *ngIf="!member">You must be a member to access this ensemble's chat.</div>
                     </div>
-                    
+                    <div *ngIf="member && !hostMode" class="important-info-container chat-container">
+                        <button (click)="onLeave()" class="btn btn-danger leave-btn">
+                            Leave Ensemble
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

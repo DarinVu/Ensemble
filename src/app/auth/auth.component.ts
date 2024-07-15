@@ -22,7 +22,8 @@ export class AuthComponent implements OnInit {
     private userService: UserService, 
     private authService: AuthService,
     private route: ActivatedRoute,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+
   ) {}
 
   ngOnInit(): void {
@@ -41,8 +42,6 @@ export class AuthComponent implements OnInit {
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required, Validators.minLength(8)])
     })
-
-    console.log(this.loginStatus);
   }
 
   onSubmit() {
@@ -114,5 +113,11 @@ export class AuthComponent implements OnInit {
     this.router.navigate(['/auth', 0]);
     this.error = null;
     this.signupForm.reset();
+  }
+
+  loginWithGoogle(status: string) {
+    console.log(status)
+    this.authService.loginWithGoogle(status);
+    this.changeCurrentProfile
   }
 }

@@ -255,7 +255,8 @@ export class ProfileCreationComponent implements OnInit {
           this.profileForm.value['instruments'],
           [new EnsembleShort('aaa', null)],
           this.profileForm.value['recordings'],
-          this.profileForm.value['bio']
+          this.profileForm.value['bio'],
+          'https://i.pinimg.com/originals/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg'
         )
         this.profileStorageService.storeProfile(newProfile);
         this.profileService.addProfile(newProfile);

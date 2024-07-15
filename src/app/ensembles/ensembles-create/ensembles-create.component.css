@@ -35,6 +35,7 @@ h3 {
     background-color: #006e90;
 }
 
+
 .form-control.ng-touched.ng-invalid {
     border:1px solid red;
 }

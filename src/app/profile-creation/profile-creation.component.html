@@ -42,48 +42,47 @@
                     </div>
                     <label for="instrumentList" class="form-label">Instrument</label>
                     <div class="control-array-container">
-                        <input 
-                        class="form-control input-w-delete" 
-                        list="datalistOptions" 
-                        id="instrumentList" 
-                        placeholder="Type to search..."
-                        formControlName="instrument">
+                        <select 
+                        id="datalistOptions"
+                        class="form-select form-select-md" 
+                        formControlName="instrument"
+                    >
+                        <option value="Accordion">Accordion</option>
+                        <option value="Alto Saxophone">Alto Saxophone</option>
+                        <option value="Baritone Saxophone">Baritone Saxophone</option>
+                        <option value="Bass Clarinet">Bass Clarinet</option>
+                        <option value="Bass Guitar">Bass Guitar</option>
+                        <option value="Bassoon">Bassoon</option>
+                        <option value="Cello">Cello</option>
+                        <option value="Clarinet">Clarinet</option>
+                        <option value="Double Bass">Double Bass</option>
+                        <option value="Drumset">Drumset</option>
+                        <option value="Euphonium">Euphonium</option>
+                        <option value="Flute">Flute</option>
+                        <option value="French Horn">French Horn</option>
+                        <option value="Guitar">Guitar</option>
+                        <option value="Harp">Harp</option>
+                        <option value="Marimba">Marimba</option>
+                        <option value="Oboe">Oboe</option>
+                        <option value="Organ">Organ</option>
+                        <option value="Piano">Piano</option>
+                        <option value="Piccolo">Piccolo</option>
+                        <option value="Recorder">Recorder</option>
+                        <option value="Soprano Saxophone">Soprano Saxophone</option>
+                        <option value="Timpani">Timpani</option>
+                        <option value="Triangle">Triangle</option>
+                        <option value="Trombone">Trombone</option>
+                        <option value="Trumpet">Trumpet</option>
+                        <option value="Tuba">Tuba</option>
+                        <option value="Ukelele">Ukelele</option>
+                        <option value="Vibraphone">Vibraphone</option>
+                        <option value="Viola">Viola</option>
+                        <option value="Violin">Violin</option>
+                        <option value="Xylophone">Xylophone</option>
+                    </select>
                         <button type="button" *ngIf="instrumentControls.length > 1"class="btn btn-danger" (click)="onDeleteInstrument(i)">X</button>
                     </div>
-                    <datalist id="datalistOptions">
-                        <option value="Accordion">
-                        <option value="Alto Saxophone">
-                        <option value="Baritone Saxophone">
-                        <option value="Bass Clarinet">
-                        <option value="Bass Guitar">
-                        <option value="Bassoon">
-                        <option value="Cello">
-                        <option value="Clarinet">
-                        <option value="Double Bass">
-                        <option value="Drumset">
-                        <option value="Euphonium">
-                        <option value="Flute">
-                        <option value="French Horn">
-                        <option value="Guitar">  
-                        <option value="Harp">
-                        <option value="Marimba">
-                        <option value="Oboe">
-                        <option value="Organ">
-                        <option value="Piano">
-                        <option value="Piccolo">
-                        <option value="Recorder">
-                        <option value="Soprano Saxophone">
-                        <option value="Timpani">
-                        <option value="Triangle">
-                        <option value="Trombone">
-                        <option value="Trumpet">
-                        <option value="Tuba">
-                        <option value="Ukelele">
-                        <option value="Vibraphone">
-                        <option value="Viola">
-                        <option value="Violin">
-                        <option value="Xylophone">
-                    </datalist>
+                    
                 </div>
             </div>
             <button type="button" (click)="onAddInstrument()" class="btn btn-add mb-3">Add</button>

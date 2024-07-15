@@ -4,8 +4,7 @@
     <div class="col-xs-12 col-md-10 col-lg-10 col-xxl-7">
         <h1>{{ ensemble.name }}</h1>
         <div class="host-container">
-            <div>
-                <img src="../../../assets/account-circle.svg">
+            <div class="profile-pic" setBackgroundImage [imageUrl]="currentProfile.profilePic">
             </div>
             <div class="host-details">
                 <p>Hosted By</p>

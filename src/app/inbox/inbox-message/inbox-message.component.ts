@@ -166,6 +166,7 @@ export class InboxMessageComponent implements OnInit{
         modifiedInstrumentsNeeded.push(instrument);
       }
     }
+    this.ensemble.instrumentsNeeded = modifiedInstrumentsNeeded;
     this.ensemblesStorageService.updateInstrumentsNeeded(modifiedInstrumentsNeeded, this.request.ensembleId).subscribe();
   }
 

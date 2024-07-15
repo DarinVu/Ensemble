@@ -18,6 +18,13 @@ h1 {
     padding-top: 30px;
 }
 
+.profile-pic {
+    height: 40px;
+    width: 40px;
+    background-size: cover;
+    border-radius: 50%;
+}
+
 .host-container {
     display: flex;
     flex-direction: row;

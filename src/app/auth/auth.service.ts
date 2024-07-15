@@ -1,3 +1,6 @@
+import { UserService } from './user.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { GoogleAuthProvider } from '@angular/fire/auth';
 import { ProfileService } from './../profile-creation/profile.service';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -29,7 +32,9 @@ export class AuthService {
         private http: HttpClient, 
         private router: Router, 
         private profileService: ProfileService,
-        private profileStorageService: ProfileStorageService
+        private profileStorageService: ProfileStorageService,
+        private fireAuth: AngularFireAuth,
+        private userService: UserService
     ){}
 
     signup(email: string, password: string) {
@@ -50,6 +55,43 @@ export class AuthService {
         }));
     }
 
+    loginWithGoogle(status: string) {
+        return this.fireAuth.signInWithPopup(new GoogleAuthProvider).then((result) => {
+            console.log(result)
+            const user = {'email': result.additionalUserInfo.profile['email']};
+            this.userService.setUserInProgress(user);
+            this.handleAuthentication(
+                result.additionalUserInfo.profile['email'],
+                result.additionalUserInfo.profile['id'],
+                result.credential['idToken'],
+                3600
+            )
+            this.user.subscribe(
+                user => {
+                  var profiles = this.profileService.getProfiles();
+                  if (profiles.length == 1) {
+                    this.profileService.setCurrentProfile(profiles[0]);
+                  }
+                  for (let profile of profiles) {
+                    var key = Object.keys(profile)[0];
+                    if (profile[key]['email'] == user.email) {
+                      this.profileService.setCurrentProfile(profile[key]);
+                    }
+                }
+                }
+              )
+            if (result.additionalUserInfo.isNewUser == false) {
+                this.router.navigate(['/user-home']);
+            } else if (result.additionalUserInfo.isNewUser == true) {
+                this.router.navigate(['/profile-creation', 0])
+            }
+        }, err => {
+            console.log(err);
+        }
+        )
+    }
+
+
     login(email: string, password: string) {
         return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAuEqeKccr6-WJqBx3hfI5yMHlaGc7qouY',
             {
@@ -58,6 +100,7 @@ export class AuthService {
                 returnSecureToken: true
             }
         ).pipe(catchError(this.handleError), tap(resData => {
+            console.log(resData);
             this.handleAuthentication(
                 resData.email, 
                 resData.localId, 

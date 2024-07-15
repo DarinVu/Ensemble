@@ -81,11 +81,17 @@
                         
                     </div>
                     <div class="specific-container">
-                        <div *ngIf="homeMode" class="specific-container-title">
+                        <div *ngIf="homeMode && profile.recordings" class="specific-container-title">
                             <h4>My Recordings</h4>
                         </div>
-                        <div *ngIf="!homeMode" class="specific-container-title">
+                        <div *ngIf="!homeMode && profile.recordings" class="specific-container-title">
                             <h4>{{ profile.firstName }}'s' Recordings</h4>
+                        </div>
+                        <div *ngIf="homeMode && !profile.recordings" class="specific-container-title">
+                            <h4>Edit Profile To Add Recordings</h4>
+                        </div>
+                        <div *ngIf="!homeMode && !profile.recordings" class="specific-container-title">
+                            <h4>No Recordings Yet</h4>
                         </div>
                         <div *ngIf="profile.recordings" class="carousel slide">
                             <div class="carousel-inner">
