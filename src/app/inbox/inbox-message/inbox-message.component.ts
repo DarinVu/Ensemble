@@ -88,8 +88,6 @@ export class InboxMessageComponent implements OnInit{
         this.requestEmail = profile[key]['email'];
       }
     }
-
-    console.log(this.ensemble.instrumentsHave)
   }
 
   onViewProfile() {
@@ -160,9 +158,14 @@ export class InboxMessageComponent implements OnInit{
     this.ensemblesStorageService.updateInstrumentsHave(this.ensemble.instrumentsHave, this.request.ensembleId).subscribe();
     
     //Remove new user's instrument from ensemble's list of instruments needed
+    var newInstrumentEntered = false;
     var modifiedInstrumentsNeeded: Object[] = [];
     for (let instrument of this.ensemble.instrumentsNeeded) {
-      if (instrument['instrument'] != this.request.instrument) {
+      if (instrument['instrument'] == this.request.instrument && newInstrumentEntered == false) {
+        newInstrumentEntered = true;
+        continue;
+      }
+      if (instrument['instrument'] != this.request.instrument || newInstrumentEntered == true) {
         modifiedInstrumentsNeeded.push(instrument);
       }
     }

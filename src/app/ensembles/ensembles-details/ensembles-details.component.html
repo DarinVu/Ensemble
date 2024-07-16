@@ -99,9 +99,14 @@
                         <div class="chat-warning" *ngIf="!member">You must be a member to access this ensemble's chat.</div>
                     </div>
                     <div *ngIf="member && !hostMode" class="important-info-container chat-container">
-                        <button (click)="onLeave()" class="btn btn-danger leave-btn">
+                        <button *ngIf="!confirmLeave" (click)="onConfirmLeave()" class="btn btn-danger leave-btn">
                             Leave Ensemble
                         </button>
+                        <div *ngIf="confirmLeave">Are you sure you want to leave this Ensemble?</div>
+                        <div *ngIf="confirmLeave" class="confirm-btn-container">
+                            <button (click)="onConfirmLeave()" class="btn btn-danger">X</button>
+                            <button (click)="onLeave()" class="btn btn-success">&#x2713;</button>
+                        </div> 
                     </div>
                 </div>
             </div>

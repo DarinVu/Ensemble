@@ -35,6 +35,7 @@ export class EnsemblesDetailsComponent implements OnInit {
   hostMode: boolean;
   confirmKick = false;
   confirmKickId: number;
+  confirmLeave = false;
   
 
   constructor(
@@ -222,7 +223,20 @@ export class EnsemblesDetailsComponent implements OnInit {
     this.router.navigate(['/user-home']);
   }
 
+  onConfirmLeave() {
+    this.confirmLeave = !this.confirmLeave;
+  }
+
   onLeave() {
+    //Get Index of member to match with instrument index
+    var memberIndex: number;
+    for (let i = 0; i < this.ensemble.members.length; i++) {
+      console.log(this.ensemble.members[i]['id'])
+      if (this.ensemble.members[i]['id'] == this.currentProfileId) {
+        memberIndex = i;
+      }
+    }
+
     //Remove member from ensemble's member list
     let modifiedMembers = [];
     for (let member of this.ensemble.members) {
@@ -242,16 +256,9 @@ export class EnsemblesDetailsComponent implements OnInit {
     }
     this.currentProfile.ensembles = modifiedEnsembles;
     this.profileStorageService.updateProfileEnsembles(modifiedEnsembles, this.currentProfileId).subscribe();
-    this.router.navigate(['/user-home']);
+    
 
-    //Get Index of member to match with instrument index
-    var memberIndex = null;
-    for (let i = 0; i < this.ensemble.members.length; i++) {
-      if (this.ensemble.members[i]['id'] == this.currentProfileId) {
-        memberIndex = i;
-      }
-    }
-
+    
     //Add member's instrument to instrumentNeeded and remove it from instrumentsHave
     let modifiedInstrumentsHave = []
     for (let i = 0; i < this.ensemble.instrumentsHave.length; i++) {
@@ -264,5 +271,7 @@ export class EnsemblesDetailsComponent implements OnInit {
     this.ensemble.instrumentsHave = modifiedInstrumentsHave;
     this.ensemblesStorageService.updateInstrumentsHave(modifiedInstrumentsHave, this.ensembleId).subscribe();
     this.ensemblesStorageService.updateInstrumentsNeeded(this.ensemble.instrumentsNeeded, this.ensembleId).subscribe();
+
+    this.router.navigate(['/user-home']);
   }
 }
