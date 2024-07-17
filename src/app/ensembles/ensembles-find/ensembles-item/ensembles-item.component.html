@@ -1,4 +1,6 @@
-<li class="list-group-item" *ngIf="ensemble.size - ensemble.members.length > 0">
+<li 
+    class="list-group-item" 
+    *ngIf="ensemble.size - ensemble.members.length > 0 && (matchFilters)">
     <div class="ensemble-container">
         <div class="main-container">
             <div class="when-container">
@@ -10,6 +12,8 @@
         </div>
         <div class="content-container">
             <div class="details-container">
+                <p>Ensemble Size: </p>
+                <h4>{{ ensemble.size }}</h4>
                 <p>Spots Remaining: </p>
                 <h4>{{ ensemble.size - ensemble.members.length }}</h4>
             </div>

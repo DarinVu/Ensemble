@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EnsemblesService } from '../ensembles.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { FiltersService } from './filters.service';
 
 @Component({
   selector: 'app-ensembles-find',
@@ -15,21 +17,19 @@ export class EnsemblesFindComponent implements OnInit, OnDestroy {
   ensembleValues = [];
   ensembleIds = []
   subscription: Subscription;
-  
+  sizeFilter: number;
+  genreFilter: string;
+  instrumentFilter: string;
+  hugeEnsembleFilter: boolean
 
-  constructor(private ensemblesService: EnsemblesService) {}
+  constructor(private ensemblesService: EnsemblesService, private filtersService: FiltersService) {}
 
   ngOnInit(): void {
-    
-
-    this.subscription = this.ensemblesService.ensemblesChanged.subscribe(
+  this.subscription = this.ensemblesService.ensemblesChanged.subscribe(
       ensembles => {
         this.ensembles = ensembles;
       }
     )
-    // this.ensembles = this.ensemblesService.getEnsembles();
-    // console.log(this.ensembles);
-
   }
 
   onDisplayDropdown1() {
@@ -71,5 +71,43 @@ export class EnsemblesFindComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  
+
+  onSetSizeFilter(size: number) {
+    this.sizeFilter = size;
+    this.filtersService.setSizeFilter(size);
+    this.filtersService.setHugeEnsembleFilter(false);
+    this.filtersService.notifyFiltersChange();
+  }
+
+  onSetGenreFilter(genre: string) {
+    this.genreFilter = genre;
+    this.filtersService.setGenreFilter(genre);
+    this.filtersService.notifyFiltersChange();
+  }
+
+  onSetInstrumentFilter(instrument: string) {
+    this.instrumentFilter = instrument;
+    this.filtersService.setInstrumentFilter(instrument);
+    this.filtersService.notifyFiltersChange();
+  }
+
+  onHugeEnsembleFilter() {
+    this.sizeFilter = null
+    this.hugeEnsembleFilter = true;
+    this.filtersService.setHugeEnsembleFilter(true);
+    this.filtersService.setSizeFilter(null);
+    this.filtersService.notifyFiltersChange();
+  }
+
+  onClearFilters() {
+    this.sizeFilter = null;
+    this.genreFilter = null;
+    this.instrumentFilter = null;
+    this.hugeEnsembleFilter = null;
+    this.filtersService.setSizeFilter(null);
+    this.filtersService.setGenreFilter(null);
+    this.filtersService.setInstrumentFilter(null);
+    this.filtersService.setHugeEnsembleFilter(null);
+    this.filtersService.notifyFiltersChange();
+  }
 }
