@@ -13,6 +13,7 @@ import { Member } from '../member.model';
 import { consumerMarkDirty } from '@angular/core/primitives/signals';
 import { EnsembleShort } from '../ensembleShort.model';
 import { finalize } from 'rxjs/operators';
+import { createDateValidator } from './date-validator';
 
 @Component({
   selector: 'app-ensembles-create',
@@ -26,6 +27,7 @@ export class EnsemblesCreateComponent implements OnInit{
   currentProfile: Profile = null;
   currentProfileId: string;
   confirmedSize = false;
+  invalidDate: boolean
   
   constructor(
     private ensemblesStorageService: EnsemblesStorageService,
@@ -40,7 +42,7 @@ export class EnsemblesCreateComponent implements OnInit{
     let instruments = new FormArray([]);
     this.ensembleForm = new FormGroup({
       'name': new FormControl(null, Validators.required),
-      'date': new FormControl(null, Validators.required),
+      'date': new FormControl(null, [Validators.required, createDateValidator()]),
       'time': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required),
       'size': new FormControl(null, [Validators.required, Validators.min(2)]),
@@ -80,6 +82,7 @@ export class EnsemblesCreateComponent implements OnInit{
   }
 
   onSubmit() {
+    console.log(this.ensembleForm)
     const formattedDate = this.datePipe.transform(this.ensembleForm.value['date'], 'mediumDate');
     const formattedTime = this.datePipe.transform(this.ensembleForm.value['date'] + ' ' + this.ensembleForm.value['time'] + ':00', 'shortTime')
     const ensembleName = this.ensembleForm.value['name'].charAt(0).toUpperCase() + this.ensembleForm.value['name'].substring(1);
@@ -115,5 +118,18 @@ export class EnsemblesCreateComponent implements OnInit{
       }
     );
     
+  }
+
+  onDateChange(event) {
+    const value = event.value;
+
+    let today : Date = new Date();
+
+    if (new Date(event.value) < today){
+      this.invalidDate = true;
+
+    } else {
+      this.invalidDate = false;
+    }
   }
 }

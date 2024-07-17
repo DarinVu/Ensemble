@@ -103,20 +103,20 @@
                     </div>
                 </div>
             </div>
-            <button *ngIf="sizeFilter || hugeEnsembleFilter || genreFilter || instrumentFilter" (click)="onClearFilters()" class="btn btn-danger">
+            <button *ngIf="sizeFilter || hugeEnsembleFilter || genreFilter || instrumentFilter" (click)="onClearFilters()" class="btn btn-danger filter-clear">
                 Clear Filters
             </button>
         </div>
-        <ul stlye="z-index: 2" class="list-group">
+        <ul *ngIf="ensembles" stlye="z-index: 2" class="list-group">
             <app-ensembles-item 
                 *ngFor="let ensemble of ensembles" 
                 [ensembleObj]="ensemble"
                 >
             </app-ensembles-item>           
         </ul>
+        <div *ngIf="!ensembles" class="no-ensembles">
+            <div>No active ensembles right now. Check back soon!</div>
+            <img class="sad-icon" src="../../../assets/sad-icon.svg">
+        </div>
     </div>
 </div>
-<!-- && 
-    (!sizeFilter && !genreFilter && ! instrumentFilter || (sizeFilter && ensemble.size == sizeFilter))
-            
-             -->

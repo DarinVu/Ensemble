@@ -20,14 +20,19 @@
                 <label for="name">Ensemble Name</label>
             </div>
             <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="!ensembleForm.controls['date'].valid && ensembleForm.controls['date'].touched">This field must be filled.</div>
+                <div class="warning-message" *ngIf="invalidDate">Selected date must be after today.</div>
+            </div>
+            <div class="col-xs-auto col-md-auto">
+                <div class="warning-message" *ngIf="!ensembleForm.controls['date'].valid && ensembleForm.controls['date'].touched && !invalidDate">This field must be filled.</div>
             </div>
             <div class="form-floating mb-3 control">
                 <input 
                     type="date" 
                     class="form-control" 
                     id="date" 
-                    formControlName="date">
+                    formControlName="date"
+                    (change)="onDateChange($event.target)"
+                    >
                 <label for="name">Date</label>
             </div>
             <div class="col-xs-auto col-md-auto">

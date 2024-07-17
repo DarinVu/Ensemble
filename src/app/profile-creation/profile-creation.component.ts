@@ -166,6 +166,8 @@ export class ProfileCreationComponent implements OnInit {
 
   onSubmit() {
     this.isLoading = true;
+    const firstName = this.profileForm.value['firstName'].charAt(0).toUpperCase() + this.profileForm.value['firstName'].substring(1);
+    const lastName = this.profileForm.value['lastName'].charAt(0).toUpperCase() + this.profileForm.value['lastName'].substring(1);
     if (this.editMode) {
       var currentProfileId: string;
       this.profileService.currentProfileId.subscribe(
@@ -182,11 +184,10 @@ export class ProfileCreationComponent implements OnInit {
             //Get image url after file uploads
             fileRef.getDownloadURL().subscribe(
               url => {
-                console.log(this.profileForm.value['firstName'])
                 const newProfile = new Profile(
                 this.currentProfile.email,
-                this.profileForm.value['firstName'],
-                this.profileForm.value['lastName'],
+                firstName,
+                lastName,
                 this.profileForm.value['instruments'],
                 [new EnsembleShort('aaa', null)],
                 this.profileForm.value['recordings'],
@@ -203,8 +204,8 @@ export class ProfileCreationComponent implements OnInit {
       } else {
         const newProfile = new Profile(
           this.currentProfile.email,
-          this.profileForm.value['firstName'],
-          this.profileForm.value['lastName'],
+          firstName,
+          lastName,
           this.profileForm.value['instruments'],
           [new EnsembleShort('aaa', null)],
           this.profileForm.value['recordings'],
@@ -229,8 +230,8 @@ export class ProfileCreationComponent implements OnInit {
                 //Create a new profile with information from form
                 const newProfile = new Profile(
                   email,
-                  this.profileForm.value['firstName'],
-                  this.profileForm.value['lastName'],
+                  firstName,
+                  lastName,
                   this.profileForm.value['instruments'],
                   [new EnsembleShort('aaa', null)],
                   this.profileForm.value['recordings'],
@@ -250,8 +251,8 @@ export class ProfileCreationComponent implements OnInit {
         const email = this.userService.getUserInProgress()['email'];
         const newProfile = new Profile(
           email,
-          this.profileForm.value['firstName'],
-          this.profileForm.value['lastName'],
+          firstName,
+          lastName,
           this.profileForm.value['instruments'],
           [new EnsembleShort('aaa', null)],
           this.profileForm.value['recordings'],

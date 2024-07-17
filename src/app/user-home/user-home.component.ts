@@ -1,3 +1,4 @@
+import { ProfileStorageService } from './../profile-creation/profile-storage.service';
 import { Ensemble } from './../ensembles/ensemble.model';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../auth/user.model';
@@ -7,6 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { EnsemblesService } from '../ensembles/ensembles.service';
 import { EnsembleShort } from '../ensembles/ensembleShort.model';
+import { EnsemblesStorageService } from '../ensembles/ensembles-storage.service';
 
 @Component({
   selector: 'app-user-home',
@@ -17,7 +19,8 @@ export class UserHomeComponent implements OnInit {
   user: User = null;
   isLoading = true;
   profile: Profile;
-  ensembles: EnsembleShort[];
+  profileId: string;
+  profileEnsembles: EnsembleShort[];
   sliderCounter: number;
   homeMode: boolean;
 
@@ -25,10 +28,36 @@ export class UserHomeComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router,
     private ensembleService: EnsemblesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ensemblesStorageService: EnsemblesStorageService,
+    private profileStorageService: ProfileStorageService
   ) {}
 
   ngOnInit(): void {
+    //Automatically delete ensemble from database (ensemble list and user profiles) if it's date is past today's date
+    for (let ensemble of this.ensembleService.getEnsembles()) {
+      const today = new Date();
+      if (new Date(Object.values(ensemble)[0]['date']) < today) {
+        var ensembleId = Object.keys(ensemble)[0]
+        this.ensemblesStorageService.deleteEnsemble(ensembleId);
+        let profiles: Profile[] = this.profileService.getProfiles() 
+        for (let profile of profiles) {
+          var key = Object.keys(profile)[0];
+          let modifiedEnsembles: EnsembleShort[] = [];
+
+          for (let ensemble of Object.values(profile)[0]['ensembles']) {
+            if (ensemble['id'] != ensembleId) {
+              modifiedEnsembles.push(ensemble);
+            }
+          }
+          this.profileStorageService.updateProfileEnsembles(modifiedEnsembles, key).subscribe();
+          if (key == this.profileId) {
+            this.profile.ensembles = modifiedEnsembles;
+          }
+        }
+      }
+    }
+
     this.route.params.subscribe(
       (params: Params) => {
         //Checks if the link is the user home link or link to other users
@@ -39,7 +68,8 @@ export class UserHomeComponent implements OnInit {
             let key = Object.keys(profile)[0];
             if (key == params['id']) {
               this.profile = profile[key];
-              this.ensembles = this.profile.ensembles.slice(1);
+              this.profileId = key;
+              this.profileEnsembles = this.profile.ensembles.slice(1);
               this.isLoading = false;
             } 
           }
@@ -48,7 +78,7 @@ export class UserHomeComponent implements OnInit {
           this.profileService.currentProfileChanged.subscribe(
             profile => {
               this.profile = profile;
-              this.ensembles = this.profile.ensembles.slice(1);
+              this.profileEnsembles = this.profile.ensembles.slice(1);
               this.isLoading = false;
             }
           )
