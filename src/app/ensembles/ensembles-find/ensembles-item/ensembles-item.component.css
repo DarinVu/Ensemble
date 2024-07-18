@@ -41,6 +41,14 @@ h3 {
     gap: 50px;
 }
 
+@media (min-width: 700px) {
+    .content-container {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+}
+
 p {
     color: #6C6D6D;
 }
