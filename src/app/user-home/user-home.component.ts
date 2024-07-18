@@ -39,6 +39,7 @@ export class UserHomeComponent implements OnInit {
       const today = new Date();
       if (new Date(Object.values(ensemble)[0]['date']) < today) {
         var ensembleId = Object.keys(ensemble)[0]
+        console.log(ensembleId)
         this.ensemblesStorageService.deleteEnsemble(ensembleId);
         let profiles: Profile[] = this.profileService.getProfiles() 
         for (let profile of profiles) {

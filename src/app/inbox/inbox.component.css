@@ -5,6 +5,8 @@ hr {
 
 .content-container {
     margin-top: 50px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .inbox-container {
@@ -13,6 +15,7 @@ hr {
     display: flex;
     flex-direction: row;
     padding: 0;
+    
 }
 
 .inbox-profile {

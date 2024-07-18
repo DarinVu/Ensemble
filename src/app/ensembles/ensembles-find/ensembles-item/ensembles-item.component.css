@@ -33,23 +33,18 @@ h3 {
     color: #6C6D6D;
 }
 
+
 .content-container {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    font-size: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    gap: 1vw;
 }
 
 @media (min-width: 700px) {
     h3 {
         font-weight: 600;
         color: #006e90;
-    }
-
-    .content-container {
-        display: flex;
-        flex-direction: row;
-        gap: 50px;
     }
 
     .when-container {
