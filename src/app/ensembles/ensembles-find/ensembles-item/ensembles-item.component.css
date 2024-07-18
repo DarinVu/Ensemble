@@ -38,14 +38,14 @@ h3 {
 .content-container {
     display: flex;
     flex-direction: row;
-    gap: 50px;
+    gap: 20px;
 }
 
 @media (min-width: 700px) {
     .content-container {
         display: flex;
         flex-direction: row;
-        gap: 20px;
+        gap: 50px;
     }
 }
 
