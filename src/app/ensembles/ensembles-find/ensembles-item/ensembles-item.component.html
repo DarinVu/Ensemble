@@ -4,22 +4,22 @@
     <div class="ensemble-container">
         <div class="main-container">
             <div class="when-container">
-                <p>{{ ensemble.date }}</p>
-                <p>-</p>
-                <p>{{ ensemble.time }}</p>
+                <div>{{ ensemble.date }}</div>
+                <div>-</div>
+                <div>{{ ensemble.time }}</div>
             </div>
             <a (click)="onGetDetails()" class="stretched-link"><h3>{{ ensemble.name }}</h3></a>
         </div>
         <div class="content-container">
             <div class="details-container">
                 <p>Ensemble Size: </p>
-                <h4>{{ ensemble.size }}</h4>
+                <h5>{{ ensemble.size }}</h5>
                 <p>Spots Remaining: </p>
-                <h4>{{ ensemble.size - ensemble.members.length }}</h4>
+                <h5>{{ ensemble.size - ensemble.members.length }}</h5>
             </div>
             <div class="details-container">
                 <p>Genre:</p>
-                <h4>{{ ensemble.genre }}</h4>
+                <h5>{{ ensemble.genre }}</h5>
             </div>
             
             <div class="instruments-container">
