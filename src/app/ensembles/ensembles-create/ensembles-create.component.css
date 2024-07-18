@@ -10,6 +10,8 @@ h3 {
     font-size: 25px;
 }
 
+
+
 .options-container {
     display: flex;
     flex-direction: row;
@@ -47,16 +49,31 @@ h3 {
 }
 
 .control {
-    width: 50%;
+    width: 100%;
 }
-
 
 .create-btn {
     color: white;
     background-color: #006e90;
     font-weight: 600;
-    width: 50%;
+    width: 100%;
 }
+
+@media (min-width: 700px) {
+    .control {
+        width: 75%;
+    }
+
+    .create-btn {
+        color: white;
+        background-color: #006e90;
+        font-weight: 600;
+        width: 75%;
+    }
+}
+
+
+
 
 select {
     font-size: medium;
