@@ -14,7 +14,7 @@ h4 {
 }
 
 .big-container {
-    height: 125vh;
+    height: 140vh;
     background-color: #F6F6F6;
     padding-top: 50px;
 }
@@ -27,7 +27,7 @@ h4 {
 }
 
 .profile-card-container {
-    height: 600px;
+    height: 700px;
     width: 100%;
     background-color: white;
     border-radius: 20px;
