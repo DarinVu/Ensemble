@@ -7,9 +7,10 @@
     text-align: center;
 }
 
-h2 {
+.message-title {
     font-weight: 800;
     color: #006e90;
+    font-size: 20px;
 }
 
 .profile-pic {
@@ -59,7 +60,15 @@ h2 {
     gap: 2vh;
 }
 
+
 @media (min-width: 700px) {
+
+    .message-title {
+        font-weight: 800;
+        color: #006e90;
+        font-size: 30px;
+    }
+
     .profile-pic {
         width: 7vh;
         height: 7vh;
