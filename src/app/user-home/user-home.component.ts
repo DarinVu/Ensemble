@@ -35,35 +35,6 @@ export class UserHomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //Automatically delete ensemble from database (ensemble list and user profiles) if it's date is past today's date
-    for (let ensemble of this.ensembleService.getEnsembles()) {
-      const today = new Date();
-      if (new Date(Object.values(ensemble)[0]['date']) < today) {
-        var ensembleId = Object.keys(ensemble)[0]
-        console.log(ensembleId)
-        this.ensemblesStorageService.deleteEnsemble(ensembleId).pipe(
-          finalize(() => {
-            this.ensemblesStorageService.fetchEnsembles().subscribe()
-          })
-        ).subscribe();
-        let profiles: Profile[] = this.profileService.getProfiles() 
-        for (let profile of profiles) {
-          var key = Object.keys(profile)[0];
-          let modifiedEnsembles: EnsembleShort[] = [];
-
-          for (let ensemble of Object.values(profile)[0]['ensembles']) {
-            if (ensemble['id'] != ensembleId) {
-              modifiedEnsembles.push(ensemble);
-            }
-          }
-          this.profileStorageService.updateProfileEnsembles(modifiedEnsembles, key).subscribe();
-          if (key == this.profileId) {
-            this.profile.ensembles = modifiedEnsembles;
-          }
-        }
-      }
-    }
-
     this.route.params.subscribe(
       (params: Params) => {
         //Checks if the link is the user home link or link to other users
@@ -91,6 +62,36 @@ export class UserHomeComponent implements OnInit {
         }
       }
     )
+    
+    //Automatically delete ensemble from database (ensemble list and user profiles) if it's date is past today's date
+    for (let ensemble of this.ensembleService.getEnsembles()) {
+      const today = new Date();
+      if (new Date(Object.values(ensemble)[0]['date']) < today) {
+        var ensembleId = Object.keys(ensemble)[0]
+        this.ensemblesStorageService.deleteEnsemble(ensembleId).pipe(
+          finalize(() => {
+            this.ensemblesStorageService.fetchEnsembles().subscribe()
+          })
+        ).subscribe();
+        let profiles: Profile[] = this.profileService.getProfiles() 
+        for (let profile of profiles) {
+          var key = Object.keys(profile)[0];
+          let modifiedEnsembles: EnsembleShort[] = [];
+
+          for (let ensemble of Object.values(profile)[0]['ensembles']) {
+            if (ensemble['id'] != ensembleId) {
+              modifiedEnsembles.push(ensemble);
+            }
+          }
+          this.profileStorageService.updateProfileEnsembles(modifiedEnsembles, key).subscribe();
+          if (key == this.profileId) {
+            this.profile.ensembles = modifiedEnsembles;
+          }
+        }
+      }
+    }
+
+    
     this.sliderCounter = 0;
     
   }
