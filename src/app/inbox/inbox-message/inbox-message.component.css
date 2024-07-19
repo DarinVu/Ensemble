@@ -1,5 +1,5 @@
 .inbox-message {
-    padding: 5vh;
+    padding: 2vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,7 +50,7 @@
 }
 
 .message {
-    height: 3vh;
+    height: 4vh;
     overflow: auto;
 }
 
