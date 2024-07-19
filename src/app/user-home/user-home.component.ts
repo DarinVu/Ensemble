@@ -9,6 +9,7 @@ import { AuthService } from '../auth/auth.service';
 import { EnsemblesService } from '../ensembles/ensembles.service';
 import { EnsembleShort } from '../ensembles/ensembleShort.model';
 import { EnsemblesStorageService } from '../ensembles/ensembles-storage.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-home',
@@ -40,7 +41,11 @@ export class UserHomeComponent implements OnInit {
       if (new Date(Object.values(ensemble)[0]['date']) < today) {
         var ensembleId = Object.keys(ensemble)[0]
         console.log(ensembleId)
-        this.ensemblesStorageService.deleteEnsemble(ensembleId);
+        this.ensemblesStorageService.deleteEnsemble(ensembleId).pipe(
+          finalize(() => {
+            this.ensemblesStorageService.fetchEnsembles().subscribe()
+          })
+        ).subscribe();
         let profiles: Profile[] = this.profileService.getProfiles() 
         for (let profile of profiles) {
           var key = Object.keys(profile)[0];

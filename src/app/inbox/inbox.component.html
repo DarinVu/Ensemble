@@ -6,7 +6,7 @@
     </div>
 </div>
 <div *ngIf="!isLoading" class="row content-container justify-content-center">
-    <div class="col-xs-11 col-md-11 col-xxl-6 inbox-container">
+    <div class="col-xs-11 col-md-11 inbox-container">
         <div class="inbox-profile">
            <div class="inbox-title">
                 <h1>Inbox</h1>
@@ -19,7 +19,7 @@
                     <div *ngIf="i > 0">
                         <div [routerLink]="[i]" class="inbox-header">
                             <div class="profile-img" setBackgroundImage [imageUrl]="request.profilePic"></div>
-                            <div>{{ request.firstName + ' ' + request.lastName }}</div>
+                            <div class="user-name">{{ request.firstName + ' ' + request.lastName }}</div>
                         </div>
                     </div>
                 </div>
