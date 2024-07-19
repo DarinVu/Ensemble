@@ -15,7 +15,6 @@ hr {
     display: flex;
     flex-direction: row;
     padding: 0;
-    
 }
 
 .inbox-profile {
@@ -25,7 +24,8 @@ hr {
 }
 
 .inbox-title {
-    padding: 25px;
+    text-align: center;
+    padding: 15px;
     border-bottom: 1px solid #B4B6B6;
 }
 
@@ -81,6 +81,12 @@ h1 {
 }
 
 @media (min-width: 700px) {
+    .inbox-title {
+        text-align: center;
+        padding: 25px;
+        border-bottom: 1px solid #B4B6B6;
+    }
+
     .profile-img {
         height: 30px;
         width: 30px;
