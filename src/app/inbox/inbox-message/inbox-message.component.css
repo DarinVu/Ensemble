@@ -3,19 +3,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4vh;
+    gap: 2vh;
     text-align: center;
 }
 
 .message-title {
     font-weight: 800;
     color: #006e90;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .profile-pic {
-    width: 3vh;
-    height: 3vh;
+    width: 3.5vh;
+    height: 3.5vh;
     border-radius: 50%;
     background-size: cover;
 }
@@ -35,7 +35,7 @@
 }
 
 .user-name {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .user-instrument {
@@ -65,6 +65,14 @@ button {
 }
 
 @media (min-width: 700px) {
+    .inbox-message {
+        padding: 5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2vh;
+        text-align: center;
+    }
 
     .message-title {
         font-weight: 800;
