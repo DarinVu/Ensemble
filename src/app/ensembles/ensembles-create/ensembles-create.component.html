@@ -1,160 +1,162 @@
 <app-header></app-header>
-<div class="row justify-content-center content-container">
-    <div class="col-xs-12 col-md-10 col-lg-7 col-xxl-5">
-        <h2>Ensembles</h2>
-        <div class="options-container">
-            <a routerLink="/ensembles-find" class="find-page-link"><h3>Find</h3></a>
-            <h3 class="curr-page">Create</h3>
-        </div>
-        <form [formGroup]="ensembleForm" (ngSubmit)="onSubmit()">
-            <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="!ensembleForm.controls['name'].valid && ensembleForm.controls['name'].touched">This field must be filled.</div>
+<div class="content-container">
+    <div class="row justify-content-center content-container">
+        <div class="col-xs-12 col-md-10 col-lg-7 col-xxl-5">
+            <h2>Ensembles</h2>
+            <div class="options-container">
+                <a routerLink="/ensembles-find" class="find-page-link"><h3>Find</h3></a>
+                <h3 class="curr-page">Create</h3>
             </div>
-            <div class="form-floating mb-3 control">
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="name" 
-                    placeholder="Ensemble Name"
-                    formControlName="name">
-                <label for="name">Ensemble Name</label>
-            </div>
-            <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="invalidDate">Selected date must be after today.</div>
-            </div>
-            <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="!ensembleForm.controls['date'].valid && ensembleForm.controls['date'].touched && !invalidDate">This field must be filled.</div>
-            </div>
-            <div class="form-floating mb-3 control">
-                <input 
-                    type="date" 
-                    class="form-control" 
-                    id="date" 
-                    formControlName="date"
-                    (change)="onDateChange($event.target)"
-                    >
-                <label for="name">Date</label>
-            </div>
-            <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="!ensembleForm.controls['time'].valid && ensembleForm.controls['time'].touched">This field must be filled.</div>
-            </div>
-            <div class="form-floating mb-3 control">
-                <input 
-                    type="time" 
-                    class="form-control" 
-                    id="time" 
-                    formControlName="time">
-                <label for="name">Time</label>
-            </div>
-            <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="!ensembleForm.controls['description'].valid && ensembleForm.controls['description'].touched">This field must be filled.</div>
-            </div>
-            <div class="description-container">
-                <p class="description-rec">*Recommended to include music piece title in description</p>
-                <div class="form-floating mb-3 control">
-                    <textarea class="form-control" 
-                    id="description" 
-                    placeholder="Description"
-                    formControlName="description"></textarea>
-                    <label for="description">Description</label>
+            <form [formGroup]="ensembleForm" (ngSubmit)="onSubmit()">
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="!ensembleForm.controls['name'].valid && ensembleForm.controls['name'].touched">This field must be filled.</div>
                 </div>
-            </div>
-            <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="!ensembleForm.controls['size'].valid && ensembleForm.controls['size'].touched">This field must be filled and confirmed.</div>
-            </div>
-            <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="ensembleForm.controls['size'].valid && ensembleForm.controls['size'].touched && !confirmedSize ">Please confirm the ensemble size.</div>
-            </div>
-            <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="ensembleForm.value['size'] == 1">Ensembles must have a minimum of 2 members.</div>
-            </div>
-            <div class="form-floating mb-3 control size-container">
-                <input 
-                    type="number" 
-                    class="form-control" 
-                    id="size" 
-                    placeholder="1"
-                    formControlName="size">
-                <label for="size">Size</label>
-                <button type="button" [disabled]="!ensembleForm.controls['size'].valid" class="btn confirm-btn" (click)="onChangeSize()">Confirm</button>
-            </div>
-            <div class="mb-3 control" formArrayName="instruments" *ngFor="let instConrol of controls; let i = index">
-                <div class="form-group" [formGroupName]="i">
-                    <label *ngIf="i != 0" for="instrumentList" class="form-label">Instrument</label>
-                    <label *ngIf="i == 0" for="instrumentList" class="form-label">Instrument YOU will be playing</label>
+                <div class="form-floating mb-3 control">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="name" 
+                        placeholder="Ensemble Name"
+                        formControlName="name">
+                    <label for="name">Ensemble Name</label>
+                </div>
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="invalidDate">Selected date must be after today.</div>
+                </div>
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="!ensembleForm.controls['date'].valid && ensembleForm.controls['date'].touched && !invalidDate">This field must be filled.</div>
+                </div>
+                <div class="form-floating mb-3 control">
+                    <input 
+                        type="date" 
+                        class="form-control" 
+                        id="date" 
+                        formControlName="date"
+                        (change)="onDateChange($event.target)"
+                        >
+                    <label for="name">Date</label>
+                </div>
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="!ensembleForm.controls['time'].valid && ensembleForm.controls['time'].touched">This field must be filled.</div>
+                </div>
+                <div class="form-floating mb-3 control">
+                    <input 
+                        type="time" 
+                        class="form-control" 
+                        id="time" 
+                        formControlName="time">
+                    <label for="name">Time</label>
+                </div>
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="!ensembleForm.controls['description'].valid && ensembleForm.controls['description'].touched">This field must be filled.</div>
+                </div>
+                <div class="description-container">
+                    <p class="description-rec">*Recommended to include music piece title in description</p>
+                    <div class="form-floating mb-3 control">
+                        <textarea class="form-control" 
+                        id="description" 
+                        placeholder="Description"
+                        formControlName="description"></textarea>
+                        <label for="description">Description</label>
+                    </div>
+                </div>
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="!ensembleForm.controls['size'].valid && ensembleForm.controls['size'].touched">This field must be filled and confirmed.</div>
+                </div>
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="ensembleForm.controls['size'].valid && ensembleForm.controls['size'].touched && !confirmedSize ">Please confirm the ensemble size.</div>
+                </div>
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="ensembleForm.value['size'] == 1">Ensembles must have a minimum of 2 members.</div>
+                </div>
+                <div class="form-floating mb-3 control size-container">
+                    <input 
+                        type="number" 
+                        class="form-control" 
+                        id="size" 
+                        placeholder="1"
+                        formControlName="size">
+                    <label for="size">Size</label>
+                    <button type="button" [disabled]="!ensembleForm.controls['size'].valid" class="btn confirm-btn" (click)="onChangeSize()">Confirm</button>
+                </div>
+                <div class="mb-3 control" formArrayName="instruments" *ngFor="let instConrol of controls; let i = index">
+                    <div class="form-group" [formGroupName]="i">
+                        <label *ngIf="i != 0" for="instrumentList" class="form-label">Instrument</label>
+                        <label *ngIf="i == 0" for="instrumentList" class="form-label">Instrument YOU will be playing</label>
+                        <select 
+                            id="datalistOptions"
+                            class="form-select form-select-lg" 
+                            formControlName="instrument"
+                        >
+                            <option value="Accordion">Accordion</option>
+                            <option value="Alto Saxophone">Alto Sax</option>
+                            <option value="Baritone Saxophone">Baritone Sax</option>
+                            <option value="Bass Clarinet">Bass Clarinet</option>
+                            <option value="Bass Guitar">Bass Guitar</option>
+                            <option value="Bassoon">Bassoon</option>
+                            <option value="Cello">Cello</option>
+                            <option value="Clarinet">Clarinet</option>
+                            <option value="Double Bass">Double Bass</option>
+                            <option value="Drumset">Drumset</option>
+                            <option value="Euphonium">Euphonium</option>
+                            <option value="Flute">Flute</option>
+                            <option value="French Horn">French Horn</option>
+                            <option value="Guitar">Guitar</option>
+                            <option value="Harp">Harp</option>
+                            <option value="Marimba">Marimba</option>
+                            <option value="Oboe">Oboe</option>
+                            <option value="Organ">Organ</option>
+                            <option value="Piano">Piano</option>
+                            <option value="Piccolo">Piccolo</option>
+                            <option value="Recorder">Recorder</option>
+                            <option value="Soprano Saxophone">Soprano Sax</option>
+                            <option value="Timpani">Timpani</option>
+                            <option value="Triangle">Triangle</option>
+                            <option value="Trombone">Trombone</option>
+                            <option value="Trumpet">Trumpet</option>
+                            <option value="Tuba">Tuba</option>
+                            <option value="Ukelele">Ukelele</option>
+                            <option value="Vibraphone">Vibraphone</option>
+                            <option value="Viola">Viola</option>
+                            <option value="Violin">Violin</option>
+                            <option value="Xylophone">Xylophone</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="!ensembleForm.controls['genre'].valid && ensembleForm.controls['genre'].touched">This field must be filled.</div>
+                </div>
+                <div class="mb-3 control">
+                    <label class="form-label">Select a Genre</label>
                     <select 
-                        id="datalistOptions"
-                        class="form-select form-select-lg" 
-                        formControlName="instrument"
-                    >
-                        <option value="Accordion">Accordion</option>
-                        <option value="Alto Saxophone">Alto Sax</option>
-                        <option value="Baritone Saxophone">Baritone Sax</option>
-                        <option value="Bass Clarinet">Bass Clarinet</option>
-                        <option value="Bass Guitar">Bass Guitar</option>
-                        <option value="Bassoon">Bassoon</option>
-                        <option value="Cello">Cello</option>
-                        <option value="Clarinet">Clarinet</option>
-                        <option value="Double Bass">Double Bass</option>
-                        <option value="Drumset">Drumset</option>
-                        <option value="Euphonium">Euphonium</option>
-                        <option value="Flute">Flute</option>
-                        <option value="French Horn">French Horn</option>
-                        <option value="Guitar">Guitar</option>
-                        <option value="Harp">Harp</option>
-                        <option value="Marimba">Marimba</option>
-                        <option value="Oboe">Oboe</option>
-                        <option value="Organ">Organ</option>
-                        <option value="Piano">Piano</option>
-                        <option value="Piccolo">Piccolo</option>
-                        <option value="Recorder">Recorder</option>
-                        <option value="Soprano Saxophone">Soprano Sax</option>
-                        <option value="Timpani">Timpani</option>
-                        <option value="Triangle">Triangle</option>
-                        <option value="Trombone">Trombone</option>
-                        <option value="Trumpet">Trumpet</option>
-                        <option value="Tuba">Tuba</option>
-                        <option value="Ukelele">Ukelele</option>
-                        <option value="Vibraphone">Vibraphone</option>
-                        <option value="Viola">Viola</option>
-                        <option value="Violin">Violin</option>
-                        <option value="Xylophone">Xylophone</option>
+                        class="form-select form-select-lg"
+                        formControlName="genre"
+                        >
+                        <option value="Baroque">Baroque</option>
+                        <option value="Choir">Choir</option>
+                        <option value="Classical">Classical</option>
+                        <option value="Contemporary">Contemporary</option>
+                        <option value="Country">Country</option>
+                        <option value="Romantic">Romantic</option>
+                        <option value="Folk">Folk</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Rock">Rock</option>
                     </select>
                 </div>
-            </div>
-            <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="!ensembleForm.controls['genre'].valid && ensembleForm.controls['genre'].touched">This field must be filled.</div>
-            </div>
-            <div class="mb-3 control">
-                <label class="form-label">Select a Genre</label>
-                <select 
-                    class="form-select form-select-lg"
-                    formControlName="genre"
-                    >
-                    <option value="Baroque">Baroque</option>
-                    <option value="Choir">Choir</option>
-                    <option value="Classical">Classical</option>
-                    <option value="Contemporary">Contemporary</option>
-                    <option value="Country">Country</option>
-                    <option value="Romantic">Romantic</option>
-                    <option value="Folk">Folk</option>
-                    <option value="Jazz">Jazz</option>
-                    <option value="Rock">Rock</option>
-                </select>
-            </div>
-            <div class="col-xs-auto col-md-auto">
-                <div class="warning-message" *ngIf="!ensembleForm.controls['location'].valid && ensembleForm.controls['location'].touched">This field must be filled.</div>
-            </div>
-            <div class="form-floating mb-3 control">
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="location" 
-                    placeholder="Location"
-                    formControlName="location">
-                <label for="location">Location</label>
-            </div>
-            <button type="submit" [disabled]="!ensembleForm.valid" class="btn create-btn">Create</button>
-        </form>
+                <div class="col-xs-auto col-md-auto">
+                    <div class="warning-message" *ngIf="!ensembleForm.controls['location'].valid && ensembleForm.controls['location'].touched">This field must be filled.</div>
+                </div>
+                <div class="form-floating mb-3 control">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="location" 
+                        placeholder="Location"
+                        formControlName="location">
+                    <label for="location">Location</label>
+                </div>
+                <button type="submit" [disabled]="!ensembleForm.valid" class="btn create-btn">Create</button>
+            </form>
+        </div>
     </div>
 </div>

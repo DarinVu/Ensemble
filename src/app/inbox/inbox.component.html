@@ -5,28 +5,30 @@
         <app-loading-spinner></app-loading-spinner>
     </div>
 </div>
-<div *ngIf="!isLoading" class="row content-container justify-content-center">
-    <div class="col-xs-11 col-md-11 inbox-container">
-        <div class="inbox-profile">
-           <div class="inbox-title">
-                <h1>Inbox</h1>
-           </div>
-           <div class="empty-message-container" *ngIf="profile.requests.length - 1 == 0" style="text-align: center;">
-                Your inbox is empty.
-           </div>
-           <div *ngIf="profile.requests.length - 1 > 0" class="inbox-header-container">
-                <div *ngFor="let request of profile.requests; let i = index">
-                    <div *ngIf="i > 0">
-                        <div [routerLink]="[i]" class="inbox-header">
-                            <div class="profile-img" setBackgroundImage [imageUrl]="request.profilePic"></div>
-                            <div class="user-name">{{ request.firstName + ' ' + request.lastName }}</div>
+<div class="content-container">
+    <div *ngIf="!isLoading" class="row justify-content-center">
+        <div class="col-xs-11 col-md-11 inbox-container">
+            <div class="inbox-profile">
+               <div class="inbox-title">
+                    <h1>Inbox</h1>
+               </div>
+               <div class="empty-message-container" *ngIf="profile.requests.length - 1 == 0" style="text-align: center;">
+                    Your inbox is empty.
+               </div>
+               <div *ngIf="profile.requests.length - 1 > 0" class="inbox-header-container">
+                    <div *ngFor="let request of profile.requests; let i = index">
+                        <div *ngIf="i > 0">
+                            <div [routerLink]="[i]" class="inbox-header">
+                                <div class="profile-img" setBackgroundImage [imageUrl]="request.profilePic"></div>
+                                <div class="user-name">{{ request.firstName + ' ' + request.lastName }}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-           </div>
-        </div>
-        <div class="inbox-message">
-            <router-outlet></router-outlet>
+               </div>
+            </div>
+            <div class="inbox-message">
+                <router-outlet></router-outlet>
+            </div>
         </div>
     </div>
 </div>

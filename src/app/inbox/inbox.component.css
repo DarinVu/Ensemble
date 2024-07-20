@@ -5,8 +5,8 @@ hr {
 
 .content-container {
     margin-top: 50px;
-    margin-right: 0px;
-    margin-left: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .inbox-container {
@@ -83,8 +83,8 @@ h1 {
 @media (min-width: 700px) {
     .content-container {
         margin-top: 50px;
-        margin-right: 10px;
-        margin-left: 10px;
+        padding-left: 0px;
+        padding-right: 0px;
     }
 
     .inbox-title {

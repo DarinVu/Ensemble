@@ -59,6 +59,7 @@ h3 {
         width: auto;
         display: flex;
         flex-direction: column;
+        align-items: start;
     }
 
     h3 {
