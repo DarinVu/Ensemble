@@ -5,8 +5,8 @@ hr {
 
 .content-container {
     margin-top: 50px;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 .inbox-container {
@@ -81,6 +81,12 @@ h1 {
 }
 
 @media (min-width: 700px) {
+    .content-container {
+        margin-top: 50px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
     .inbox-title {
         text-align: center;
         padding: 25px;

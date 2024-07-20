@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-white">
-    <div class="container-fluid">
+    <div class="container-fluid navbar-container">
         <a class="navbar-brand" routerLink="/home">Ensemble</a>
         <button class="navbar-toggler" (click)="onShow()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -16,47 +16,47 @@
         </div>
     </div>
 </nav>
-<div class="row justify-content-center">
-    <div class="col-xs-12 col-md-10 col-xxl-8">
-        <div class="row intro-main-container">
-            <div class="col-xs-11 col-md-8 intro-container">
-                <div class="intro-message">
-                    <div class="make-music">
-                        <h1 class="nonemphasis">Make</h1>
-                        <h1 class="music-emphasis">Music.</h1>
+<div class="content-container">
+    <div class="row justify-content-center">
+        <div class="col-xs-12 col-md-10 col-xxl-8">
+            <div class="row intro-main-container">
+                <div class="col-xs-11 col-md-8 intro-container">
+                    <div class="intro-message">
+                        <div class="make-music">
+                            <h1 class="nonemphasis">Make</h1>
+                            <h1 class="music-emphasis">Music.</h1>
+                        </div>
+                        <div class="make-friends">
+                            <h1 class="nonemphasis">Make</h1>
+                            <h1 class="friends-emphasis">Friends.</h1>
+                        </div>
                     </div>
-                    <div class="make-friends">
-                        <h1 class="nonemphasis">Make</h1>
-                        <h1 class="friends-emphasis">Friends.</h1>
+                    <p class="intro-paragraph">Whether you're into rock, jazz, classical, or any other genre, there are countless musicians who share your passion on Ensemble. Connect with fellow artists, form bands, and collaborate on exciting projects. Musicians of all levels are finding new opportunities to play, learn, and create every day. Sign up and start making music together!</p>
+                    <button type="button" (click)="onSignup()" class="btn signup-btn join-btn">Join Ensemble</button>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <img src="../../assets/home-page-image.svg">
+                </div>
+            </div>
+            <div class="row how-container">
+                <h3>How Ensemble Works</h3>
+                <div class="how-box">
+                    <img src="../../assets/discover.svg">
+                    <div class="how-content-container" (click)="onSignup()">
+                        <div class="how-title">Discover Ensembles</div>
+                        <div class="how-message">See who's hosting ensembles for all the music you love and join one today</div>
+                        <div class="how-link">Search Ensembles</div>
                     </div>
                 </div>
-                <p class="intro-paragraph">Whether you're into rock, jazz, classical, or any other genre, there are countless musicians who share your passion on Ensemble. Connect with fellow artists, form bands, and collaborate on exciting projects. Musicians of all levels are finding new opportunities to play, learn, and create every day. Sign up and start making music together!</p>
-                <button type="button" (click)="onSignup()" class="btn signup-btn join-btn">Join Ensemble</button>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <img src="../../assets/home-page-image.svg">
+                <div class="how-box">
+                    <img src="../../assets/add.svg">
+                    <div class="how-content-container" (click)="onSignup()">
+                        <div class="how-title">Start Your Own Ensemble</div>
+                        <div class="how-message">Create your own Ensemble, and draw from a massive community of musicians</div>
+                        <div class="how-link">Start an Ensemble</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row how-container">
-            <h3>How Ensemble Works</h3>
-            <div class="how-box">
-                <img src="../../assets/discover.svg">
-                <div class="how-content-container" (click)="onSignup()">
-                    <div class="how-title">Discover Ensembles</div>
-                    <div class="how-message">See who's hosting ensembles for all the music you love and join one today</div>
-                    <div class="how-link">Search Ensembles</div>
-                </div>
-            </div>
-            <div class="how-box">
-                <img src="../../assets/add.svg">
-                <div class="how-content-container" (click)="onSignup()">
-                    <div class="how-title">Start Your Own Ensemble</div>
-                    <div class="how-message">Create your own Ensemble, and draw from a massive community of musicians</div>
-                    <div class="how-link">Start an Ensemble</div>
-                </div>
-            </div>
-        </div>
-  
     </div>
 </div>
-

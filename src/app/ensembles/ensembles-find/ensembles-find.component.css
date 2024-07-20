@@ -1,5 +1,15 @@
 .content-container {
     padding-top: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width: 700px) {
+    .content-container {
+        padding-top: 50px;
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 h2{
