@@ -1,4 +1,4 @@
-import { Profile } from "../../profile-creation/profile.model";
+import { Profile } from "../../profile/profile.model";
 
 export class Message {
     constructor(

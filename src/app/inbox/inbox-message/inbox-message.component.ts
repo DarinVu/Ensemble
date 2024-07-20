@@ -1,9 +1,9 @@
-import { ProfileStorageService } from './../../profile-creation/profile-storage.service';
+import { ProfileStorageService } from '../../profile/profile-storage.service';
 import { Request } from './../request.model';
 import { ActivatedRoute, Params, ParamMap, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../../profile-creation/profile.service';
-import { Profile } from '../../profile-creation/profile.model';
+import { ProfileService } from '../../profile/profile.service';
+import { Profile } from '../../profile/profile.model';
 import { EnsemblesStorageService } from '../../ensembles/ensembles-storage.service';
 import { EnsemblesService } from '../../ensembles/ensembles.service';
 import { Ensemble } from '../../ensembles/ensemble.model';

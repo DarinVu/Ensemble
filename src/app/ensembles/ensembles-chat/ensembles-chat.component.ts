@@ -2,11 +2,11 @@ import { EnsemblesService } from './../ensembles.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Ensemble } from '../ensemble.model';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
-import { ProfileService } from '../../profile-creation/profile.service';
+import { ProfileService } from '../../profile/profile.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ChatStorageService } from './chat-storage.service';
 import { Message } from './message.model';
-import { Profile } from '../../profile-creation/profile.model';
+import { Profile } from '../../profile/profile.model';
 import { ChatService } from './chat.service';
 
 @Component({

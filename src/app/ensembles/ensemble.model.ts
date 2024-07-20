@@ -1,4 +1,4 @@
-import { Profile } from "../profile-creation/profile.model";
+import { Profile } from "../profile/profile.model";
 import { Message } from "./ensembles-chat/message.model";
 import { Member } from "./member.model";
 

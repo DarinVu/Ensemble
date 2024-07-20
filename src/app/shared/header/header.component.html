@@ -1,31 +1,23 @@
 <nav class="navbar navbar-expand-lg bg-white">
     <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/user-home">Ensemble</a>
+        <a class="navbar-brand" (click)="goHome()">Ensemble</a>
         <button class="navbar-toggler" (click)="onShow()" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse " [ngClass]="{show: show}" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <button type="button" routerLink="/inbox" class="inbox-btn btn btn-primary position-relative">
+                    <button type="button" (click)="checkInbox()" class="inbox-btn btn btn-primary position-relative">
                         <img src="../../assets/inbox.svg">
                         <span *ngIf="profile.requests.length - 1 > 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                           {{ profile.requests.length-1 }}
                           <span class="visually-hidden">unread messages</span>
                         </span>
                       </button>
-                    <!-- <a routerLink="/inbox" class="nav-link" title="Inbox">
-                        <img src="../../assets/inbox.svg">
-                        <span class="position-absolute top-40 start-90 translate-middle badge rounded-pill bg-danger">
-                            99+
-                            <span class="visually-hidden">unread messages</span>
-                          </span>
-                    </a> -->
                 </li>                                                                   
                 <li class="nav-item">
                     <div class="dropdown">
                         <a class="nav-link" (clickOutside)="onCloseDropdown()" (click)="onDisplayDropdown()" title="View Profile">
-                            <!-- <img src="../../assets/account-circle.svg"> -->
                             <div class="profile-pic" setBackgroundImage [imageUrl]="profile.profilePic"></div>
                             <img src="../../assets/chevron-down.svg">
                         </a>

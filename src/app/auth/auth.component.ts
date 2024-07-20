@@ -1,4 +1,4 @@
-import { ProfileService } from './../profile-creation/profile.service';
+import { ProfileService } from '../profile/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -63,7 +63,7 @@ export class AuthComponent implements OnInit {
           this.isLoading = false;
           this.error = null;
           this.changeCurrentProfile();
-          this.router.navigate(['/user-home']);
+          this.router.navigate(['/user', 'home']);
         }, 
         errorMessage => {
           this.error = errorMessage
@@ -116,7 +116,6 @@ export class AuthComponent implements OnInit {
   }
 
   loginWithGoogle(status: string) {
-    console.log(status)
     this.authService.loginWithGoogle(status);
     this.changeCurrentProfile
   }

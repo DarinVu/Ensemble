@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { EnsemblesService } from "./ensembles.service";
 import { Ensemble } from "./ensemble.model";
 import { map, tap } from "rxjs/operators";
-import { Profile } from "../profile-creation/profile.model";
+import { Profile } from "../profile/profile.model";
 import { Member } from "./member.model";
 
 @Injectable({

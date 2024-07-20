@@ -1,12 +1,12 @@
 import { Subscription } from 'rxjs';
-import { ProfileStorageService } from './../../profile-creation/profile-storage.service';
+import { ProfileStorageService } from '../../profile/profile-storage.service';
 import { Request } from './../../inbox/request.model';
-import { ProfileService } from './../../profile-creation/profile.service';
+import { ProfileService } from '../../profile/profile.service';
 import { EnsemblesService } from './../ensembles.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Ensemble } from '../ensemble.model';
-import { Profile } from '../../profile-creation/profile.model';
+import { Profile } from '../../profile/profile.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Member } from '../member.model';
 import { EnsemblesStorageService } from '../ensembles-storage.service';
@@ -272,6 +272,6 @@ export class EnsemblesDetailsComponent implements OnInit {
     this.ensemblesStorageService.updateInstrumentsHave(modifiedInstrumentsHave, this.ensembleId).subscribe();
     this.ensemblesStorageService.updateInstrumentsNeeded(this.ensemble.instrumentsNeeded, this.ensembleId).subscribe();
 
-    this.router.navigate(['/user-home']);
+    this.router.navigate(['/user', 'home']);
   }
 }

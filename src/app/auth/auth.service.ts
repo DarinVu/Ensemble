@@ -1,14 +1,14 @@
 import { UserService } from './user.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { GoogleAuthProvider } from '@angular/fire/auth';
-import { ProfileService } from './../profile-creation/profile.service';
+import { ProfileService } from '../profile/profile.service';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
 import { BehaviorSubject, Subject, throwError } from "rxjs"
 import { Router } from "@angular/router";
 import { User } from "./user.model";
-import { ProfileStorageService } from '../profile-creation/profile-storage.service';
+import { ProfileStorageService } from '../profile/profile-storage.service';
 
 
 interface AuthResponseData {
@@ -81,7 +81,7 @@ export class AuthService {
                 }
               )
             if (result.additionalUserInfo.isNewUser == false) {
-                this.router.navigate(['/user-home']);
+                this.router.navigate(['/user', 'home']);
             } else if (result.additionalUserInfo.isNewUser == true) {
                 this.router.navigate(['/profile-creation', 0])
             }

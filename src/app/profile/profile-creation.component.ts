@@ -196,7 +196,7 @@ export class ProfileCreationComponent implements OnInit {
               )
               this.profileStorageService.editProfile(currentProfileId, newProfile);
               this.profileService.setCurrentProfile(newProfile);
-              this.router.navigate(['user-home']);
+              this.router.navigate(['/user', 'home']);
             }
           )
         })
@@ -214,7 +214,7 @@ export class ProfileCreationComponent implements OnInit {
         )
         this.profileStorageService.editProfile(currentProfileId, newProfile);
         this.profileService.setCurrentProfile(newProfile);
-        this.router.navigate(['user-home']);
+        this.router.navigate(['/user', 'home']);
         }
     } else {
       if (this.selectedFile) {
@@ -241,7 +241,7 @@ export class ProfileCreationComponent implements OnInit {
                 this.profileStorageService.storeProfile(newProfile);
                 this.profileService.addProfile(newProfile);
                 this.profileService.setCurrentProfile(newProfile);
-                this.router.navigate(['user-home']);
+                this.router.navigate(['/user', 'home']);
               }
             )
             
@@ -262,7 +262,7 @@ export class ProfileCreationComponent implements OnInit {
         this.profileStorageService.storeProfile(newProfile);
         this.profileService.addProfile(newProfile);
         this.profileService.setCurrentProfile(newProfile);
-        this.router.navigate(['user-home']);
+        this.router.navigate(['/user', 'home']);
              
       }
     }  

@@ -25,7 +25,6 @@ export class EnsemblesItemComponent implements OnInit {
 
   constructor(
     private router: Router, 
-    private ensemblesService: EnsemblesService,
     private filtersService: FiltersService
   ) {}
 
@@ -99,6 +98,6 @@ export class EnsemblesItemComponent implements OnInit {
 
   onGetDetails() {
       const key = Object.keys(this.ensembleObj)[0]
-      this.router.navigate(['/ensembles-details', key]);
+      this.router.navigate(['/ensembles', 'details', key]);
   }
 }

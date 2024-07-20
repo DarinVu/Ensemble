@@ -1,8 +1,8 @@
-import { ProfileService } from './../profile-creation/profile.service';
+import { ProfileService } from '../../profile/profile.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
-import { Profile } from '../profile-creation/profile.model';
+import { Profile } from '../../profile/profile.model';
 
 @Component({
   selector: 'app-header',
@@ -51,6 +51,14 @@ export class HeaderComponent implements OnInit {
   }
 
   onEditProfile() {
-    this.router.navigate(['/profile-creation', 1])
+    this.router.navigate(['/profile-creation', 1]);
+  }
+
+  goHome() {
+    this.router.navigate(['/user', 'home']);
+  }
+
+  checkInbox() {
+    this.router.navigate(['/inbox']);
   }
 }

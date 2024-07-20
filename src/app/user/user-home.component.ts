@@ -1,9 +1,9 @@
-import { ProfileStorageService } from './../profile-creation/profile-storage.service';
-import { Ensemble } from './../ensembles/ensemble.model';
+import { ProfileStorageService } from '../profile/profile-storage.service';
+import { Ensemble } from '../ensembles/ensemble.model';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../auth/user.model';
-import { Profile } from '../profile-creation/profile.model';
-import { ProfileService } from '../profile-creation/profile.service';
+import { Profile } from '../profile/profile.model';
+import { ProfileService } from '../profile/profile.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { EnsemblesService } from '../ensembles/ensembles.service';
@@ -101,7 +101,7 @@ export class UserHomeComponent implements OnInit {
     for (let ensemble of ensembles) {
       let key = Object.keys(ensemble)[0];
       if (ensemble[key]['name'] == selectedEnsemble['name']) {
-        this.router.navigate(['/ensembles-details', key]);
+        this.router.navigate(['/ensembles', 'details', key]);
       }
     }
   }

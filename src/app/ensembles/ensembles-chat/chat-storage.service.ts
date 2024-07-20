@@ -2,7 +2,7 @@ import { ChatService } from './chat.service';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Message } from "./message.model";
-import { ProfileService } from "../../profile-creation/profile.service";
+import { ProfileService } from "../../profile/profile.service";
 import { tap } from "rxjs/operators";
 import { EnsemblesService } from '../ensembles.service';
 

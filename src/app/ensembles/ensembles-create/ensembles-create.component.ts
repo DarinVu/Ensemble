@@ -1,11 +1,11 @@
-import { ProfileStorageService } from './../../profile-creation/profile-storage.service';
+import { ProfileStorageService } from '../../profile/profile-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Ensemble } from '../ensemble.model';
 import { EnsemblesStorageService } from '../ensembles-storage.service';
 import { EnsemblesService } from '../ensembles.service';
-import { Profile } from '../../profile-creation/profile.model';
-import { ProfileService } from '../../profile-creation/profile.service';
+import { Profile } from '../../profile/profile.model';
+import { ProfileService } from '../../profile/profile.service';
 import { formatDate } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
@@ -107,7 +107,7 @@ export class EnsemblesCreateComponent implements OnInit{
         newEnsembleObj[resData['name']] = newEnsemble;
         modifiedEnsembles.push(newEnsembleObj);
         this.ensemblesService.setEnsembles(modifiedEnsembles);
-        this.router.navigate(['/ensembles-find']);
+        this.router.navigate(['ensembles','find']);
 
         const newEnsembleShort = new EnsembleShort(
           resData['name'],
