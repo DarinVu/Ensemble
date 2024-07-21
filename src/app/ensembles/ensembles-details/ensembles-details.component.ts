@@ -220,7 +220,7 @@ export class EnsemblesDetailsComponent implements OnInit {
     }
 
     //Route back to the user home page
-    this.router.navigate(['/user-home']);
+    this.router.navigate(['/user','home']);
   }
 
   onConfirmLeave() {

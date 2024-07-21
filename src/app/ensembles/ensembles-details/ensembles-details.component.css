@@ -1,3 +1,8 @@
+.big-content-container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .title-container {
     padding-top: 30px;
     padding-bottom: 30px;
@@ -43,6 +48,8 @@ h1 {
 }
 
 .big-info-container {
+    margin-top: 20px;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -216,8 +223,8 @@ h4 {
     background-color: white;
     padding-top: 30px;
     padding-bottom: 30px;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 30px;
+    padding-right: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -243,6 +250,7 @@ h4 {
 
 .footer-date {
     display: flex;
+    flex-direction: row;
     gap: 10px;
     color:#6C6D6D;
 }
@@ -257,6 +265,39 @@ h4 {
     background-color: #006e90;
     color: white;
     font-weight: 600;
+}
+
+@media (min-width: 700px) {
+    .big-content-container {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    
+    .big-info-container {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100px;
+        background-color: white;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 80px;
+        padding-right: 80px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 30px;
+        justify-content: space-between;
+    }
 }
 
 .modal {

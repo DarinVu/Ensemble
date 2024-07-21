@@ -1,112 +1,114 @@
 <app-header></app-header>
 <hr>
-<div class="row justify-content-center title-container">
-    <div class="col-xs-12 col-md-10 col-lg-10 col-xxl-7">
-        <h1>{{ ensemble.name }}</h1>
-        <div class="host-container">
-            <div class="small-pfp" setBackgroundImage [imageUrl]="host.profilePic"></div>
-            <div class="host-details">
-                <p>Hosted By</p>
-                <p *ngIf="!hostMode" class="host-name">{{ host.firstName }} {{ host.lastName }}</p>
-                <p *ngIf="hostMode" class="host-name">You</p>
+<div class="big-content-container">
+    <div class="row justify-content-center title-container">
+        <div class="col-xs-12 col-md-10 col-lg-10 col-xxl-7">
+            <h1>{{ ensemble.name }}</h1>
+            <div class="host-container">
+                <div class="small-pfp" setBackgroundImage [imageUrl]="host.profilePic"></div>
+                <div class="host-details">
+                    <p>Hosted By</p>
+                    <p *ngIf="!hostMode" class="host-name">{{ host.firstName }} {{ host.lastName }}</p>
+                    <p *ngIf="hostMode" class="host-name">You</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<hr>
-<div class="row justify-content-center content-container">
-    <div class="col-xs-12 col-md-10 col-lg-10 col-xxl-7">
-        <div class="row justify-content-between">
-            <div class="col-xs-12 col-md-7 col-lg-7 col-xxl-7 details-and-members">
-                <div class="details-container">
-                    <h4>Description</h4>
-                    <p class="ensemble-description">{{ ensemble.description }}</p>
-                </div>
-                <hr>
-                <div class="members-container">
-                    <div class="members-container-title">
-                        <h4 class="mb-3">Members</h4>
-                        <div *ngIf="hostMode" (click)="onManageMembers()" class="mb-3 manage-btn-container">
-                            <div *ngIf="!manageMode" class="manage-btn">Manage</div>
-                            <div *ngIf="manageMode" class="manage-btn">Done</div>
-                            <img *ngIf="!manageMode" class="manage-btn" src="../../../assets/edit.svg">
+    <hr>
+    <div class="row justify-content-center content-container">
+        <div class="col-xs-12 col-md-10 col-lg-10 col-xxl-7">
+            <div class="row justify-content-between">
+                <div class="col-xs-12 col-md-7 col-lg-7 col-xxl-7 details-and-members">
+                    <div class="details-container">
+                        <h4>Description</h4>
+                        <p class="ensemble-description">{{ ensemble.description }}</p>
+                    </div>
+                    <hr>
+                    <div class="members-container">
+                        <div class="members-container-title">
+                            <h4 class="mb-3">Members</h4>
+                            <div *ngIf="hostMode" (click)="onManageMembers()" class="mb-3 manage-btn-container">
+                                <div *ngIf="!manageMode" class="manage-btn">Manage</div>
+                                <div *ngIf="manageMode" class="manage-btn">Done</div>
+                                <img *ngIf="!manageMode" class="manage-btn" src="../../../assets/edit.svg">
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-container">
-                        <div *ngFor="let member of ensemble.members; let i = index" >
-                            <div *ngIf="currentProfile.firstName == member.name" style="cursor: default" class="card">
-                                <div class="card-img-top" setBackgroundImage [imageUrl]="member.profilePic"></div>      
-                                <div class="card-text">You</div>
-                                <div class="member-instrument">{{ ensemble.instrumentsHave[i].instrument }}</div>
+                        <div class="card-container">
+                            <div *ngFor="let member of ensemble.members; let i = index" >
+                                <div *ngIf="currentProfile.firstName == member.name" style="cursor: default" class="card">
+                                    <div class="card-img-top" setBackgroundImage [imageUrl]="member.profilePic"></div>      
+                                    <div class="card-text">You</div>
+                                    <div class="member-instrument">{{ ensemble.instrumentsHave[i].instrument }}</div>
+                                </div>
+                                <div *ngIf="currentProfile.firstName != member.name && !manageMode" class="card" (click)="onViewProfile(member)">
+                                    <div class="card-img-top" setBackgroundImage [imageUrl]="member.profilePic"></div>      
+                                    <div *ngIf="hostId == member['id']" class="card-text">{{ member.name }} (Host)</div>
+                                    <div *ngIf="hostId != member['id']" class="card-text">{{ member.name }}</div>
+                                    <div class="member-instrument">{{ ensemble.instrumentsHave[i].instrument }}</div>
+                                </div>    
+                                <div *ngIf="currentProfile.firstName != member.name && manageMode && i != confirmKickId" style="cursor: default" class="card">
+                                    <button (click)="onKick(i)" class="btn btn-danger kick-btn">Kick</button>
+                                    <p class="card-text">{{ member.name }}</p>
+                                </div>   
+                                <div *ngIf="i == confirmKickId" style="cursor: default" class="card">
+                                    <p>Confirm?</p>
+                                    <div class="confirm-btn-container">
+                                        <button class="btn btn-danger">X</button>
+                                        <button (click)="onConfirm(i, member)" class="btn btn-success">&#x2713;</button>
+                                    </div> 
+                                </div>   
                             </div>
-                            <div *ngIf="currentProfile.firstName != member.name && !manageMode" class="card" (click)="onViewProfile(member)">
-                                <div class="card-img-top" setBackgroundImage [imageUrl]="member.profilePic"></div>      
-                                <div *ngIf="hostId == member['id']" class="card-text">{{ member.name }} (Host)</div>
-                                <div *ngIf="hostId != member['id']" class="card-text">{{ member.name }}</div>
-                                <div class="member-instrument">{{ ensemble.instrumentsHave[i].instrument }}</div>
-                            </div>    
-                            <div *ngIf="currentProfile.firstName != member.name && manageMode && i != confirmKickId" style="cursor: default" class="card">
-                                <button (click)="onKick(i)" class="btn btn-danger kick-btn">Kick</button>
-                                <p class="card-text">{{ member.name }}</p>
-                            </div>   
-                            <div *ngIf="i == confirmKickId" style="cursor: default" class="card">
-                                <p>Confirm?</p>
-                                <div class="confirm-btn-container">
-                                    <button class="btn btn-danger">X</button>
-                                    <button (click)="onConfirm(i, member)" class="btn btn-success">&#x2713;</button>
-                                </div> 
-                            </div>   
                         </div>
-                    </div>
-                    <div *ngIf="manageMode" class="disband-container">
-                        <button class="btn btn-danger disband-btn" (click)="openModal()">Disband Ensemble</button>
-
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-4 col-lg-4 col-xxl-4" style="justify-content: center;">
-                <div class="big-info-container">
-                    <div class="important-info-container event-link-container">
-                        <img src="../../../assets/note.svg">
-                        <div>
-                            <div>
-                                {{ensemble.name}}
-                            </div>
-                            <div class="ensemble-location">
-                                {{ ensemble.location }}
-                            </div>
+                        <div *ngIf="manageMode" class="disband-container">
+                            <button class="btn btn-danger disband-btn" (click)="openModal()">Disband Ensemble</button>
+    
                         </div>
                         
                     </div>
-                    <div class="important-info-container date-info-container">
-                        <div>
-                            <img src="../../../assets/clock.svg">  
-                        </div>
-                        <div class="date-and-time">
+                </div>
+                <div class="col-xs-12 col-md-4 col-lg-4 col-xxl-4" style="justify-content: center;">
+                    <div class="big-info-container">
+                        <div class="important-info-container event-link-container">
+                            <img src="../../../assets/note.svg">
                             <div>
-                                {{ensemble.date}}
+                                <div>
+                                    {{ensemble.name}}
+                                </div>
+                                <div class="ensemble-location">
+                                    {{ ensemble.location }}
+                                </div>
                             </div>
+                            
+                        </div>
+                        <div class="important-info-container date-info-container">
                             <div>
-                                {{ensemble.time}}
+                                <img src="../../../assets/clock.svg">  
+                            </div>
+                            <div class="date-and-time">
+                                <div>
+                                    {{ensemble.date}}
+                                </div>
+                                <div>
+                                    {{ensemble.time}}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="important-info-container chat-container">
-                        <button type="button" class="btn chat-btn" [disabled]="!member" (click)="onChat()">
-                            <img src='../../../assets/chat.svg'> Ensemble Chat
-                        </button>
-                        <div class="chat-warning" *ngIf="!member">You must be a member to access this ensemble's chat.</div>
-                    </div>
-                    <div *ngIf="member && !hostMode" class="important-info-container chat-container">
-                        <button *ngIf="!confirmLeave" (click)="onConfirmLeave()" class="btn btn-danger leave-btn">
-                            Leave Ensemble
-                        </button>
-                        <div *ngIf="confirmLeave">Are you sure you want to leave this Ensemble?</div>
-                        <div *ngIf="confirmLeave" class="confirm-btn-container">
-                            <button (click)="onConfirmLeave()" class="btn btn-danger">X</button>
-                            <button (click)="onLeave()" class="btn btn-success">&#x2713;</button>
-                        </div> 
+                        <div class="important-info-container chat-container">
+                            <button type="button" class="btn chat-btn" [disabled]="!member" (click)="onChat()">
+                                <img src='../../../assets/chat.svg'> Ensemble Chat
+                            </button>
+                            <div class="chat-warning" *ngIf="!member">You must be a member to access this ensemble's chat.</div>
+                        </div>
+                        <div *ngIf="member && !hostMode" class="important-info-container chat-container">
+                            <button *ngIf="!confirmLeave" (click)="onConfirmLeave()" class="btn btn-danger leave-btn">
+                                Leave Ensemble
+                            </button>
+                            <div *ngIf="confirmLeave">Are you sure you want to leave this Ensemble?</div>
+                            <div *ngIf="confirmLeave" class="confirm-btn-container">
+                                <button (click)="onConfirmLeave()" class="btn btn-danger">X</button>
+                                <button (click)="onLeave()" class="btn btn-success">&#x2713;</button>
+                            </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -118,6 +120,7 @@
         <div class="footer-info">
             <div class="footer-date">
                 <p>{{ ensemble.date }}</p>
+                <p>-</p>
                 <p>{{ ensemble.time }}</p>
             </div>
             <p class="footer-ensemble-name">{{ ensemble.name }}</p>

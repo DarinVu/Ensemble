@@ -107,14 +107,14 @@
                 Clear Filters
             </button>
         </div>
-        <ul *ngIf="ensembles" stlye="z-index: 2" class="list-group">
+        <ul *ngIf="ensembles.length > 0" stlye="z-index: 2" class="list-group">
             <app-ensembles-item 
                 *ngFor="let ensemble of ensembles" 
                 [ensembleObj]="ensemble"
                 >
             </app-ensembles-item>           
         </ul>
-        <div *ngIf="!ensembles" class="no-ensembles">
+        <div *ngIf="ensembles.length == 0" class="no-ensembles">
             <div>No active ensembles right now. Check back soon!</div>
             <img class="sad-icon" src="../../../assets/sad-icon.svg">
         </div>
