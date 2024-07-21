@@ -39,17 +39,15 @@ h1 {
 }
 
 .content-container {
-    height: 90vh;
+    height: 100vh;
     background-color: #F6F6F6;
     padding-top: 30px;
-
     padding-left: 15px;
     padding-right: 15px;
 }
 
 .big-info-container {
     margin-top: 20px;
-    margin-bottom: 130px;
     display: flex;
     flex-direction: column;
     gap: 20px;
