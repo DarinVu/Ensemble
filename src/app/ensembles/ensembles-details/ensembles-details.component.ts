@@ -192,6 +192,20 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.profileStorageService.updateProfileEnsembles(modifiedEnsembles, key).subscribe();
       }
     }
+
+    //Add member's instrument to instrumentNeeded and remove it from instrumentsHave
+    let modifiedInstrumentsHave = []
+    for (let i = 0; i < this.ensemble.instrumentsHave.length; i++) {
+      if (i != indexOfMember) {
+        modifiedInstrumentsHave.push(this.ensemble.instrumentsHave[i]);
+      } else {
+        this.ensemble.instrumentsNeeded.push(this.ensemble.instrumentsHave[i]);
+      }
+    }
+    this.ensemble.instrumentsHave = modifiedInstrumentsHave;
+    this.ensemblesStorageService.updateInstrumentsHave(modifiedInstrumentsHave, this.ensembleId).subscribe();
+    this.ensemblesStorageService.updateInstrumentsNeeded(this.ensemble.instrumentsNeeded, this.ensembleId).subscribe();
+
   } 
 
   onConfirmDisband() {
@@ -256,8 +270,6 @@ export class EnsemblesDetailsComponent implements OnInit {
     }
     this.currentProfile.ensembles = modifiedEnsembles;
     this.profileStorageService.updateProfileEnsembles(modifiedEnsembles, this.currentProfileId).subscribe();
-    
-
     
     //Add member's instrument to instrumentNeeded and remove it from instrumentsHave
     let modifiedInstrumentsHave = []
