@@ -131,6 +131,7 @@ h4 {
     padding-right: 25px;  
     margin-top: 20px;
     padding-bottom: 80px;
+    overflow-y: auto;
 }
 
 .members-container-title {
@@ -159,7 +160,6 @@ h4 {
     gap: 2vh;
     flex-wrap: wrap;
     justify-content: center;
-    overflow-y: auto;
 }
 
 
@@ -308,7 +308,7 @@ h4 {
         padding-right: 25px;  
         margin-top: 20px;
         padding-bottom: 80px;
-        
+        overflow-y: none;
     }
 
     .card-container {
@@ -317,7 +317,6 @@ h4 {
         gap: 2vh;
         flex-wrap: wrap;
         justify-content: start;
-        overflow-y: none;
     }
 
     .card {
