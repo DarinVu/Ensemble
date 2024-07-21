@@ -1,11 +1,9 @@
-.big-content-container {
-    padding-left: 15px;
-    padding-right: 15px;
-}
 
 .title-container {
     padding-top: 30px;
     padding-bottom: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 h1 {
@@ -44,12 +42,14 @@ h1 {
     height: 90vh;
     background-color: #F6F6F6;
     padding-top: 30px;
-    overflow-y: auto;
+
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .big-info-container {
     margin-top: 20px;
-    margin-bottom: 100px;
+    margin-bottom: 130px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -242,6 +242,9 @@ h4 {
 
 .footer-info {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .footer-ensemble-name {
@@ -253,6 +256,7 @@ h4 {
     flex-direction: row;
     gap: 10px;
     color:#6C6D6D;
+    font-size: 13px;
 }
 
 .status-container {
@@ -265,14 +269,25 @@ h4 {
     background-color: #006e90;
     color: white;
     font-weight: 600;
+    font-size: 15px;
 }
 
 @media (min-width: 700px) {
-    .big-content-container {
+    .title-container {
+        padding-top: 30px;
+        padding-bottom: 30px;
         padding-left: 0px;
         padding-right: 0px;
     }
     
+    .content-container {
+        height: 90vh;
+        background-color: #F6F6F6;
+        padding-top: 30px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
     .big-info-container {
         margin-top: 0px;
         margin-bottom: 0px;
@@ -297,6 +312,28 @@ h4 {
         align-items: center;
         gap: 30px;
         justify-content: space-between;
+    }
+
+    .footer-info {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-date {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        color:#6C6D6D;
+        font-size: 16px;
+    }
+
+    .btn-join {
+        background-color: #006e90;
+        color: white;
+        font-weight: 600;
+        font-size: 17px;
     }
 }
 
