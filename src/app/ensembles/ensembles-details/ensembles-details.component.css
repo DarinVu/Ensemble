@@ -131,7 +131,6 @@ h4 {
     padding-right: 25px;  
     margin-top: 20px;
     padding-bottom: 80px;
-    overflow-y: auto;
 }
 
 .members-container-title {
@@ -159,6 +158,8 @@ h4 {
     flex-direction: row;
     gap: 2vh;
     flex-wrap: wrap;
+    justify-content: center;
+    overflow-y: auto;
 }
 
 
@@ -307,6 +308,15 @@ h4 {
         padding-right: 25px;  
         margin-top: 20px;
         padding-bottom: 80px;
+        
+    }
+
+    .card-container {
+        display: flex;
+        flex-direction: row;
+        gap: 2vh;
+        flex-wrap: wrap;
+        justify-content: start;
         overflow-y: none;
     }
 
