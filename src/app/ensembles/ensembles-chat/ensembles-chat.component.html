@@ -52,7 +52,7 @@
             </div>
             <div class="col-xs-12 col-md-7 chat-container">
                 <div class="row chat" #scroll> 
-                    <div class="col-xs-12" *ngFor="let message of chat" >
+                    <div class="col-xs-12" *ngFor="let message of chat">
                         <div *ngIf="message.profile['email'] != currentProfile['email']">
                             <div class="away-chat-name">{{ message.profile['firstName'] }}</div>
                             <div class="away-chat-bubble">

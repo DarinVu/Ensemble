@@ -85,7 +85,37 @@ export class EnsemblesCreateComponent implements OnInit{
     console.log(this.ensembleForm)
     const formattedDate = this.datePipe.transform(this.ensembleForm.value['date'], 'mediumDate');
     const formattedTime = this.datePipe.transform(this.ensembleForm.value['date'] + ' ' + this.ensembleForm.value['time'] + ':00', 'shortTime')
-    const ensembleName = this.ensembleForm.value['name'].charAt(0).toUpperCase() + this.ensembleForm.value['name'].substring(1);
+    var ensembleName = '';
+    var location = '';
+
+    //Make sure that every word in ensemble name is capitalized
+    for (let i = 0; i < this.ensembleForm.value['name'].length; i++) {
+      console.log(this.ensembleForm.value['name'].charAt(i))
+      if (i == 0) {
+        ensembleName = ensembleName.concat(this.ensembleForm.value['name'].charAt(i).toUpperCase());
+        continue;
+      }
+      if (this.ensembleForm.value['name'].charAt(i) == ' ' && this.ensembleForm.value['name'].charAt(i+1)) {
+        ensembleName = ensembleName.concat(' ' + this.ensembleForm.value['name'].charAt(i+1).toUpperCase());
+        i++;
+        continue;
+      }
+      ensembleName = ensembleName.concat(this.ensembleForm.value['name'].charAt(i));
+    }
+
+    //Makes sure that every word in ensemble location is capitalized
+    for (let i = 0; i < this.ensembleForm.value['location'].length; i++) {
+      if (i == 0) {
+        location = location.concat(this.ensembleForm.value['location'].charAt(i).toUpperCase());
+        continue;
+      }
+      if (this.ensembleForm.value['location'].charAt(i) == ' ' && this.ensembleForm.value['location'].charAt(i+1)) {
+        location = location.concat(' ' + this.ensembleForm.value['location'].charAt(i+1).toUpperCase());
+        i++;
+        continue;
+      }
+      location = location.concat(this.ensembleForm.value['location'].charAt(i));
+    }
 
     const newEnsemble = new Ensemble(
       ensembleName,
@@ -96,7 +126,7 @@ export class EnsemblesCreateComponent implements OnInit{
       this.ensembleForm.value['instruments'].slice(1),
       [this.ensembleForm.value['instruments'][0]],
       this.ensembleForm.value['genre'],
-      this.ensembleForm.value['location'],
+      location,
       [new Member(this.currentProfileId, this.currentProfile.firstName, this.currentProfile.profilePic)]
     )
 

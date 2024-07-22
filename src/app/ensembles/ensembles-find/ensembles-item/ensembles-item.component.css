@@ -35,8 +35,14 @@ h3 {
     flex-direction: row;
     color: #6C6D6D;
     gap: 5px;
+    font-size: 12px;
 }
 
+.ensemble-location {
+    color: #6C6D6D;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
 
 .content-container {
     display: grid;
@@ -72,6 +78,13 @@ h3 {
         flex-direction: row;
         gap: 10px;
         color: #6C6D6D;
+        font-size: 15px;
+    }
+
+    .ensemble-location {
+        color: #6C6D6D;
+        font-size: 15px;
+        margin-bottom: 0px;
     }
 
     .content-container {
