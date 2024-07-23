@@ -12,11 +12,11 @@
                <div class="inbox-title">
                     <h1>Inbox</h1>
                </div>
-               <div class="empty-message-container" *ngIf="profile.requests.length - 1 == 0" style="text-align: center;">
+               <div class="empty-message-container" *ngIf="profile.requestsReceivedength - 1 == 0" style="text-align: center;">
                     Your inbox is empty.
                </div>
-               <div *ngIf="profile.requests.length - 1 > 0" class="inbox-header-container">
-                    <div *ngFor="let request of profile.requests; let i = index">
+               <div *ngIf="profile.requestsReceived.length - 1 > 0" class="inbox-header-container">
+                    <div *ngFor="let request of profile.requestsReceived; let i = index">
                         <div *ngIf="i > 0">
                             <div [routerLink]="[i]" class="inbox-header">
                                 <div class="profile-img" setBackgroundImage [imageUrl]="request.profilePic"></div>

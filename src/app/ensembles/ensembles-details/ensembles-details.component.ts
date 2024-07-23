@@ -36,6 +36,7 @@ export class EnsemblesDetailsComponent implements OnInit {
   confirmKick = false;
   confirmKickId: number;
   confirmLeave = false;
+  requestAlreadySent: boolean;
   
 
   constructor(
@@ -100,6 +101,26 @@ export class EnsemblesDetailsComponent implements OnInit {
       'message': new FormControl(null),
       'instrument': new FormControl(null, Validators.required)
     })
+
+    for (let request of this.currentProfile['requestsSent']) {
+      if (request == this.ensembleId) {
+        this.requestAlreadySent = true;
+        break;
+      }
+    }
+
+    for (let i = 0; i < this.currentProfile.requestsReceived.length; i++) {
+      if (i == 0) {
+        console.log('it works')
+      }
+      if (i != 0 && this.currentProfile.requestsReceived[i]['ensembleId'] != this.ensembleId) {
+        for (let request of this.currentProfile.requestsReceived[i]['requestsSent']) {
+          console.log(request)
+        }
+        console.log(this.currentProfile.requestsReceived[i])
+      } 
+      
+    }
   }
 
   onChat() {
@@ -124,7 +145,8 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.ensembleId,
         this.ensemble.name,
         this.currentProfile.profilePic,
-        this.requestForm.value['instrument']
+        this.requestForm.value['instrument'],
+        this.currentProfile['requestsSent']
       )
     } else {
       var request = new Request(
@@ -135,15 +157,25 @@ export class EnsemblesDetailsComponent implements OnInit {
         this.ensemble.name,
         this.currentProfile.profilePic,
         this.requestForm.value['instrument'],
+        this.currentProfile['requestsSent'],
         this.requestForm.value['message'])
     }
 
-    this.host.requests.push(request);
-    this.profileStorageService.addRequestToProfile(this.hostId, this.host.requests).subscribe(
+    //Add request sent to current user's data
+    this.currentProfile['requestsSent'].push(this.ensembleId);
+    this.profileStorageService.updateRequestsSentToProfile(this.currentProfileId, this.currentProfile['requestsSent']).subscribe();
+
+    //Send request to host
+    this.host.requestsReceived.push(request);
+    this.profileStorageService.updateRequestReceivedToProfile(this.hostId, this.host.requestsReceived).subscribe(
       resData => {
         this.requestSubmitted = true;
       }
     )
+
+    
+    
+    this.requestAlreadySent = true;
   }
 
   onViewProfile(member) {
@@ -233,6 +265,33 @@ export class EnsemblesDetailsComponent implements OnInit {
       }
     }
 
+    //Remove request received from host's (current user) data & Remove request sent from current user's data
+    let modifiedRequestsReceived = [];
+
+    for (let i = 0; i < this.currentProfile.requestsReceived.length; i++) {
+      if (i == 0) {
+        modifiedRequestsReceived.push(this.currentProfile.requestsReceived[i]);
+      }
+      if (i != 0 && this.currentProfile.requestsReceived[i]['ensembleId'] != this.ensembleId) {
+        modifiedRequestsReceived.push(this.currentProfile.requestsReceived[i]);  
+      }
+      if (i != 0 && this.currentProfile.requestsReceived[i]['ensembleId'] == this.ensembleId) {
+        console.log("WORKING!!!")
+        let modifiedRequestsSent = [];
+        for (let requestSent of this.currentProfile.requestsReceived[i]['requestsSent']) {
+          if (requestSent != this.ensembleId) {
+            modifiedRequestsSent.push(requestSent);
+          }
+        }
+        this.profileStorageService.updateRequestsSentToProfile(this.currentProfile.requestsReceived[i]['profileId'], modifiedRequestsSent).subscribe();
+      }
+    }
+
+    this.currentProfile['requestsReceived'] = modifiedRequestsReceived;
+    this.profileStorageService.updateRequestReceivedToProfile(this.currentProfileId, modifiedRequestsReceived).subscribe()
+
+   
+
     //Route back to the user home page
     this.router.navigate(['/user','home']);
   }
@@ -285,5 +344,28 @@ export class EnsemblesDetailsComponent implements OnInit {
     this.ensemblesStorageService.updateInstrumentsNeeded(this.ensemble.instrumentsNeeded, this.ensembleId).subscribe();
 
     this.router.navigate(['/user', 'home']);
+  }
+
+  onCancelRequest() {
+    //Remove request received from host's data
+    let modifiedRequestsReceived = [];
+    for (let requestReceived of this.host.requestsReceived) {
+      if (requestReceived['profileId'] != this.currentProfileId || requestReceived['ensembleId'] != this.ensembleId) {
+        modifiedRequestsReceived.push(requestReceived);
+      }
+    }
+    this.host['requestsReceived'] = modifiedRequestsReceived;
+    this.profileStorageService.updateRequestReceivedToProfile(this.hostId, modifiedRequestsReceived).subscribe()
+
+    //Remove request sent from current user's data
+    let modifiedRequestsSent = [];
+    for (let requestSent of this.currentProfile.requestsSent) {
+      if (requestSent != this.ensembleId) {
+        modifiedRequestsSent.push(requestSent);
+      }
+    }
+    this.currentProfile['requestsSent'] = modifiedRequestsSent;
+    this.profileStorageService.updateRequestsSentToProfile(this.currentProfileId, modifiedRequestsSent).subscribe();
+    this.requestAlreadySent = false;
   }
 }

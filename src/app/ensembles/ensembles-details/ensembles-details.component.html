@@ -63,7 +63,6 @@
                         <button class="btn btn-danger disband-btn" (click)="openModal()">Disband Ensemble</button>
 
                     </div>
-                    
                 </div>
             </div>
             <div class="col-xs-12 col-md-4 col-lg-4 col-xxl-4" style="justify-content: center;">
@@ -127,7 +126,9 @@
         </div>
     </div>
    <div class="right-side">
-        <button class="btn btn-join" (click)="openModal()">Request To Join</button>
+        <button *ngIf="!requestAlreadySent" class="btn btn-join" (click)="openModal()">Request To Join</button>
+        <button *ngIf="requestAlreadySent" class="btn btn-join" [disabled]="requestAlreadySent">Request Processing...</button>
+        <button *ngIf="requestAlreadySent" class="btn btn-danger" (click)="onCancelRequest()">Cancel</button>
    </div>
 </div>
 <div class="modal" *ngIf="hostMode" tabindex="-1" [ngStyle]="{'display': display}">

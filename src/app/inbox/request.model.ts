@@ -10,6 +10,7 @@ export class Request {
         public ensembleName: string,
         public profilePic: string,
         public instrument: string,
+        public requestsSent: string[],
         public message?: string
     ) {}
 }

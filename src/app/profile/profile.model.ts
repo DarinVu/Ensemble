@@ -11,6 +11,7 @@ export class Profile {
         public recordings?: string[],
         public bio?: string,
         public profilePic?: any,
-        public requests: Request[] = [new Request(null, null, null, null, null, null, 'aaa')]
+        public requestsReceived: Request[] = [new Request(null, null, null, null, null, null, 'placeholder', null)],
+        public requestsSent: string[] = ['placeholder']
     ) {}
 }

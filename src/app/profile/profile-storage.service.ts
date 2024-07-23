@@ -45,10 +45,18 @@ export class ProfileStorageService {
         )
     }
 
-    addRequestToProfile(hostId: string, requests: Request[]) {
+    updateRequestReceivedToProfile(hostId: string, requestsReceived: Request[]) {
         return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles/' + hostId + '.json',
             {
-                'requests': requests
+                'requestsReceived': requestsReceived
+            }
+        )
+    }
+
+    updateRequestsSentToProfile(profileId: string, requestsSent: string[]) {
+        return this.http.patch('https://ensemble-163c3-default-rtdb.firebaseio.com/profiles/' + profileId + '.json',
+            {
+                'requestsSent': requestsSent
             }
         )
     }

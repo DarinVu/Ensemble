@@ -241,6 +241,11 @@ h4 {
     gap: 30px;
 }
 
+.right-side {
+    display: flex;
+    flex-direction: column;
+}
+
 .footer-info {
     height: 100%;
     display: flex;
@@ -270,7 +275,7 @@ h4 {
     background-color: #006e90;
     color: white;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 @media (min-width: 700px) {
@@ -371,6 +376,11 @@ h4 {
         color: white;
         font-weight: 600;
         font-size: 17px;
+    }
+
+    .right-side {
+        display: flex;
+        flex-direction: row;
     }
 
     

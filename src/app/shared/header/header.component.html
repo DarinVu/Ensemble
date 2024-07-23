@@ -9,8 +9,8 @@
                 <li class="nav-item">
                     <button type="button" (click)="checkInbox()" class="inbox-btn btn btn-primary position-relative">
                         <img src="../../assets/inbox.svg">
-                        <span *ngIf="profile.requests.length - 1 > 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                          {{ profile.requests.length-1 }}
+                        <span *ngIf="profile.requestsReceived.length - 1 > 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          {{ profile.requestsReceived.length-1 }}
                           <span class="visually-hidden">unread messages</span>
                         </span>
                       </button>

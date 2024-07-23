@@ -89,10 +89,12 @@ h3 {
 
     .content-container {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, minmax(160px, 1fr));
         justify-items: center;
+        align-self: center;
         gap: 1vw;
         text-align: start;
+        
     }
     
 }

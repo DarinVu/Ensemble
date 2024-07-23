@@ -11,7 +11,6 @@ import { Request } from './request.model';
 export class InboxComponent implements OnInit{
   isLoading = true;
   profile: Profile;
-  requests: Request[];
 
   constructor(
     private profileService: ProfileService,

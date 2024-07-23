@@ -63,7 +63,7 @@ export class InboxMessageComponent implements OnInit{
     this.route.params.subscribe(
       (params: Params) => {
         this.requestNum = +params['request-num']
-        this.request = this.currentProfile.requests[this.requestNum];
+        this.request = this.currentProfile.requestsReceived[this.requestNum];
       }
     )
 
@@ -80,7 +80,6 @@ export class InboxMessageComponent implements OnInit{
       }
     ) 
 
-
     for (let profile of profiles) {
       var key = Object.keys(profile)[0]
       if (key == this.request.profileId) {
@@ -95,18 +94,28 @@ export class InboxMessageComponent implements OnInit{
   }
 
   onDecline() {
-    let modifiedRequests = [];
-    for (let i = 0; i < this.currentProfile.requests.length; i++) {
+    //Remove request received from host
+    let modifiedRequestsReceived = [];
+    for (let i = 0; i < this.currentProfile.requestsReceived.length; i++) {
       if (i != this.requestNum) {
-        modifiedRequests.push(this.currentProfile.requests[i]);
+        modifiedRequestsReceived.push(this.currentProfile.requestsReceived[i]);
       }
     }
-    this.profileStorageService.addRequestToProfile(this.currentProfileId, modifiedRequests).pipe(
+    this.profileStorageService.updateRequestReceivedToProfile(this.currentProfileId, modifiedRequestsReceived).pipe(
       finalize(() => {
-        this.currentProfile.requests = modifiedRequests;
+        this.currentProfile.requestsReceived = modifiedRequestsReceived;
         this.router.navigate(['..'], {relativeTo: this.route});
       })
     ).subscribe()
+
+    //Remove request sent from requesting user
+    let modifiedRequestsSent = [];
+    for (let request of this.request.requestsSent) {
+      if (request != this.request.ensembleId) {
+        modifiedRequestsSent.push(request);
+      }
+    }
+    this.profileStorageService.updateRequestsSentToProfile(this.request.profileId, modifiedRequestsSent).subscribe();
   }
 
   onAccept() {
@@ -126,9 +135,9 @@ export class InboxMessageComponent implements OnInit{
     this.ensemble.members.push(new Member(this.requestProfileId, this.request.firstName, requestedUserProfilePic));
     this.ensemblesStorageService.updateEnsembleMembers(this.ensemble.members, this.request.ensembleId).subscribe();
     let modifiedRequests = [];
-    for (let i = 0; i < this.currentProfile.requests.length; i++) {
+    for (let i = 0; i < this.currentProfile.requestsReceived.length; i++) {
       if (i != this.requestNum) {
-        modifiedRequests.push(this.currentProfile.requests[i]);
+        modifiedRequests.push(this.currentProfile.requestsReceived[i]);
       }
     }
 
@@ -143,10 +152,10 @@ export class InboxMessageComponent implements OnInit{
       }
     }
     requestedUserEnsembles.push(new EnsembleShort(this.request.ensembleId, this.request.ensembleName));
-    this.profileStorageService.addRequestToProfile(this.currentProfileId, modifiedRequests).pipe(
+    this.profileStorageService.updateRequestReceivedToProfile(this.currentProfileId, modifiedRequests).pipe(
       finalize(() => {
         this.profileStorageService.updateProfileEnsembles(requestedUserEnsembles, this.request.profileId).subscribe()
-        this.currentProfile.requests = modifiedRequests;
+        this.currentProfile.requestsReceived = modifiedRequests;
       })
     )
     .subscribe();
@@ -171,6 +180,15 @@ export class InboxMessageComponent implements OnInit{
     }
     this.ensemble.instrumentsNeeded = modifiedInstrumentsNeeded;
     this.ensemblesStorageService.updateInstrumentsNeeded(modifiedInstrumentsNeeded, this.request.ensembleId).subscribe();
+
+     //Remove request sent from requesting user
+     let modifiedRequestsSent = [];
+     for (let request of this.request.requestsSent) {
+       if (request != this.request.ensembleId) {
+         modifiedRequestsSent.push(request);
+       }
+     }
+     this.profileStorageService.updateRequestsSentToProfile(this.request.profileId, modifiedRequestsSent).subscribe();
   }
 
   closeModal() {
