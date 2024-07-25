@@ -11,14 +11,21 @@
     <div class="message">
         <div>{{ request.message }}</div>
     </div>
-    <div class="button-container">
-        <button class="btn btn-danger" (click)="onDecline()">
-            Decline
-        </button>
-        <button class="btn btn-success" (click)="onAccept()" >
-            Accept
-        </button>
+    <div class="btn-container-w-warning">
+        <div class="button-container">
+            <button class="btn btn-danger" (click)="onDecline()">
+                Decline
+            </button>
+            <button class="btn btn-success" [disabled]="spotsTakenError == requestNum" (click)="onAccept()" >
+                Accept
+            </button>
+        </div>
+        <div *ngIf="spotsTakenError == requestNum" class="spots-filled-warning">
+            <div>Spots for this instrument have been filled.</div>
+        </div>
     </div>
+    
+    
 </div>
 <div class="modal" (click)="closeModal()" *ngIf="acceptMode"  tabindex="-1" [ngStyle]="{'display': display}">
     <div class="modal-dialog">

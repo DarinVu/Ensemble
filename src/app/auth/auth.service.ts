@@ -57,7 +57,6 @@ export class AuthService {
 
     loginWithGoogle(status: string) {
         return this.fireAuth.signInWithPopup(new GoogleAuthProvider).then((result) => {
-            console.log(result)
             const user = {'email': result.additionalUserInfo.profile['email']};
             this.userService.setUserInProgress(user);
             this.handleAuthentication(
@@ -100,7 +99,6 @@ export class AuthService {
                 returnSecureToken: true
             }
         ).pipe(catchError(this.handleError), tap(resData => {
-            console.log(resData);
             this.handleAuthentication(
                 resData.email, 
                 resData.localId, 

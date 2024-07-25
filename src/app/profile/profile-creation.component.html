@@ -116,9 +116,13 @@
                 <img *ngIf="editMode && currentProfile.profilePic" #profilePicSample class="profile-pic-sample" [src]="currentProfile.profilePic">
                 <hr class="main-divider">
                 <h3>Show Off Your Talent!</h3>
+                <label for="recording" class="form-label">Video Recordings (Optional)</label>
+
                 <div class="mb-3" formArrayName="recordings" *ngFor="let recordingControl of recordingControls; let i = index">
                     <div class="form-group" [formGroupName]="i">
-                        <label for="recording" class="form-label">Video Recordings (Optional)</label>
+                        <div class="col-xs-auto col-md-auto">
+                            <div class="warning-message" *ngIf="videoLinkError == i">A valid YouTube link is required.</div>
+                        </div>
                         <div class="control-array-container">
                             <input 
                             type="text" 
@@ -126,6 +130,7 @@
                             id="recording" 
                             placeholder="YouTube Link"
                             formControlName="recording"
+                            (change)="checkYTLink($event.target.value, i)"
                         >
                         <button type="button" *ngIf="recordingControls.length > 1"class="btn btn-danger" (click)="onDeleteRecording(i)">X</button>
                         </div>

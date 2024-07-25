@@ -13,6 +13,7 @@ import { User } from '../auth/user.model';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { EnsembleShort } from '../ensembles/ensembleShort.model';
+import { createLinkValidator } from './link-validator';
 
 @Component({
   selector: 'app-profile-creation',
@@ -29,6 +30,7 @@ export class ProfileCreationComponent implements OnInit {
   profilePicError = null;
   editMode: boolean;
   currentProfile: Profile;
+  videoLinkError = null;
 
   constructor(
     private router: Router, 
@@ -62,12 +64,12 @@ export class ProfileCreationComponent implements OnInit {
               if (this.currentProfile.recordings) {
                 for (let recording of this.currentProfile.recordings) {
                   recordings.push(new FormGroup({
-                    'recording': new FormControl(recording['recording'])
+                    'recording': new FormControl(recording['recording'], createLinkValidator())
                   }))
                 }
               } else {
                 recordings.push(new FormGroup({
-                  'recording': new FormControl(null)
+                  'recording': new FormControl(null, createLinkValidator())
                 }))
               }
               
@@ -128,13 +130,14 @@ export class ProfileCreationComponent implements OnInit {
   onAddRecording() {
     (<FormArray>this.profileForm.get('recordings')).push(
       new FormGroup({
-        'recording': new FormControl(null, Validators.required)
+        'recording': new FormControl(null, createLinkValidator())
       })
     );
   }
 
   onDeleteRecording(index: number) {
     (<FormArray>this.profileForm.get('recordings')).removeAt(index);
+    this.videoLinkError = null;
   }
 
 
@@ -162,7 +165,11 @@ export class ProfileCreationComponent implements OnInit {
     }
   }
 
-  
+  checkYTLink(link: string, index: number) {
+    if (link.substring(0, 17) != 'https://youtu.be/') {
+      this.videoLinkError = index;
+    }
+  }
 
   onSubmit() {
     this.isLoading = true;

@@ -28,6 +28,7 @@ export class InboxMessageComponent implements OnInit{
   acceptMode = false;
   display = '';
   profiles: Profile[];
+  spotsTakenError: number;
 
   constructor(
     private profileService: ProfileService,
@@ -40,13 +41,11 @@ export class InboxMessageComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    
     this.profileService.profilesChanged.subscribe(
       profiles => {
         this.profiles = profiles;
       }
     )
-    this.profiles = this.profileService.getProfiles()
 
     this.profileService.currentProfileChanged.subscribe(
       profile => {
@@ -80,11 +79,24 @@ export class InboxMessageComponent implements OnInit{
       }
     ) 
 
+    
+
     for (let profile of profiles) {
       var key = Object.keys(profile)[0]
       if (key == this.request.profileId) {
         this.requestProfileId = key;
         this.requestEmail = profile[key]['email'];
+      }
+    }
+
+    //Check if ensemble needs instrument from requesting user
+    for (let i = 0; i < this.ensemble.instrumentsNeeded.length; i++) {
+      if (this.request['instrument'] == this.ensemble.instrumentsNeeded[i]['instrument']) {
+        this.spotsTakenError = null;
+        break;
+      }
+      if (this.request['instrument'] != this.ensemble.instrumentsNeeded[i]['instrument'] && i == this.ensemble.instrumentsNeeded.length - 1) {
+        this.spotsTakenError = this.requestNum;
       }
     }
   }

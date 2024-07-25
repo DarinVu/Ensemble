@@ -60,6 +60,10 @@ h3 {
     width: 100%;
 }
 
+.form-select {
+    font-weight: 500;
+}
+
 @media (min-width: 700px) {
     .content-container {
         padding-top: 50px;

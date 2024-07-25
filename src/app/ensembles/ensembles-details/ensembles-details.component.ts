@@ -108,19 +108,6 @@ export class EnsemblesDetailsComponent implements OnInit {
         break;
       }
     }
-
-    for (let i = 0; i < this.currentProfile.requestsReceived.length; i++) {
-      if (i == 0) {
-        console.log('it works')
-      }
-      if (i != 0 && this.currentProfile.requestsReceived[i]['ensembleId'] != this.ensembleId) {
-        for (let request of this.currentProfile.requestsReceived[i]['requestsSent']) {
-          console.log(request)
-        }
-        console.log(this.currentProfile.requestsReceived[i])
-      } 
-      
-    }
   }
 
   onChat() {
@@ -276,7 +263,6 @@ export class EnsemblesDetailsComponent implements OnInit {
         modifiedRequestsReceived.push(this.currentProfile.requestsReceived[i]);  
       }
       if (i != 0 && this.currentProfile.requestsReceived[i]['ensembleId'] == this.ensembleId) {
-        console.log("WORKING!!!")
         let modifiedRequestsSent = [];
         for (let requestSent of this.currentProfile.requestsReceived[i]['requestsSent']) {
           if (requestSent != this.ensembleId) {
