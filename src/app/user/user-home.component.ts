@@ -81,6 +81,28 @@ export class UserHomeComponent implements OnInit {
           for (let ensemble of Object.values(profile)[0]['ensembles']) {
             if (ensemble['id'] != ensembleId) {
               modifiedEnsembles.push(ensemble);
+            } else {
+              //Remove request received from host's (current user) data & Remove request sent from current user's data
+              let modifiedRequestsReceived = [];
+              for (let i = 0; i < this.profile.requestsReceived.length; i++) {
+                if (i == 0) {
+                  modifiedRequestsReceived.push(this.profile.requestsReceived[i]);
+                }
+                if (i != 0 && this.profile.requestsReceived[i]['ensembleId'] != ensembleId) {
+                  modifiedRequestsReceived.push(this.profile.requestsReceived[i]);  
+                }
+                if (i != 0 && this.profile.requestsReceived[i]['ensembleId'] == ensembleId) {
+                  let modifiedRequestsSent = [];
+                  for (let requestSent of this.profile.requestsReceived[i]['requestsSent']) {
+                    if (requestSent != ensembleId) {
+                      modifiedRequestsSent.push(requestSent);
+                    }
+                  }
+                  this.profileStorageService.updateRequestsSentToProfile(this.profile.requestsReceived[i]['profileId'], modifiedRequestsSent).subscribe();
+                }
+              }
+              this.profile['requestsReceived'] = modifiedRequestsReceived;
+              this.profileStorageService.updateRequestReceivedToProfile(this.profileId, modifiedRequestsReceived).subscribe()
             }
           }
           this.profileStorageService.updateProfileEnsembles(modifiedEnsembles, key).subscribe();

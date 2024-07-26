@@ -46,6 +46,7 @@ export class InboxMessageComponent implements OnInit{
         this.profiles = profiles;
       }
     )
+    this.profiles = this.profileService.getProfiles()
 
     this.profileService.currentProfileChanged.subscribe(
       profile => {
