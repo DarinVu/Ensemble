@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators'
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -38,7 +39,8 @@ export class ProfileCreationComponent implements OnInit {
     private profileStorageService: ProfileStorageService,
     private profileService: ProfileService,
     private storage: AngularFireStorage,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -87,8 +89,12 @@ export class ProfileCreationComponent implements OnInit {
         } else {
           this.editMode = false;
           this.isLoading = false;
-           this.currentUser = this.userService.getUserInProgress();
-
+          this.userService.userInProgress.subscribe(
+            user => {
+              this.currentUser = user;
+            }
+          )
+          console.log(this.currentUser);
           let instruments = new FormArray([new FormGroup({
             'instrument': new FormControl(null, Validators.required)
           })]);
@@ -173,6 +179,12 @@ export class ProfileCreationComponent implements OnInit {
 
   onSubmit() {
     this.isLoading = true;
+    this.authService.handleAuthentication(
+      this.currentUser['email'],
+      this.currentUser['id'],
+      this.currentUser['idToken'],
+      this.currentUser['duration']
+    )
     const firstName = this.profileForm.value['firstName'].charAt(0).toUpperCase() + this.profileForm.value['firstName'].substring(1);
     const lastName = this.profileForm.value['lastName'].charAt(0).toUpperCase() + this.profileForm.value['lastName'].substring(1);
     if (this.editMode) {
@@ -225,7 +237,7 @@ export class ProfileCreationComponent implements OnInit {
         }
     } else {
       if (this.selectedFile) {
-        const email = this.userService.getUserInProgress()['email'];
+        const email = this.currentUser['email'];
         const filePath = `profile-pics/${this.selectedFile.name}`;
         const fileRef = this.storage.ref(filePath);
         const uploadTask = this.storage.upload(filePath, this.selectedFile);
@@ -255,7 +267,7 @@ export class ProfileCreationComponent implements OnInit {
           })
         ).subscribe()
       } else {
-        const email = this.userService.getUserInProgress()['email'];
+        const email = this.currentUser['email'];
         const newProfile = new Profile(
           email,
           firstName,
