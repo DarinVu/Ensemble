@@ -290,7 +290,6 @@ export class EnsemblesDetailsComponent implements OnInit {
     //Get Index of member to match with instrument index
     var memberIndex: number;
     for (let i = 0; i < this.ensemble.members.length; i++) {
-      console.log(this.ensemble.members[i]['id'])
       if (this.ensemble.members[i]['id'] == this.currentProfileId) {
         memberIndex = i;
       }

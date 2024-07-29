@@ -46,16 +46,16 @@ export class AuthService {
                 returnSecureToken: true
             }
         ).pipe(catchError(this.handleError), tap(resData => {
-            this.handleAuthentication(
-                resData.email, 
-                resData.localId, 
-                resData.idToken, 
-                +resData.expiresIn
-            )
+            this.userService.setUserInProgress({
+                email: resData.email, 
+                id: resData.localId, 
+                idToken: resData.idToken, 
+                duration: +resData.expiresIn
+            })
         }));
     }
 
-    loginWithGoogle(status: string) {
+    loginWithGoogle() {
         return this.fireAuth.signInWithPopup(new GoogleAuthProvider).then((result) => {
             const email =  result.additionalUserInfo.profile['email'];
             this.userService.setUserInProgress({
@@ -82,7 +82,6 @@ export class AuthService {
                         noProfile = true;
                     }
                 }
-                console.log(noProfile)
             }
             if (result.additionalUserInfo.isNewUser == false && noProfile == false) {
                 this.handleAuthentication(

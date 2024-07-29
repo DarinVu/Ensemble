@@ -23,7 +23,6 @@ export class AuthComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private profileService: ProfileService,
-
   ) {}
 
   ngOnInit(): void {
@@ -55,15 +54,30 @@ export class AuthComponent implements OnInit {
       'password': password
     };
 
-    this.userService.setUserInProgress(user);
+    
 
     if (this.loginStatus) {
       this.authService.login(email, password).subscribe(
         resData => {
-          this.isLoading = false;
-          this.error = null;
-          this.changeCurrentProfile();
-          this.router.navigate(['/user', 'home']);
+          let profiles = this.profileService.getProfiles()
+          for (let i = 0; i < profiles.length; i++) {
+            if (Object.values(profiles[i])[0]['email'] == email) {
+              this.isLoading = false;
+              this.error = null;
+              this.changeCurrentProfile();
+              this.router.navigate(['/user', 'home']);
+              break;
+            }
+            if (Object.values(profiles[i])[0]['email'] != email && i == profiles.length - 1) {
+              this.userService.setUserInProgress({
+                email: resData.email, 
+                id: resData.localId, 
+                idToken: resData.idToken, 
+                duration: +resData.expiresIn
+              })
+              this.router.navigate(['/profile-creation', 0]);
+            }
+          }
         }, 
         errorMessage => {
           this.error = errorMessage
@@ -115,8 +129,8 @@ export class AuthComponent implements OnInit {
     this.signupForm.reset();
   }
 
-  loginWithGoogle(status: string) {
-    this.authService.loginWithGoogle(status);
+  loginWithGoogle() {
+    this.authService.loginWithGoogle();
     this.changeCurrentProfile
   }
 }
