@@ -48,14 +48,7 @@ export class AuthComponent implements OnInit {
 
     const email = this.signupForm.value['email'];
     const password = this.signupForm.value['password'];
-    
-    const user = {
-      'email': email,
-      'password': password
-    };
-
-    
-
+  
     if (this.loginStatus) {
       this.authService.login(email, password).subscribe(
         resData => {
