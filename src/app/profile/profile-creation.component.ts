@@ -179,12 +179,7 @@ export class ProfileCreationComponent implements OnInit {
 
   onSubmit() {
     this.isLoading = true;
-    this.authService.handleAuthentication(
-      this.currentUser['email'],
-      this.currentUser['id'],
-      this.currentUser['idToken'],
-      this.currentUser['duration']
-    )
+    
     const firstName = this.profileForm.value['firstName'].charAt(0).toUpperCase() + this.profileForm.value['firstName'].substring(1);
     const lastName = this.profileForm.value['lastName'].charAt(0).toUpperCase() + this.profileForm.value['lastName'].substring(1);
     if (this.editMode) {
@@ -208,7 +203,7 @@ export class ProfileCreationComponent implements OnInit {
                 firstName,
                 lastName,
                 this.profileForm.value['instruments'],
-                [new EnsembleShort('aaa', null)],
+                this.currentProfile.ensembles,
                 this.profileForm.value['recordings'],
                 this.profileForm.value['bio'],
                 url
@@ -226,7 +221,7 @@ export class ProfileCreationComponent implements OnInit {
           firstName,
           lastName,
           this.profileForm.value['instruments'],
-          [new EnsembleShort('aaa', null)],
+          this.currentProfile.ensembles,
           this.profileForm.value['recordings'],
           this.profileForm.value['bio'],
           this.currentProfile.profilePic
@@ -236,6 +231,12 @@ export class ProfileCreationComponent implements OnInit {
         this.router.navigate(['/user', 'home']);
         }
     } else {
+      this.authService.handleAuthentication(
+        this.currentUser['email'],
+        this.currentUser['id'],
+        this.currentUser['idToken'],
+        this.currentUser['duration']
+      )
       if (this.selectedFile) {
         const email = this.currentUser['email'];
         const filePath = `profile-pics/${this.selectedFile.name}`;
