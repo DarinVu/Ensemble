@@ -18,7 +18,6 @@ import { finalize } from 'rxjs/operators';
 })
 export class UserHomeComponent implements OnInit {
   user: User = null;
-  isLoading = true;
   profile: Profile;
   profileId: string;
   profileEnsembles: EnsembleShort[];
@@ -47,7 +46,6 @@ export class UserHomeComponent implements OnInit {
               this.profile = profile[key];
               this.profileId = key;
               this.profileEnsembles = this.profile.ensembles.slice(1);
-              this.isLoading = false;
             } 
           }
         } else {
@@ -56,7 +54,7 @@ export class UserHomeComponent implements OnInit {
             profile => {
               this.profile = profile;
               this.profileEnsembles = this.profile.ensembles.slice(1);
-              this.isLoading = false;
+  
             }
           )
         }

@@ -1,15 +1,10 @@
 
 <app-header></app-header>
 <hr>
-<div *ngIf="isLoading" class="big-container container-fluid">
-    <div class="loading-container">
-        <app-loading-spinner></app-loading-spinner>
-    </div>
-</div>
 <div class="big-container container-fluid">
     <div class="row justify-content-center">
         <div class="col-xs-11">
-            <div *ngIf="!isLoading" class="row justify-content-center">
+            <div class="row justify-content-center">
                 <div class="main-profile-container col-xs-12 col-md-auto">
                     <div class="profile-card-container">
                         <div class="profile-image-container" setBackgroundImage [imageUrl]="profile.profilePic">
